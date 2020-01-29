@@ -8,40 +8,120 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <style>
+    .dashBody{
+        text-align: center;
+
+    }
+    
+    </style>
+
     <title>BillMaster</title>
   </head>
   <body>
       <!-- Body -->
-    <div class="dashBody">
+    <div class="dashBody container">
         <!-- NAVBAR -->
-        <div class="dashNav">
-
-        </div>
+        <nav class="dashNav navbar navbar-light bg-light justify-content-between">
+            <div>
+                <a class="navbar-brand">Ícone do projeto</a>
+            </div>
+            <div>
+                <!-- Modal Triggers -->
+                <button type="button" class="btn btn-primary">
+                    Logout
+                </button>
+            </div>
+        </nav>
     
         <!-- CONTENT -->
-        <div class="dasContent">
-      
+        <div class="dashContent row">
       
              <!-- LEFT SIDE -->
-            <div class="dashLeft">
-
+            <div class="dashLeft col-md-3">
+                MENU LATERAL
             </div>
       
             <!-- RIGHT SIDE -->
-            <div class="dashRight">
+            <div class="dashRight col-md-9">
                 <!-- Top Main Menu -->
                 <div class="dashMainMenu">
-
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label  class="btn btn-outline-dark active" active>
+                          <input type="radio" name="options" id="dashPessoas">Pessoas
+                        </label >
+                        <label class="btn btn-outline-dark">
+                          <input type="radio" name="options" id="dashDespesas">Despesas</input>
+                        </label>
+                    </div>
                 </div >
                 <!-- Main content -->
                 <div class="dashMainContent">
                     <!-- Add bills -->
                     <div class="dashAddBills">
-
+                        <div class="d-flex flex-row bd-highlight mb-n3">
+                            <div class="bd-highlight">
+                                <span class="input-group-text ml-3" id="inputGroup-sizing-default">Name</span>
+                            </div>
+                            <div class="my-auto bd-highlight">
+                                <input type="text" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default" placeholder="New name">
+                            </div>
+                            <div class="pl-3 bd-highlight">
+                                <span class="input-group-text" id="inputGroup-sizing-default">E-mail</span>
+                            </div>
+                            <div class="my-auto bd-highlight">
+                                <input type="text" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default" placeholder="Optional">
+                            </div>
+                            <div class="pl-5 my-auto bd-highlight">
+                                <button type="button" class="btn btn-primary">CRIAR</button>
+                            </div>
+                        </div>
+                        <hr>
                     </div>
                     <!-- Bills list -->
                     <div class="dashBillsList">
-                        
+                        <div class="list-group p-2 d-flex flex-wrap">
+                            <div class="row">
+                                <div class="pt-2 mx-auto col-sm-6 col-md-6">
+                                    <a href="#" class="list-group-item list-group-item-action">NAME 01</a>
+                                </div>
+                                <div class="pt-2 mx-auto col-sm-6 col-md-6">
+                                    <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
+                                </div>
+                                <div class="pt-2 mx-auto col-sm-6 col-md-6">
+                                    <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
+                                </div>
+                                <div class="pt-2 mx-auto col-sm-6 col-md-6">
+                                    <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
+                                </div>
+                                <div class="pt-2 mx-auto col-sm-6 col-md-6">
+                                    <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
+                                </div>
+                                <div class="pt-2 mx-auto col-sm-6 col-md-6">
+                                    <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
+                                </div>
+                                <div class="pt-2 mx-auto col-sm-6 col-md-6">
+                                    <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
+                                </div>
+                                <div class="pt-2 mx-auto col-sm-6 col-md-6">
+                                    <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
+                                </div>
+                                <div class="pt-2 mx-auto col-sm-6 col-md-6">
+                                    <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
+                                </div>
+                                <div class="pt-2 mx-auto col-sm-6 col-md-6">
+                                    <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
+                                </div>
+                                <div class="pt-2 mx-auto col-sm-6 col-md-6">
+                                    <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
+                                </div>
+                                <div class="pt-2 mx-auto col-sm-6 col-md-6">
+                                    <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     
