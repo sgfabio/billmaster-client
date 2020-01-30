@@ -10,161 +10,157 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <style>
+        .dashBody {
+            text-align: center;
+
+        }
+    </style>
+
     <title>BillMaster</title>
 </head>
 
 <body>
+    <!-- Body -->
+    <div class="dashBody container">
+        <!-- NAVBAR -->
+        <nav class="dashNav navbar navbar-light bg-light justify-content-between">
+            <div>
+                <a class="navbar-brand">Ícone do projeto</a>
+            </div>
+            <div>
+                <!-- Modal Triggers -->
+                <button type="button" class="btn btn-primary">
+                    Logout
+                </button>
+            </div>
+        </nav>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-light bg-light justify-content-between">
-        <div>
-            <a class="navbar-brand">Ícone do projeto</a>
-        </div>
-        <div>
-            <!-- Modal Triggers -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginbutton">
-                Entre
-            </button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signupbutton">
-                Cadastre-se
-            </button>
-        </div>
-    </nav>
+        <!-- CONTENT -->
+        <div class="dashContent row">
 
+            <!-- LEFT SIDE -->
+            <div class="dashLeft col-md-3">
+                MENU LATERAL
+            </div>
 
-    <!-- NAV LINK -->
-    <div>
-        <h1>PARTICIPANTES</h1>
-    </div>
-
-    <!-- ADD AREA -->
-    <div class="d-flex flex-row bd-highlight mb-n3">
-        <div class="bd-highlight">
-            <span class="input-group-text ml-3" id="inputGroup-sizing-default">Name</span>
-        </div>
-        <div class="my-auto bd-highlight">
-            <input type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default" placeholder="New name">
-        </div>
-        <div class="pl-3 bd-highlight">
-            <span class="input-group-text" id="inputGroup-sizing-default">E-mail</span>
-        </div>
-        <div class="my-auto bd-highlight">
-            <input type="text" class="form-control ml-n8" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default" placeholder="Optional">
-        </div>
-        <div class="pl-5 my-auto bd-highlight">
-            <button type="button" class="btn btn-primary">CRIAR</button>
-        </div>
-    </div>
-    <hr>
-<!--  -->
-    <div class="list-group p-2 d-flex flex-wrap">
-        <div class="row">
-            <div class="pt-2 mx-auto col-sm-6 col-md-6">
-                <a href="#" class="list-group-item list-group-item-action">NAME 01</a>
-            </div>
-            <div class="pt-2 mx-auto col-sm-6 col-md-6">
-                <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
-            </div>
-            <div class="pt-2 mx-auto col-sm-6 col-md-6">
-                <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
-            </div>
-            <div class="pt-2 mx-auto col-sm-6 col-md-6">
-                <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
-            </div>
-            <div class="pt-2 mx-auto col-sm-6 col-md-6">
-                <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
-            </div>
-            <div class="pt-2 mx-auto col-sm-6 col-md-6">
-                <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
-            </div>
-            <div class="pt-2 mx-auto col-sm-6 col-md-6">
-                <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
-            </div>
-            <div class="pt-2 mx-auto col-sm-6 col-md-6">
-                <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
-            </div>
-            <div class="pt-2 mx-auto col-sm-6 col-md-6">
-                <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
-            </div>
-            <div class="pt-2 mx-auto col-sm-6 col-md-6">
-                <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
-            </div>
-            <div class="pt-2 mx-auto col-sm-6 col-md-6">
-                <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
-            </div>
-            <div class="pt-2 mx-auto col-sm-6 col-md-6">
-                <a href="#" class="list-group-item list-group-item-action">NAME 02</a>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-    <!-- SIGNIN MODAL -->
-    <div class="modal fade" id="loginbutton" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Dados de acesso</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+            <!-- RIGHT SIDE -->
+            <div class="dashRight col-md-9">
+                <!-- Top Main Menu -->
+                <div class="dashMainMenu">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-outline-dark active" active>
+                            <input type="radio" name="options" id="dashPessoas">Status & Resumo</input>
+                        </label>
+                        <label class="btn btn-outline-dark">
+                            <input type="radio" name="options" id="dashDespesas">Contas</input>
+                        </label>
+                        <label class="btn btn-outline-dark">
+                            <input type="radio" name="options" id="dashDespesas">Pagamentos</input>
+                        </label>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="recipient-email" class="col-form-label">Usuário:</label>
-                            <input type="email" class="form-control" id="recipient-email">
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-password" class="col-form-label">Senha:</label>
-                            <input type="password" class="form-control" id="recipient-password">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Entrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+                <!-- Main content -->
+                <div class="dashMainContent">
+                    <!-- Status -->
+                    <div class="container my-3 mx-auto">
+                        <h2>NOME DO GRUPO</h2>
+                    </div>
+                    <div class="container my-3 mx-auto">
+                        <h3>Total gasto pelo grupo: R$ 100,00</h3>
+                    </div>
+                    <div> <!-- PLANILHA -->
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col" class="p-auto">Membro</th>
+                                    <th scope="col">Precisa Pagar Para</th>
+                                    <th scope="col">Membro</th>
+                                    <th scope="col">E-mail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">NOME 01</th>
+                                    <td>R$10</td>
+                                    <td>NOME 01-B</td>
+                                    <td>nome01b@email.com</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">NOME 02</th>
+                                    <td>R$10</td>
+                                    <td>NOME 02-B</td>
+                                    <td>EMAIL</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">NOME 03</th>
+                                    <td>R$10</td>
+                                    <td>NOME 03-B</td>
+                                    <td>EMAIL</td>
+                                </tr>
+                            </tbody>
+                        </table>
+    
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="bg-warning" colspan="4">RESUMO</th>
+                                </tr>
+                            </thead>
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Membro</th>
+                                    <th scope="col">Total gasto</th>
+                                    <th scope="col">Total em participações</th>
+                                    <th scope="col">Constas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">NOME 01</th>
+                                    <td>R$ 20,00</td>
+                                    <td>R$ 80,00</td>
+                                    <td>
+                                        <select class="form-control form-control-sm">
+                                            <option>Conta 01</option>
+                                            <option>Conta 02</option>
+                                            <option>Conta 03</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">NOME 01</th>
+                                    <td>R$ 20,00</td>
+                                    <td>R$ 80,00</td>
+                                    <td>
+                                        <select class="form-control form-control-sm">
+                                            <option>Conta 01</option>
+                                            <option>Conta 02</option>
+                                            <option>Conta 03</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">NOME 01</th>
+                                    <td>R$ 20,00</td>
+                                    <td>R$ 80,00</td>
+                                    <td>
+                                        <select class="form-control form-control-sm">
+                                            <option>Conta 01</option>
+                                            <option>Conta 02</option>
+                                            <option>Conta 03</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                           
+                            </tbody>
+                        </table>
+                    </div> <!-- Fim da Planilha -->
 
-    <!-- SIGNUP MODAL -->
-    <div class="modal fade" id="signupbutton" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Dados para cadastro</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="recipient-email" class="col-form-label">Usuário:</label>
-                            <input type="email" class="form-control" id="recipient-email">
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-password" class="col-form-label">Senha:</label>
-                            <input type="password" class="form-control" id="recipient-password">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Entrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+                </div> <!-- close main -->
+            </div> <!-- close right side -->
+        </div> <!-- close content -->
+    </div> <!-- close body -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
