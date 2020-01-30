@@ -1,0 +1,40 @@
+*{
+    font-size: calc(14px + (22 - 14) * ((100vw - 400px) / (1600 - 300)));
+    line-height: calc(1.3em + (1.4 - 1.0) * ((100vw - 400px)/(1600 - 300)));
+}
+
+body{
+    padding: 1.5rem;
+}
+.btn-group{
+    min-width: 75%;
+}
+.btn-yellow{
+    background-color: #fcf7ad;
+    color: #343a40;
+    width: 33.3%;
+}
+
+.btn-outline-dark:not(:disabled):not(.disabled).active, .btn-outline-dark:not(:disabled):not(.disabled):active, .show>.btn-outline-dark.dropdown-toggle {
+    color: #343a40;
+    background-color: #ffe600;
+    border-color: #343a40;
+    font-weight: bolder;
+}
+
+.focus{
+    background-color: rgb(255, 234, 116);
+}
+
+.dashBody {
+    text-align: center;
+
+}
+
+.table .thead-dark th {
+    color: #343a40;
+    background-color: #ffe600;
+    border-color: #32383e;
+    padding: 5px;
+    width: 33.3%;
+}
