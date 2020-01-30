@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="a.css">
+
+
+
+    <style>
+        .dashBody {
+            text-align: center;
+
+        }
+    </style>
+
+    <title>BillMaster</title>
+</head>
+
+<body>
+    <!-- Body -->
+    <div class="dashBody p-3">
+        <!-- CONTENT -->
+        <div class="dashContent">
+            <!-- RIGHT SIDE -->
+            <div class="dashRight">
+                <!-- Top Main Menu -->
+
+
+
+                <div class="dashMainMenu">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-outline-dark btn-yellow active" active>
+                            <input type="radio" name="options" id="dashPessoas">Acertos</input>
+                        </label>
+                        <label class="btn btn-outline-dark btn-yellow">
+                            <input type="radio" name="options" id="dashDespesas">Contas</input>
+                        </label>
+                        <label class="btn btn-outline-dark btn-yellow">
+                            <input type="radio" name="options" id="dashDespesas">Resumo</input>
+                        </label>
+                    </div>
+                </div>
+
+
+<!-- -----------------------------------INICIO RESUMO---------------------------------------------------------- -->
+
+                <!-- Main content -->
+                <div class="dashMainContent">
+                    <!-- Status -->
+                    <div class="container my-3 mx-auto">
+                        <h2>NOME DO GRUPO</h2>
+                    </div>
+                    <div class="container my-3 mx-auto">
+                        <h3>Despesas totais: R$999,00</h3>
+                    </div>
+                    <div>
+
+                        <!-- PLANILHA -->
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Membro</th>
+                                    <th scope="col">TOTAL GASTO</th>
+                                    <th scope="col">CONSUMO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Button trigger modal -->
+                                <tr>
+                                    <th scope="row" type="link" class="btn-yellow" data-toggle="modal"
+                                        data-target="#modalContas">
+                                        NOME 01
+                                    </th>
+                                    <td scope="row" type="link" class="btn-yellow" data-toggle="modal"
+                                        data-target="#modalContas">
+                                        R$ 20,00
+                                    </td>
+                                    <td scope="row" type="link" class="btn-yellow" data-toggle="modal"
+                                        data-target="#modalContas">
+                                        R$ 80,00
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalContas" tabindex="-1" role="dialog"
+                            aria-labelledby="modalContasLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalContasLabel">Todas as contas partilhadas</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- LISTA DENTRO DO MODAL -->
+                                        <div class="list-group">
+                                            <button onclick="#" type="button"
+                                                class="list-group-item list-group-item-action">CONTA_01</button>
+                                            <button onclick="#" type="button"
+                                                class="list-group-item list-group-item-action">CONTA_01</button>
+                                            <button onclick="#" type="button"
+                                                class="list-group-item list-group-item-action">CONTA_01</button>
+                                            <button onclick="#" type="button"
+                                                class="list-group-item list-group-item-action">CONTA_01</button>
+                                            <button onclick="#" type="button"
+                                                class="list-group-item list-group-item-action">CONTA_01</button>
+                                            <button onclick="#" type="button"
+                                                class="list-group-item list-group-item-action">CONTA_01</button>
+                                            <button onclick="#" type="button"
+                                                class="list-group-item list-group-item-action">CONTA_01</button>
+                                            <button onclick="#" type="button"
+                                                class="list-group-item list-group-item-action">CONTA_01</button>
+                                            <button onclick="#" type="button"
+                                                class="list-group-item list-group-item-action list-group-item-danger">
+                                                CONTA_02 <br><small><small>O usuário nào participou do rateio
+                                                            desta conta.</small></small>
+                                            </button>
+                                        </div>
+                                        <!-- FIM LISTRA DENTRO DO MODAL -->
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary mx-auto"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- Fim da Planilha -->
+
+<!-- -------------------------------------FIM RESUMO---------------------------------------------------------- -->
+
+
+
+
+
+
+
+                    </div> <!-- close main -->
+                </div> <!-- close right side -->
+            </div> <!-- close content -->
+        </div> <!-- close body -->
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
