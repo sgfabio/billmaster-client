@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link , NavLink } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar"
 import Despesas from "../DashDespesas/DashDespesas"
+import Index from "../Index/Index"
 
 
 const Dashboard = props => {
@@ -15,18 +17,32 @@ const Dashboard = props => {
                 {/* <!-- Top Main Menu --> */}
                 <div className="dashMainMenu">
                     <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label  className="btn btn-outline-dark btn-yellow-dashboard active" active>
+
+                        <NavLink to="/dashboard/despesas" className="btn btn-outline-dark btn-yellow-dashboard active" active>
                             <input type="radio" name="options" id="dashPessoas"/>Pessoas
-                        </label >
-                        <label className="btn btn-outline-dark btn-yellow-dashboard">
+                        </NavLink >
+
+                        <NavLink to="/dashboard/index" className="btn btn-outline-dark btn-yellow-dashboard">
                             <input type="radio" name="options" id="dashDespesas"/>Despesas
+                        </NavLink>
+
+                        <label className="btn btn-outline-dark btn-yellow-dashboard">
+                            <input type="radio" name="options" id="/dashDespesas"/>Acertos
                         </label>
+
                     </div>
                 </div >
                 <hr/>
                 {/* <!-- Main content --> */}
                 <div className="dashMainContent">
-                    <Despesas />
+                <Switch>
+                    <Route exact path="/despesas" component={Despesas} />
+                    <Route exact path="/index" component={Index} />
+                    {/* <Route exact path="/despesas" component={Despesas} /> */}
+                    {/* <Route exact path="/" component={Despesas} /> */}
+                </Switch>
+
+                    {/* <NavLink to="/about">About</NavLink> */}
 
 
 
