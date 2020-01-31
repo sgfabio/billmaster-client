@@ -1,63 +1,52 @@
-import React from "react";
-import { Route, Switch, NavLink } from "react-router-dom";
-import { Nav, NavItem } from 'react-bootstrap';
-import Navbar from "../Navbar/Navbar";
-// import DashPessoas from "../DashPessoas/DashPessoas";
-import DashDespesas from "../DashDespesas/DashDespesas";
-// import DashAcertos from "../DashAcertos/DashAcertos";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Navbar from "../Navbar/Navbar"
+import Despesas from "../DashDespesas/DashDespesas"
 
 
 const Dashboard = props => {
- 
-    return(
-    
-    <div>
-        {/* // NAVBAR DASH */}
-        <>
-            < Navbar />
-        </>
-        {/* // OPTIONS TOGGLE */}
+  return (
+  <>
+  <Navbar />
+  {/* <!-- CONTENT --> */}
+        <div className="dashContent row">
+            {/* <!-- RIGHT SIDE --> */}
+            <div className="dashRight">
+                {/* <!-- Top Main Menu --> */}
+                <div className="dashMainMenu">
+                    <div className="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label  className="btn btn-outline-dark btn-yellow-dashboard active" active>
+                            <input type="radio" name="options" id="dashPessoas"/>Pessoas
+                        </label >
+                        <label className="btn btn-outline-dark btn-yellow-dashboard">
+                            <input type="radio" name="options" id="dashDespesas"/>Despesas
+                        </label>
+                    </div>
+                </div >
+                <hr/>
+                {/* <!-- Main content --> */}
+                <div className="dashMainContent">
+                    <Despesas />
 
-        <Nav variant="pills" defaultActiveKey="/home">
-        <Nav.Item>
-            <Nav.Link href="/home">Active</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-            <Nav.Link eventKey="link-1">Option 2</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-            <Nav.Link eventKey="" disabled>
-            Disabled
-            </Nav.Link>
-        </Nav.Item>
-        </Nav>
 
 
-        <div className="dashMainMenu">
-            <div className="" data-toggle="buttons">
-                <label className=" active">
-                        <NavLink to="/DashContas">Contas</NavLink>
-                </label>
-                <label className="">
-                        <NavLink to="/DashContas">Contas</NavLink>
-                </label>
-                <label className="">
-                        <NavLink to="/DashContas">Contas</NavLink>
-                </label>
-            </div>
-        </div>
-        <hr/>
 
-        {/* // TOGGLE RESULT AREA */}
-        <>
-            <Switch>
-                {/* <Route path="/DashPessoas" component={DashPessoas}/> */}
-                <Route path="/DashDespesas" component={DashDespesas}/>
-                {/* <Route path="/DashAcertos" component={DashAcertos}/> */}
-            </Switch>
-        </>
-    </div>
 
+
+
+
+
+
+
+
+
+
+
+
+                </div>{/*  <!-- close main --> */}
+            </div> {/* <!-- close right side --> */}
+        </div>  
+  </>
   );
 };
 

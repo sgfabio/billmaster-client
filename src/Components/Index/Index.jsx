@@ -52,7 +52,9 @@ const Index = props => {
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <Link type="button" to="/dashboard" className="btn btn-primary">Entrar</Link>
+                    <form action="/dashboard">
+                      <input type="submit" value="Entrar" className="btn btn-primary" />
+                      </form>
                 </div>
             </div>
         </div>
