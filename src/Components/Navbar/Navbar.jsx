@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 const Navbar = props => {
   return (
     /* ----------------------------------------------------------- NAVBAR INTERNA ----------------------------------------------------------- */
     // NAVBAR
+    <>
     <nav className="navbar navbar-light bg-yellow justify-content-between">
       <div>
         <Link className="navbar-brand" to="/"><strong>BANANA</strong><em>SPLIT</em></Link>
@@ -26,7 +27,8 @@ const Navbar = props => {
 
           <div className="dropdown-divider"></div>
 
-          <button className="dropdown-item py-3" type="button">GRUPO-01</button> //TODO MAP - LISTA dos GRUPOS
+          <button className="dropdown-item py-3" type="button">GRUPO-01</button> 
+          {/* //TODO MAP - LISTA dos GRUPOS */}
           <button className="dropdown-item py-3" type="button">GRUPO-02</button>
         </div>
 
@@ -71,7 +73,8 @@ const Navbar = props => {
         </div>
       </div>
     </div>
-    {/* --------------------------------------------------------- FIM NAVBAR INTERNA ---------------------------------------------------------- */}
+    // {/* --------------------------------------------------------- FIM NAVBAR INTERNA ---------------------------------------------------------- */}
+    </>
   );
 };
 

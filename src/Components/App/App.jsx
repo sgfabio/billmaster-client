@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 // import logo from './logo.svg';
 import Index from "../Index/Index"
 import Dashboard from "../Dashboard/Dashboard"
