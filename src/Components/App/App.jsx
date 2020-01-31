@@ -10,6 +10,7 @@ import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { Button } from 'reactstrap';
+import DashAcertos from "../DashAcertos/DashAcertos";
 
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Index} />
           <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/dash-acertos" component={DashAcertos} />
         </Switch>
 
       </div>
