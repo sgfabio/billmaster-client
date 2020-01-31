@@ -9,12 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-<<<<<<< HEAD
 import Despesas from "../DashDespesas/DashDespesas"
-=======
-import { Button } from 'reactstrap';
-import DashAcertos from "../DashAcertos/DashAcertos";
->>>>>>> 9890c9639f02c8703e39879dc2d112d57c800279
 
 
 class App extends Component {
@@ -24,11 +19,9 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Index} />
           <Route exact path="/dashboard" component={Dashboard} />
-<<<<<<< HEAD
+
           <Route exact path="/dashboard/despesas" component={Despesas} />
-=======
-          <Route exact path="/dash-acertos" component={DashAcertos} />
->>>>>>> 9890c9639f02c8703e39879dc2d112d57c800279
+          {/* <Route exact path="/dash-acertos" component={DashAcertos} /> */}
         </Switch>
 
       </div>
