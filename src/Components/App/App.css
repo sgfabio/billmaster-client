@@ -41,3 +41,76 @@ h1 {
   font-size: 1.8rem;
   color: #fff;
 }
+*{
+  font-size: calc(14px + (22 - 14) * ((100vw - 400px) / (1600 - 300)));
+  line-height: calc(1.3em + (1.4 - 1.0) * ((100vw - 400px)/(1600 - 300)));
+  text-align: center;
+}
+.dashContent{
+  padding: 1.5rem;
+}
+
+.btn-group{
+  min-width: 75%;
+
+}
+.btn-yellow{
+  background-color: #fcf7ad;
+  color: #343a40;
+  width: 33.3%;
+}
+
+.btn-yellow-dashboard{
+  background-color: #fcf7ad;
+  color: #343a40;
+  width: 50%;
+}
+
+.btn-outline-dark:not(:disabled):not(.disabled).active, .btn-outline-dark:not(:disabled):not(.disabled):active, .show>.btn-outline-dark.dropdown-toggle {
+  color: #343a40;
+  background-color: #ffe600;
+  border-color: #343a40;
+  font-weight: bolder;
+}
+
+.focus{
+  background-color: rgb(255, 234, 116);
+}
+
+.dashBody {
+  text-align: center;
+
+}
+
+.table .thead-dark th {
+  color: #343a40;
+  background-color: #ffe600;
+  border-color: #32383e;
+  padding: 5px;
+  width: 33.3%;
+}
+
+.table tr th td {
+  padding: 0;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.bg-yellow{
+  background-color: #ffe600;
+  margin-top: -30px;
+}
+
+.dashLeft{
+  width: auto;
+  height: 85vh;
+  background-color: #dee2e6;
+}
+
+.dashRight{
+  padding-left: 15px;
+}
+
+.navbar{
+  margin: 0;
+}
