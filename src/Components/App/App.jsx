@@ -4,9 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import logo from './logo.svg';
 import Index from "../Index/Index"
-import RandomBeer from "./components/Random-beer"
-import NewBeer from "./components/New-beer"
-import Main from "./components/Main"
+import Dashboard from "../Dashboard/Dashboard"
 
 
 class App extends Component {
@@ -15,7 +13,7 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path="/" component={Index}/>
-          <Route path="/all-beers" component={Beers}/>
+          <Route path="/dashboard" component={Dashboard}/>
         </Switch>
           
       </div>
