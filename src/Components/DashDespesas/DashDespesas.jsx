@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Dashboard from "../Dashboard/Dashboard"
+
 
 const DashDespesas = props => {
   return (
+      <>
+      <Dashboard />
                 <div class="dashMainContent">
                     {/* <!-- Add bills --> */}
                     <h2>Adicionar nova despesa:</h2>
@@ -47,6 +51,7 @@ const DashDespesas = props => {
                         </div>
                     </div>
                 </div> 
+      </>
   );
 };
 
