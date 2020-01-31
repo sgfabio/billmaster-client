@@ -19,16 +19,15 @@ const Dashboard = props => {
 
         <div className="dashMainMenu">
             <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                {/* <label className="btn btn-outline-dark btn-yellow active" active>
-                    <input type="radio" name="options" id="dashPessoas"><NavLink to="/DashPessoas">Pessoas</NavLink></input>
-                </label> */}
                 <label className="btn btn-outline-dark btn-yellow">
-                    <input type="radio" name="options" id="dashContas">
-                        <NavLink to="/DashContas">Contas</NavLink></input>
+                        <NavLink to="/DashContas">Contas</NavLink>
                 </label>
-                {/* <label className="btn btn-outline-dark btn-yellow">
-                    <input type="radio" name="options" id="dashAcertos"><NavLink to="/DashAcertos">Acertos</NavLink></input>
-                </label> */}
+                <label className="btn btn-outline-dark btn-yellow">
+                        <NavLink to="/DashContas">Contas</NavLink>
+                </label>
+                <label className="btn btn-outline-dark btn-yellow">
+                        <NavLink to="/DashContas">Contas</NavLink>
+                </label>
             </div>
         </div>
         <hr/>

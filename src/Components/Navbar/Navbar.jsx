@@ -42,7 +42,7 @@ const Navbar = props => {
 
     </nav>
 
-    // CREATE A GROUP MODAL
+    {/* // CREATE A GROUP MODAL */}
 
     <div className="modal fade" id="creategroupbutton" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
@@ -73,7 +73,7 @@ const Navbar = props => {
         </div>
       </div>
     </div>
-    // {/* --------------------------------------------------------- FIM NAVBAR INTERNA ---------------------------------------------------------- */}
+    {/* // --------------------------------------------------------- FIM NAVBAR INTERNA ---------------------------------------------------------- */}
     </>
   );
 };
