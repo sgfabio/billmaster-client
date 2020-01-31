@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch, NavLink } from "react-router-dom";
+import { Nav, NavItem } from 'react-bootstrap';
 import Navbar from "../Navbar/Navbar";
 // import DashPessoas from "../DashPessoas/DashPessoas";
 import DashDespesas from "../DashDespesas/DashDespesas";
@@ -17,15 +18,30 @@ const Dashboard = props => {
         </>
         {/* // OPTIONS TOGGLE */}
 
+        <Nav variant="pills" defaultActiveKey="/home">
+        <Nav.Item>
+            <Nav.Link href="/home">Active</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+            <Nav.Link eventKey="link-1">Option 2</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+            <Nav.Link eventKey="" disabled>
+            Disabled
+            </Nav.Link>
+        </Nav.Item>
+        </Nav>
+
+
         <div className="dashMainMenu">
-            <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                <label className="btn btn-outline-dark btn-yellow">
+            <div className="" data-toggle="buttons">
+                <label className=" active">
                         <NavLink to="/DashContas">Contas</NavLink>
                 </label>
-                <label className="btn btn-outline-dark btn-yellow">
+                <label className="">
                         <NavLink to="/DashContas">Contas</NavLink>
                 </label>
-                <label className="btn btn-outline-dark btn-yellow">
+                <label className="">
                         <NavLink to="/DashContas">Contas</NavLink>
                 </label>
             </div>
