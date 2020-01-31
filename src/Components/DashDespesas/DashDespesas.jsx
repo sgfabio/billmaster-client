@@ -1,52 +1,11 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="a.css">
-    <title>BillMaster</title>
-  </head>
-  <body>
-      <!-- Body -->
-        <!-- NAVBAR -->
-        <nav class="navbar navbar-light bg-yellow justify-content-between">
-            <div>
-                <a class="navbar-brand"><strong>BANANA</strong><em>SPLIT</em></a>
-            </div>
-            <div>
-                <!-- Modal Triggers -->
-                <button type="button" class="btn btn-outline-dark">
-                    Sair
-                </button>
-            </div>
-        </nav>
-        <!-- CONTENT -->
-        <div class="dashContent row">
-             <!-- LEFT SIDE
-            <div class="dashLeft col-md-3">
-                MENU LATERAL
-            </div> -->
-            <!-- RIGHT SIDE -->
-            <div class="dashRight">
-                <!-- Top Main Menu -->
-                <div class="dashMainMenu">
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label  class="btn btn-outline-dark btn-yellow-dashboard active" active>
-                            <input type="radio" name="options" id="dashPessoas">Pessoas
-                        </label >
-                        <label class="btn btn-outline-dark btn-yellow-dashboard">
-                            <input type="radio" name="options" id="dashDespesas">Despesas</input>
-                        </label>
-                    </div>
-                </div >
-                <hr/>
-                <!-- Main content -->
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
+const DashDespesas = props => {
+  return (
                 <div class="dashMainContent">
                     <!-- Add bills -->
-                    <h2>Adicionar novo(a) integrante:</h2>
+                    <h2>Adicionar nova despesa:</h2>
                     <div class="dashAddBills d-flex justify-content-between align-items-end flex-wrap">
                         <div class="form-group text-left col-lg-4 mt-1 mb-0 p-0">
                             Nome:
@@ -87,13 +46,9 @@
                             </div>
                         </div>
                     </div>
-                </div> <!-- close main -->
-            </div> <!-- close right side -->
-        </div>  <!-- close content -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
-</html>
+                </div> 
+  );
+};
+
+
+export default DashDespesas;
