@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Switch, NavLink } from "react-router-dom";
-import Navbar from "navbar";
-import DashPessoas from "../DashPessoas/DashPessoas";
+import Navbar from "../Navbar/Navbar";
+// import DashPessoas from "../DashPessoas/DashPessoas";
 import DashDespesas from "../DashDespesas/DashDespesas";
-import DashAcertos from "../DashAcertos/DashAcertos";
+// import DashAcertos from "../DashAcertos/DashAcertos";
 
 
 const Dashboard = props => {
@@ -19,14 +19,14 @@ const Dashboard = props => {
 
         <div className="dashMainMenu">
             <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                <label className="btn btn-outline-dark btn-yellow active" active>
-                    <input type="radio" name="options" id="dashPessoas"><NavLink to="/DashPessoas">Pessoas</NavLink></input>
+                <label className="btn btn-outline-dark btn-yellow">
+                        <NavLink to="/DashContas">Contas</NavLink>
                 </label>
                 <label className="btn btn-outline-dark btn-yellow">
-                    <input type="radio" name="options" id="dashContas"><NavLink to="/DashContas">Contas</NavLink></input>
+                        <NavLink to="/DashContas">Contas</NavLink>
                 </label>
                 <label className="btn btn-outline-dark btn-yellow">
-                    <input type="radio" name="options" id="dashAcertos"><NavLink to="/DashAcertos">Acertos</NavLink></input>
+                        <NavLink to="/DashContas">Contas</NavLink>
                 </label>
             </div>
         </div>
@@ -35,9 +35,9 @@ const Dashboard = props => {
         {/* // TOGGLE RESULT AREA */}
         <>
             <Switch>
-                <Route path="/DashPessoas" component={DashPessoas}/>
+                {/* <Route path="/DashPessoas" component={DashPessoas}/> */}
                 <Route path="/DashDespesas" component={DashDespesas}/>
-                <Route path="/DashAcertos" component={DashAcertos}/>
+                {/* <Route path="/DashAcertos" component={DashAcertos}/> */}
             </Switch>
         </>
     </div>
