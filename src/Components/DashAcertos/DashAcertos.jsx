@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Dashboard from "../Dashboard/Dashboard"
+import DashNavbar from "../DashNavbar/DashNavbar"
+
 
 const DashAcertos = props => {
   return (
       <>
-      <Dashboard />
+      <DashNavbar />
 
     <div class="dashMainContent">
         {/* <!-- Add bills --> */}
@@ -43,29 +44,71 @@ const DashAcertos = props => {
         <div class="dashBillsList">
             <div class="row">
                 <div class="col-lg-6 p-0 my-1">
-                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button> <button class="btn btn-danger col-1">X</button>
+                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button>
+                    <button class="btn btn-danger col-1 mx-1"  type="button" data-toggle="modal" data-target="#deleteButton">X</button>
                 </div>
                 <div class="col-lg-6 p-0 my-1">
-                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button> <button class="btn btn-danger col-1">X</button>
+                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button>
+                    <button class="btn btn-danger col-1 mx-1"  type="button" data-toggle="modal" data-target="#deleteButton">X</button>
                 </div>
                 <div class="col-lg-6 p-0 my-1">
-                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button> <button class="btn btn-danger col-1">X</button>
+                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button>
+                    <button class="btn btn-danger col-1 mx-1"  type="button" data-toggle="modal" data-target="#deleteButton">X</button>
                 </div>
                 <div class="col-lg-6 p-0 my-1">
-                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button> <button class="btn btn-danger col-1">X</button>
+                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button>
+                    <button class="btn btn-danger col-1 mx-1"  type="button" data-toggle="modal" data-target="#deleteButton">X</button>
                 </div>
                 <div class="col-lg-6 p-0 my-1">
-                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button> <button class="btn btn-danger col-1">X</button>
+                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button>
+                    <button class="btn btn-danger col-1 mx-1"  type="button" data-toggle="modal" data-target="#deleteButton">X</button>
                 </div>
                 <div class="col-lg-6 p-0 my-1">
-                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button> <button class="btn btn-danger col-1">X</button>
+                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button>
+                    <button class="btn btn-danger col-1 mx-1"  type="button" data-toggle="modal" data-target="#deleteButton">X</button>
                 </div>
                 <div class="col-lg-6 p-0 my-1">
-                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button> <button class="btn btn-danger col-1">X</button>
+                    <button class="btn btn-outline-dark col-10">FULANO pagou para CICLANO o valor de VALOR</button>
+                    <button class="btn btn-danger col-1 mx-1"  type="button" data-toggle="modal" data-target="#deleteButton">X</button>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
+
+
+    {/* // CONFIRM EXCLUSION MODAL */}
+
+    <div className="modal fade" id="deleteButton" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Deseja realmente remover?</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close" >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div className="modal-body">
+              <form>
+                <div className="form-group">
+                  <label for="recipient" className="col-form-label"> O pagamento de FULANO para CICLANO </label>
+                </div>
+              </form>
+            </div>
+
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal" > Cancelar </button>
+              <button type="button" className="btn btn-danger"> Excluir </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
       </>
   );
 };

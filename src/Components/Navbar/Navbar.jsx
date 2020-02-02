@@ -27,7 +27,7 @@ const Navbar = props => {
       </div>
 
       <div>
-        <button type="button" className="btn btn-outline-dark">
+        <button type="button" className="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#logoutButton">
           Sair
         </button>
       </div>
@@ -65,6 +65,40 @@ const Navbar = props => {
         </div>
       </div>
     </div>
+
+    {/* // CONFIRM LOGOUT MODAL */}
+
+    <div className="modal fade" id="logoutButton" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Deseja realmente sair?</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close" >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div className="modal-body">
+              <form>
+                <div className="form-group">
+                  <label for="recipient" className="col-form-label"> SAD IMAGE </label>
+                </div>
+              </form>
+            </div>
+
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal" > Cancelar </button>
+              <button type="button" className="btn btn-danger"> Sair </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* //TODO input all modals in this area.... its gonna work??? */}
+
+
+
+
     {/* // --------------------------------------------------------- FIM NAVBAR INTERNA ---------------------------------------------------------- */}
     </>
   );
