@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Dashboard from "../Dashboard/Dashboard"
 
 const DashAcertos = props => {
   return (
+      <>
+      <Dashboard />
+
     <div class="dashMainContent">
         {/* <!-- Add bills --> */}
         <h2>Adicionar novo acerto:</h2>
@@ -10,21 +14,21 @@ const DashAcertos = props => {
             <div class="form-group text-left col-lg-3 mt-1 mb-0 p-0">
                 Pagou:
                 <select class="form-control" placeholder="Quem pagou?">
-                    <option>Default select</option>
-                    <option>Default select</option>
-                    <option>Default select</option>
-                    <option>Default select</option>
-                    <option>Default select</option>
+                    <option>Member 01</option>
+                    <option>Member 02</option>
+                    <option>Member 03</option>
+                    <option>Member 04</option>
+                    <option>Member 05</option>
                 </select>
             </div>
             <div class="form-group text-left col-lg-3 mb-0 mt-1 p-0">
                 Recebeu:
-                <select multiple class="form-control" placeholder="Quem pagou?">
-                    <option><input type="checkbox" class="form-check-input" id="exampleCheck1" value="Default select"/></option>
-                    <option><input type="checkbox" class="form-check-input" id="exampleCheck1" value="Default select"/></option>
-                    <option><input type="checkbox" class="form-check-input" id="exampleCheck1" value="Default select"/></option>
-                    <option><input type="checkbox" class="form-check-input" id="exampleCheck1" value="Default select"/></option>
-                    <option><input type="checkbox" class="form-check-input" id="exampleCheck1" value="Default select"/></option>
+                <select class="form-control" placeholder="Quem pagou?">
+                    <option>Member 01</option>
+                    <option>Member 02</option>
+                    <option>Member 03</option>
+                    <option>Member 04</option>
+                    <option>Member 05</option>
                 </select>
                 
             </div>
@@ -62,6 +66,7 @@ const DashAcertos = props => {
             </div>
         </div>
     </div> 
+      </>
   );
 };
 
