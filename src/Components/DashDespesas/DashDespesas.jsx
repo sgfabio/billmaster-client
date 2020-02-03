@@ -20,7 +20,7 @@ let members = [
 ];
 
 const listOptions = [
-  { label: "TODOS", value: ["???"] },
+  { label: "TODOS", value: ["???"], isChecked: true },
   { label: "TESTES", value: ["NAME 01", "NAME 02"] },
 ];
 
@@ -76,8 +76,10 @@ class DashDespesas extends Component {
                 Dividir por:
                 <div className="d-flex align-items-center">
                   <ReactMultiSelectCheckboxes
-                    placeholderButtonLabel="Menbros"
+                    placeholderButtonLabel="Membros"
                     options={listOptions}
+                    selectOption={["NAME 01", "NAME 02"]}
+                    // getDisabled={}
                     onMenuClose={this.doSomething}
                   />
                 </div>
