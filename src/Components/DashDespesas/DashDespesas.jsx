@@ -51,11 +51,11 @@ class DashDespesas extends Component {
                   <option selected>Owner</option>
                 </select>
               </div>
-              <div class="form-group text-left col-lg-2 mb-0 mt-1 p-0">
+              <div className="form-group text-left col-lg-2 mb-0 mt-1 p-0">
                 Valor:
                 <input
                   type="number"
-                  class="form-control"
+                  className="form-control"
                   min="0.00"
                   max="10000.00"
                   step="0.01"
@@ -80,7 +80,7 @@ class DashDespesas extends Component {
                     />
                     <label
                       className="dropdown-item py-2 my-auto ml-n4 bg-transparent"
-                      for="checkedall"
+                      htmlFor="checkedall"
                     >
                       Todos
                     </label>
@@ -98,55 +98,19 @@ class DashDespesas extends Component {
         </div>
     
     
-              <button type="submit" class="btn btn-warning mt-2 col-lg-2">
+              <button type="submit" className="btn btn-warning mt-2 col-lg-2">
                 Submit
               </button>
             </div>
             <hr />
             {/* <!-- Bills list --> */}
-            <div class="dashBillsList">
-              <div class="row">
-                <div class="col-lg-6 p-0 my-1">
-                  <button class="btn btn-outline-dark col-10">
+            <div className="dashBillsList">
+              <div className="row">
+                <div className="col-lg-6 p-0 my-1">
+                  <button className="btn btn-outline-dark col-10">
                     FULANO pagou DESPESA-TITLE dividindo o VALOR com TODOS ou LISTA
                   </button>{" "}
-                  <button class="btn btn-danger col-1" type="button" data-toggle="modal" data-target="#deleteButton">X</button>
-                </div>
-                <div class="col-lg-6 p-0 my-1">
-                  <button class="btn btn-outline-dark col-10">
-                    FULANO pagou DESPESA-TITLE dividindo o VALOR com TODOS ou LISTA
-                  </button>{" "}
-                  <button class="btn btn-danger col-1" type="button" data-toggle="modal" data-target="#deleteButton">X</button>
-                </div>
-                <div class="col-lg-6 p-0 my-1">
-                  <button class="btn btn-outline-dark col-10">
-                    FULANO pagou DESPESA-TITLE dividindo o VALOR com TODOS ou LISTA
-                  </button>{" "}
-                  <button class="btn btn-danger col-1" type="button" data-toggle="modal" data-target="#deleteButton">X</button>
-                </div>
-                <div class="col-lg-6 p-0 my-1">
-                  <button class="btn btn-outline-dark col-10">
-                    FULANO pagou DESPESA-TITLE dividindo o VALOR com TODOS ou LISTA
-                  </button>{" "}
-                  <button class="btn btn-danger col-1" type="button" data-toggle="modal" data-target="#deleteButton">X</button>
-                </div>
-                <div class="col-lg-6 p-0 my-1">
-                  <button class="btn btn-outline-dark col-10">
-                    FULANO pagou DESPESA-TITLE dividindo o VALOR com TODOS ou LISTA
-                  </button>{" "}
-                  <button class="btn btn-danger col-1" type="button" data-toggle="modal" data-target="#deleteButton">X</button>
-                </div>
-                <div class="col-lg-6 p-0 my-1">
-                  <button class="btn btn-outline-dark col-10">
-                    FULANO pagou DESPESA-TITLE dividindo o VALOR com TODOS ou LISTA
-                  </button>{" "}
-                  <button class="btn btn-danger col-1" type="button" data-toggle="modal" data-target="#deleteButton">X</button>
-                </div>
-                <div class="col-lg-6 p-0 my-1">
-                  <button class="btn btn-outline-dark col-10">
-                    FULANO pagou DESPESA-TITLE dividindo o VALOR com TODOS ou LISTA
-                  </button>{" "}
-                  <button class="btn btn-danger col-1" type="button" data-toggle="modal" data-target="#deleteButton">X</button>
+                  <button className="btn btn-danger col-1" type="button" data-toggle="modal" data-target="#deleteButton">X</button>
                 </div>
               </div>
             </div>
@@ -155,7 +119,7 @@ class DashDespesas extends Component {
 
           {/* // CONFIRM EXCLUSION MODAL */}
 
-      <div className="modal fade" id="deleteButton" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+      <div className="modal fade" id="deleteButton" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -168,7 +132,7 @@ class DashDespesas extends Component {
             <div className="modal-body">
               <form>
                 <div className="form-group">
-                  <label for="recipient" className="col-form-label"> expense details </label>
+                  <label htmlFor="recipient" className="col-form-label"> expense details </label>
                 </div>
               </form>
             </div>

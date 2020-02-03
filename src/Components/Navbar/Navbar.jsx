@@ -36,7 +36,7 @@ const Navbar = props => {
 
     {/* // CREATE A GROUP MODAL */}
 
-    <div className="modal fade" id="creategroupbutton" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div className="modal fade" id="creategroupbutton" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
@@ -51,7 +51,7 @@ const Navbar = props => {
           <div className="modal-body">
             <form>
               <div className="form-group">
-                <label for="recipient" className="col-form-label">Digite um titulo para o grupo:</label>
+                <label htmlFor="recipient" className="col-form-label">Digite um titulo para o grupo:</label>
                 <input type="text" className="form-control" id="recipient"/>
               </div>
             </form>
@@ -68,7 +68,7 @@ const Navbar = props => {
 
     {/* // CONFIRM LOGOUT MODAL */}
 
-    <div className="modal fade" id="logoutButton" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+    <div className="modal fade" id="logoutButton" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -81,7 +81,7 @@ const Navbar = props => {
             <div className="modal-body">
               <form>
                 <div className="form-group">
-                  <label for="recipient" className="col-form-label"> SAD IMAGE </label>
+                  <label htmlFor="recipient" className="col-form-label"> SAD IMAGE </label>
                 </div>
               </form>
             </div>
