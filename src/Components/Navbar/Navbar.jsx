@@ -14,9 +14,9 @@ const Navbar = props => {
         <Link className="navbar-brand" to="/"><strong>BANANA</strong><em>SPLIT</em></Link>
       </div>
 
-      <div class="dropdown ml-auto mr-3 btn btn-outline-dark dropdown-toggle">
-        <button class="dropbtn">Grupos</button>
-        <div class="dropdown-content">
+      <div className="dropdown ml-auto mr-3 btn btn-outline-dark dropdown-toggle">
+        <button className="dropbtn">Grupos</button>
+        <div className="dropdown-content">
           <button className="btn btn-success dropdown-item bg-success text-white" type="button" data-toggle="modal" data-target="#creategroupbutton">
             Criar Grupo
           </button>

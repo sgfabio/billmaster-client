@@ -14,13 +14,33 @@ import Despesas from "../DashDespesas/DashDespesas"
 import Acertos from "../DashAcertos/DashAcertos"
 
 
+const fakeGroups = [
+  {},
+  {}
+]
+
 class App extends Component {
+   // stateful..
+  
+   // esse componente guarda no state uma lista de grupos do usuário logado
+
+  //  createGroup(newGroup) {
+    //  this.setState(lista de grupos)
+  //  }
+  
   render() {
     return (
       <div className="App">
         <Switch>
           <Route exact path="/" component={Index} />
-          <Route exact path="/dashboard" component={Dashboard} />
+          {/* <Routue exact path="/dashboard" component={Dashboard} /> */}
+          <Route exact path="/" render={(props) => {
+            return (
+            <Dashboard
+            // data={this.state.data} manda a lista de grupos para esse componente
+            {...props} />
+              )
+          }} />
 
           <Route exact path="/dashboard/pessoas" component={Pessoas} />
           <Route exact path="/dashboard/despesas" component={Despesas} />
@@ -34,4 +54,3 @@ class App extends Component {
 
 export default App;
 
-//TODO IMPORTAR bootstrap CSS e JAVASCRIPT

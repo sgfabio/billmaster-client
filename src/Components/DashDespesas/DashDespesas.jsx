@@ -1,39 +1,33 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import DashNavbar from "../DashNavbar/DashNavbar";
+import CheckBox from "./Checkbox"
 
-import ReactDOM from "react-dom";
-import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
-
-//
-let members = [
-  { Name: "NAME 01" },
-  { Name: "NAME 02" },
-  { Name: "NAME 03" },
-  { Name: "NAME 04" },
-  { Name: "NAME 05" },
-  { Name: "NAME 06" },
-  { Name: "NAME 07" },
-  { Name: "NAME 08" },
-  { Name: "NAME 09" },
-  { Name: "NAME 10" }
-];
-
-const listOptions = [
-  { label: "TODOS", value: ["???"], isChecked: true },
-  { label: "TESTES", value: ["NAME 01", "NAME 02"] },
-];
-
-members.map(e => {
-  let obj = {};
-  obj.label = e.Name;
-  obj.value = [e.Name];
-  listOptions.push(obj);
-});
 
 class DashDespesas extends Component {
     constructor (props) {
       super(props)
+      this.state = {
+        members: [
+          {id: 1, name: "banana", isChecked: true},
+          {id: 2, name: "apple", isChecked: true},
+          {id: 3, name: "mango", isChecked: true},
+          {id: 4, name: "grap", isChecked: true}
+        ]
+      }
+    }
+    handleAllChecked = (event) => {
+      let members = this.state.members
+      members.forEach(member => member.isChecked = event.target.checked) 
+      this.setState({members: members})
+    }
+    handleCheckChieldElement = (event) => {
+      let members = this.state.members
+      members.forEach(member => {
+         if (member.name === event.target.name)
+            member.isChecked =  event.target.checked
+      })
+      this.setState({members: members})
     }
     doSomething = () => {
       console.log('something is happening')
@@ -43,13 +37,13 @@ class DashDespesas extends Component {
         <>
           <DashNavbar />
     
-          <div className="dashMainContent">
+          <div className="dashMainContent mx-2">
             {/* <!-- Add bills --> */}
             <h2>Adicionar nova despesa:</h2>
             <div className="dashAddBills d-flex justify-content-between align-items-end flex-wrap px-4">
               <div className="form-group text-left col-lg-3 mt-1 mb-0 p-0">
                 Pagou:
-                <select className="form-control" placeholder="Quem pagou?">
+                <select className="form-control">
                   <option>Default select</option>
                   <option>Default select</option>
                   <option>Default select</option>
@@ -69,59 +63,40 @@ class DashDespesas extends Component {
                   placeholder="R$ 10,00"
                 />
               </div>
-    
-              {/* //! DOCUMENTAÇÃO https://react-select.com/props */}
-    
-              <div class="form-group text-left col-lg-3 mb-0 mt-1 p-0">
-                Dividir por:
-                <div className="d-flex align-items-center">
-                  <ReactMultiSelectCheckboxes
-                    placeholderButtonLabel="Membros"
-                    options={listOptions}
-                    selectOption={["NAME 01", "NAME 02"]}
-                    // getDisabled={}
-                    onMenuClose={this.doSomething}
-                  />
-                </div>
-              </div>
-    
-              {/* <div class="form-group text-left col-lg-3 mb-0 mt-1 p-0">
-                Recebeu:
-                <button class="dropbtn">Pessoas</button>
-                <div class="dropdown-content">
-                  <div className="d-flex align-items-center">
-                    <input
-                      className="mx-2 my-auto"
+
+              <div className="form-group text-left col-lg-3 mb-0 mt-1 p-0">
+                Dividir Por:
+              <div className="btn btn-outline-dark dropdown dropdown-toggle form-control">
+                TODOS
+                <div className="dropdown-content form-group">
+
+                <div className="dropdown-item d-flex form-group">
+                <input
+                      className="dropdown-item mx-0 my-auto bg-transparent"
                       type="checkbox"
-                      id="TODOS"
-                      name="TODOS"
+                      onClick={this.handleAllChecked}
+                      id="checkedall"
+                      name="checkedall"
                     />
                     <label
-                      className="dropdown-item py-2 my-auto ml-n3 bg-transparent"
-                      for="TODOS"
+                      className="dropdown-item py-2 my-auto ml-n4 bg-transparent"
+                      for="checkedall"
                     >
-                      TODOS
+                      Todos
                     </label>
-                  </div>
+
+          </div>
+        <ul>
+        {
+          this.state.members.map((member) => {
+            return (<CheckBox handleCheckChieldElement={this.handleCheckChieldElement} {...member} />)
+          })
+        }
+        </ul>
+      </div>
+        </div>
+        </div>
     
-                  <hr className="py-0 my-1" />
-    
-                  <div className="d-flex align-items-center">
-                    <input
-                      className="mx-2 my-auto"
-                      type="checkbox"
-                      id="TESTE"
-                      name="TESTE"
-                    />
-                    <label
-                      className="dropdown-item py-2 my-auto ml-n3 bg-transparent"
-                      for="TESTE"
-                    >
-                      TESTE
-                    </label>
-                  </div>
-                </div>
-              </div> */}
     
               <button type="submit" class="btn btn-warning mt-2 col-lg-2">
                 Submit
@@ -205,11 +180,6 @@ class DashDespesas extends Component {
           </div>
         </div>
       </div>
-
-
-
-
-
 
         </>
       );
