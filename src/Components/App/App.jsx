@@ -90,7 +90,7 @@ class App extends Component {
     super(props);
     this.state = {
       groups: fakeGroups,
-      selectedGroup: fakeGroups[0],
+      selectedGroup: fakeGroups[0]
     };
     this.addMember = this.addMember.bind(this);
   }
@@ -111,13 +111,13 @@ class App extends Component {
     />
   );
   addMember = newMember => {
-    let newArr = []
-    newArr = {...this.state.selectedGroup}
-    newArr.members.push(newMember)
-    
+    let newArr = [];
+    newArr = { ...this.state.selectedGroup };
+    newArr.members.push(newMember);
+
     this.setState({
-      selectedGroup: newArr,
-    })
+      selectedGroup: newArr
+    });
   };
 
   render() {
@@ -141,15 +141,29 @@ class App extends Component {
             render={props => {
               return (
                 <Pessoas
-                {...props}
-                  oneGroup={this.state.groups[0]}
+                  {...props}
+                  oneGroup={this.state.selectedGroup}
                   renderModalDelete={this.renderModalDelete}
                   addMember={this.addMember}
                 />
               );
             }}
           />
-          <Route exact path="/dashboard/despesas" component={Despesas} />
+
+          <Route
+            exact
+            path="/dashboard/despesas"
+            render={props => {
+              return (
+                <Despesas
+                  {...props}
+                  oneGroup={this.state.selectedGroup}
+                  renderModalDelete={this.renderModalDelete}
+                  addMember={this.addMember}
+                />
+              );
+            }}
+          />
           <Route exact path="/dashboard/acertos" component={Acertos} />
         </Switch>
       </div>

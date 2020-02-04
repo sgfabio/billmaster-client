@@ -8,12 +8,7 @@ class DashDespesas extends Component {
     constructor (props) {
       super(props)
       this.state = {
-        members: [
-          {id: 1, name: "banana", isChecked: true},
-          {id: 2, name: "apple", isChecked: true},
-          {id: 3, name: "mango", isChecked: true},
-          {id: 4, name: "grap", isChecked: true}
-        ]
+        members: this.props.oneGroup.members,
       }
     }
     handleAllChecked = (event) => {
@@ -31,6 +26,26 @@ class DashDespesas extends Component {
     }
     doSomething = () => {
       console.log('something is happening')
+    }
+    handleChange(event) {
+      // const { name , value} = event.target;
+      
+      // const newMemberCopy = {...this.state.newMember};
+      // newMemberCopy[name] = value;
+      
+      // this.setState({newMember: newMemberCopy});
+    }
+    handleSubmit(event) {
+      // event.preventDefault();
+      // this.props.addMember(this.state.newMember);
+      // const copyNewMember = {...this.state.newMember};
+      // // const { newMember } = this.state;
+      // copyNewMember.id=(getRandomInt(1000000000).toString());
+      // copyNewMember.name="";
+      // copyNewMember.contact="";
+      // this.setState({
+      //   newMember: copyNewMember,
+      // })
     }
     
     render () {
