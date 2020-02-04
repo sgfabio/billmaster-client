@@ -1,32 +1,67 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import DashNavbar from "../DashNavbar/DashNavbar";
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
 
 class DashPessoas extends Component {
   constructor(props) {
     super(props);
-    const allGroups = props.data.groups;
     this.state = {
-      selectedGroup: allGroups[0], /* //TODO Filter seleted group */
+      selectedGroup: this.props.oneGroup,
       renderModalDelete: this.props.renderModalDelete,
-      addMember: this.props.addMember,
+      newMember: {
+        id: (getRandomInt(1000000000).toString()),
+        name: "",
+        contact: "",
+      },
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+  handleChange(event) {
+    const { name , value} = event.target;
+    
+    const newMemberCopy = {...this.state.newMember};
+    newMemberCopy[name] = value;
+    
+    this.setState({newMember: newMemberCopy});
+  }
+  handleSubmit(event) {
+    // alert('Um novo membro foi adicionado com sucesso: ' + this.state.newMember.name);
+    event.preventDefault();
+    this.props.addMember(this.state.newMember);
+    const copyNewMember = {...this.state.newMember};
+    // const { newMember } = this.state;
+    copyNewMember.id=(getRandomInt(1000000000).toString());
+    copyNewMember.name="";
+    copyNewMember.contact="";
+    this.setState({
+      newMember: copyNewMember,
+    })
+  }
+  
+  
   render() {
-    const { members } = this.state.selectedGroup;
+    let { oneGroup } = this.props;
     return (
       <>
         <DashNavbar />
         <div className="dashMainContent mx-4">
           <h2>Adicionar pessoa:</h2>
-          <form action="/dashboard" className="dashAddBills d-flex justify-content-between align-items-end flex-wrap">
+          <form onSubmit={this.handleSubmit} className="dashAddBills d-flex justify-content-between align-items-end flex-wrap">
             <div className="form-group text-left col-lg-4 mt-1 mb-0 p-0">
               Nome:
               <input
                 type="text"
                 className="form-control"
                 id="newMemberName"
-                value=""
+                name="name"
+                value={this.state.newMember.name}
+                onChange={this.handleChange}
+                required
 
               />
             </div>
@@ -35,12 +70,14 @@ class DashPessoas extends Component {
               <input
                 type="text"
                 className="form-control"
-                id="newMemberEmail"
-                value=""
+                id="newMemberContact"
+                name="contact"
+                value={this.state.newMember.contact}
                 placeholder={"E-mail ou Telefone para contato"}
+                onChange={this.handleChange}
               />
             </div>
-            <button type="submit" value="submit" className="btn btn-warning mt-2 col-lg-2">
+            <button type="submit" value="submit" className="btn btn-warning mt-2 col-lg-2" >
               Submit
             </button>
           </form>
@@ -48,7 +85,7 @@ class DashPessoas extends Component {
 
           <div className="dashBillsList">
             <div className="row">
-              {members.map(e => {
+              {oneGroup.members.map(e => {
                 return (
                   <>
                     <div className="col-lg-6 p-0 my-1">

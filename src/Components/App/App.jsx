@@ -90,8 +90,9 @@ class App extends Component {
     super(props);
     this.state = {
       groups: fakeGroups,
-      selectedGroup: []
+      selectedGroup: fakeGroups[0],
     };
+    this.addMember = this.addMember.bind(this);
   }
   createGroup(newGroup) {
     this.state.groups.push(newGroup);
@@ -109,8 +110,14 @@ class App extends Component {
       element={element}
     />
   );
-  addMember = member => {
-    member.push(fakeMembers);
+  addMember = newMember => {
+    let newArr = []
+    newArr = {...this.state.selectedGroup}
+    newArr.members.push(newMember)
+    
+    this.setState({
+      selectedGroup: newArr,
+    })
   };
 
   render() {
@@ -134,9 +141,9 @@ class App extends Component {
             render={props => {
               return (
                 <Pessoas
-                  data={this.state}
+                {...props}
+                  oneGroup={this.state.groups[0]}
                   renderModalDelete={this.renderModalDelete}
-                  {...props}
                   addMember={this.addMember}
                 />
               );

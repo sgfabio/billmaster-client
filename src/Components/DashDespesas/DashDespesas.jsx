@@ -32,6 +32,7 @@ class DashDespesas extends Component {
     doSomething = () => {
       console.log('something is happening')
     }
+    
     render () {
       return (
         <>
