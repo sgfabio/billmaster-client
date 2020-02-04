@@ -29,7 +29,7 @@ const Index = props => {
     </div>
 
     {/* <!-- SIGNIN MODAL --> */}
-    <div className="modal fade" id="loginbutton" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div className="modal fade" id="loginbutton" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
                 <div className="modal-header">
@@ -39,29 +39,27 @@ const Index = props => {
                     </button>
                 </div>
                 <div className="modal-body">
-                    <form>
+                    <form action="/dashboard">
                         <div className="form-group">
-                            <label for="recipient-email" className="col-form-label">Usuário:</label>
-                            <input type="email" className="form-control" id="recipient-email"/>
+                            <label htmlFor="recipient-user" className="col-form-label">Usuário:</label>
+                            <input type="text" className="form-control" id="recipient-user"/>
                         </div>
                         <div className="form-group">
-                            <label for="recipient-password" className="col-form-label">Senha:</label>
+                            <label htmlFor="recipient-password" className="col-form-label">Senha:</label>
                             <input type="password" className="form-control" id="recipient-password"/>
                         </div>
-                    </form>
-                </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <form action="/dashboard">
                       <input type="submit" value="Entrar" className="btn btn-primary" />
-                      </form>
+                </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
     {/* <!-- SIGNUP MODAL --> */}
-    <div className="modal fade" id="signupbutton" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div className="modal fade" id="signupbutton" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
                 <div className="modal-header">
@@ -71,24 +69,24 @@ const Index = props => {
                     </button>
                 </div>
                 <div className="modal-body">
-                    <form>
+                    <form action="/signup">
                         <div className="form-group">
-                            <label for="recipient-email" className="col-form-label">Usuário:</label>
+                            <label htmlFor="recipient-email" className="col-form-label">Usuário:</label>
                             <input type="email" className="form-control" id="recipient-email"/>
                         </div>
                         <div className="form-group">
-                            <label for="recipient-email" className="col-form-label">E-mail:</label>
+                            <label htmlFor="recipient-email" className="col-form-label">E-mail:</label>
                             <input type="email" className="form-control" id="recipient-email"/>
                         </div>
                         <div className="form-group">
-                            <label for="recipient-password" className="col-form-label">Senha:</label>
+                            <label htmlFor="recipient-password" className="col-form-label">Senha:</label>
                             <input type="password" className="form-control" id="recipient-password"/>
                         </div>
-                    </form>
-                </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" className="btn btn-primary">CRIAR</button>
+                    <button type="submit" className="btn btn-primary">CRIAR</button>
+                </div>
+                    </form>
                 </div>
             </div>
         </div>

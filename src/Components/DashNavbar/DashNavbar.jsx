@@ -3,13 +3,12 @@ import { Link, NavLink } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
-const Dashboard = props => {
+
+const DashNavbar = props => {
   return (
     <>
-      <Navbar />
-      <h1>OLHA ESSE H1</h1>
-      <article>EXPLICANDO COMO FAZ</article>
-      {/* <div className="dashContent row py-0 my-2">
+    <Navbar />
+      <div className="dashContent row py-0 my-2">
           <div className="btn-group btn-group-toggle mx-auto my-0" data-toggle="buttons">
 
             <NavLink to="/dashboard/pessoas" className="btn btn-outline-dark btn-yellow-dashboard">
@@ -23,9 +22,9 @@ const Dashboard = props => {
 
           </div>
       </div>
-      <hr className="my-2"/> */}
+      <hr className="my-2"/>
     </>
   );
 };
 
-export default Dashboard;
+export default DashNavbar;

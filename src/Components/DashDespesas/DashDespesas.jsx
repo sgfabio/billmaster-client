@@ -1,59 +1,169 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Dashboard from "../Dashboard/Dashboard"
+import DashNavbar from "../DashNavbar/DashNavbar";
+import CheckBox from "./Checkbox"
 
 
-const DashDespesas = props => {
-  return (
-      <>
-      <Dashboard />
-                <div class="dashMainContent">
-                    {/* <!-- Add bills --> */}
-                    <h2>Adicionar nova despesa:</h2>
-                    <div class="dashAddBills d-flex justify-content-between align-items-end flex-wrap">
-                        <div class="form-group text-left col-lg-4 mt-1 mb-0 p-0">
-                            Nome:
-                            <input type="text" class="form-control" id="exampleInputPassword1"/>
-                        </div>
-                        <div class="form-group text-left col-lg-5 mb-0 mt-1 p-0">
-                            E-mail:
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-                        </div>
-                        <button type="submit" class="btn btn-warning mt-2 col-lg-2">Submit</button>
-                    </div>
-                    <hr/>
-                    {/* <!-- Bills list --> */}
-                    <div class="dashBillsList">
-                        <div class="row">
-                            <div class="col-lg-6 p-0 my-1">
-                                <button class="btn btn-outline-dark col-10">NAME 01</button> <button class="btn btn-danger col-1">X</button>
-                            </div>
-                            <div class="col-lg-6 p-0 my-1">
-                                <button class="btn btn-outline-dark col-10">NAME 01</button> <button class="btn btn-danger col-1">X</button>
-                            </div>
-                            <div class="col-lg-6 p-0 my-1">
-                                <button class="btn btn-outline-dark col-10">NAME 01</button> <button class="btn btn-danger col-1">X</button>
-                            </div>
-                            <div class="col-lg-6 p-0 my-1">
-                                <button class="btn btn-outline-dark col-10">NAME 01</button> <button class="btn btn-danger col-1">X</button>
-                            </div><div class="col-lg-6 p-0 my-1">
-                                <button class="btn btn-outline-dark col-10">NAME 01</button> <button class="btn btn-danger col-1">X</button>
-                            </div>
-                            <div class="col-lg-6 p-0 my-1">
-                                <button class="btn btn-outline-dark col-10">NAME 01</button> <button class="btn btn-danger col-1">X</button>
-                            </div>
-                            <div class="col-lg-6 p-0 my-1">
-                                <button class="btn btn-outline-dark col-10">NAME 01</button> <button class="btn btn-danger col-1">X</button>
-                            </div>
-                            <div class="col-lg-6 p-0 my-1">
-                                <button class="btn btn-outline-dark col-10">NAME 01</button> <button class="btn btn-danger col-1">X</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-      </>
-  );
+class DashDespesas extends Component {
+    constructor (props) {
+      super(props)
+      this.state = {
+        members: this.props.oneGroup.members,
+      }
+    }
+    handleAllChecked = (event) => {
+      let members = this.state.members
+      members.forEach(member => member.isChecked = event.target.checked) 
+      this.setState({members: members})
+    }
+    handleCheckChieldElement = (event) => {
+      let members = this.state.members
+      members.forEach(member => {
+         if (member.name === event.target.name)
+            member.isChecked =  event.target.checked
+      })
+      this.setState({members: members})
+    }
+    doSomething = () => {
+      console.log('something is happening')
+    }
+    handleChange(event) {
+      // const { name , value} = event.target;
+      
+      // const newMemberCopy = {...this.state.newMember};
+      // newMemberCopy[name] = value;
+      
+      // this.setState({newMember: newMemberCopy});
+    }
+    handleSubmit(event) {
+      // event.preventDefault();
+      // this.props.addMember(this.state.newMember);
+      // const copyNewMember = {...this.state.newMember};
+      // // const { newMember } = this.state;
+      // copyNewMember.id=(getRandomInt(1000000000).toString());
+      // copyNewMember.name="";
+      // copyNewMember.contact="";
+      // this.setState({
+      //   newMember: copyNewMember,
+      // })
+    }
+    
+    render () {
+      return (
+        <>
+          <DashNavbar />
+    
+          <div className="dashMainContent mx-2">
+            {/* <!-- Add bills --> */}
+            <h2>Adicionar nova despesa:</h2>
+            <div className="dashAddBills d-flex justify-content-between align-items-end flex-wrap px-4">
+              <div className="form-group text-left col-lg-3 mt-1 mb-0 p-0">
+                Pagou:
+                <select className="form-control">
+                  <option>Default select</option>
+                  <option>Default select</option>
+                  <option>Default select</option>
+                  <option>Default select</option>
+                  <option selected>Owner</option>
+                </select>
+              </div>
+              <div className="form-group text-left col-lg-2 mb-0 mt-1 p-0">
+                Valor:
+                <input
+                  type="number"
+                  className="form-control"
+                  min="0.00"
+                  max="10000.00"
+                  step="0.01"
+                  id="acertoValor"
+                  placeholder="R$ 10,00"
+                />
+              </div>
+
+              <div className="form-group text-left col-lg-3 mb-0 mt-1 p-0">
+                Dividir Por:
+              <div className="btn btn-outline-dark dropdown dropdown-toggle form-control">
+                TODOS
+                <div className="dropdown-content form-group">
+
+                <div className="dropdown-item d-flex form-group">
+                <input
+                      className="dropdown-item mx-0 my-auto bg-transparent"
+                      type="checkbox"
+                      onClick={this.handleAllChecked}
+                      id="checkedall"
+                      name="checkedall"
+                    />
+                    <label
+                      className="dropdown-item py-2 my-auto ml-n4 bg-transparent"
+                      htmlFor="checkedall"
+                    >
+                      Todos
+                    </label>
+
+          </div>
+        <ul>
+        {
+          this.state.members.map((member) => {
+            return (<CheckBox handleCheckChieldElement={this.handleCheckChieldElement} {...member} />)
+          })
+        }
+        </ul>
+      </div>
+        </div>
+        </div>
+    
+    
+              <button type="submit" className="btn btn-warning mt-2 col-lg-2">
+                Submit
+              </button>
+            </div>
+            <hr />
+            {/* <!-- Bills list --> */}
+            <div className="dashBillsList">
+              <div className="row">
+                <div className="col-lg-6 p-0 my-1">
+                  <button className="btn btn-outline-dark col-10">
+                    FULANO pagou DESPESA-TITLE dividindo o VALOR com TODOS ou LISTA
+                  </button>{" "}
+                  <button className="btn btn-danger col-1" type="button" data-toggle="modal" data-target="#deleteButton">X</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          {/* // CONFIRM EXCLUSION MODAL */}
+
+      <div className="modal fade" id="deleteButton" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Deseja realmente remover?</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close" >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div className="modal-body">
+              <form>
+                <div className="form-group">
+                  <label htmlFor="recipient" className="col-form-label"> expense details </label>
+                </div>
+              </form>
+            </div>
+
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal" > Cancelar </button>
+              <button type="button" className="btn btn-danger"> Excluir </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        </>
+      );
+    }
 };
-
 
 export default DashDespesas;
