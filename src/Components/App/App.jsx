@@ -164,7 +164,17 @@ class App extends Component {
               );
             }}
           />
-          <Route exact path="/dashboard/acertos" component={Acertos} />
+          <Route exact path="/dashboard/acertos" render={props => {
+              return (
+                <Acertos
+                  {...props}
+                  oneGroup={this.state.selectedGroup}
+                  renderModalDelete={this.renderModalDelete}
+                  addMember={this.addMember}
+                />
+              );
+            }}
+          />
         </Switch>
       </div>
     );

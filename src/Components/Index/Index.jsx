@@ -39,22 +39,20 @@ const Index = props => {
                     </button>
                 </div>
                 <div className="modal-body">
-                    <form>
+                    <form action="/dashboard">
                         <div className="form-group">
-                            <label htmlFor="recipient-email" className="col-form-label">Usuário:</label>
-                            <input type="email" className="form-control" id="recipient-email"/>
+                            <label htmlFor="recipient-user" className="col-form-label">Usuário:</label>
+                            <input type="text" className="form-control" id="recipient-user"/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="recipient-password" className="col-form-label">Senha:</label>
                             <input type="password" className="form-control" id="recipient-password"/>
                         </div>
-                    </form>
-                </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <form action="/dashboard"> {/* //TODO função sinup */}
                       <input type="submit" value="Entrar" className="btn btn-primary" />
-                      </form>
+                </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -71,7 +69,7 @@ const Index = props => {
                     </button>
                 </div>
                 <div className="modal-body">
-                    <form>
+                    <form action="/signup">
                         <div className="form-group">
                             <label htmlFor="recipient-email" className="col-form-label">Usuário:</label>
                             <input type="email" className="form-control" id="recipient-email"/>
@@ -84,11 +82,11 @@ const Index = props => {
                             <label htmlFor="recipient-password" className="col-form-label">Senha:</label>
                             <input type="password" className="form-control" id="recipient-password"/>
                         </div>
-                    </form>
-                </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" className="btn btn-primary">CRIAR</button>
+                    <button type="submit" className="btn btn-primary">CRIAR</button>
+                </div>
+                    </form>
                 </div>
             </div>
         </div>
