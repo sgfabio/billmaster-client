@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+
+
 const ReportsBills = props => {
   return (
 <div>
@@ -9,7 +11,7 @@ const ReportsBills = props => {
             <a class="navbar-brand"><strong>BANANA</strong><em>SPLIT</em></a>
         </div>
         <div>
-                Grupo: {buscar.nome.grupo}
+                Grupo: {Group.groupName}
         </div>
     </nav>
 

@@ -11,7 +11,6 @@ class DashPessoas extends Component {
     super(props);
     this.state = {
       selectedGroup: this.props.oneGroup,
-      renderModalDelete: this.props.renderModalDelete,
       newMember: {
         id: (getRandomInt(1000000000).toString()),
         name: "",
@@ -94,16 +93,16 @@ class DashPessoas extends Component {
                       </button>{" "}
                       <button
                         className="btn btn-danger col-1"
-                        onClick={() => this.state.renderModalDelete(e.name, e)}
+                        onClick={() => this.props.renderModalDelete(e.name, e)}
                         type="button"
                         data-toggle="modal"
                         data="teste"
-                        data-target={`#deleteButton${e.id}`}
+                        data-target={`#deleteButton${e._id}`}
                       >
                         {" "}
                         X{" "}
                       </button>
-                      {this.state.renderModalDelete(e.name, e)}
+                      {this.props.renderModalDelete(e.name, e)}
                     </div>
                   </>
                 );
