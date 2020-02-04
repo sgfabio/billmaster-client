@@ -90,10 +90,19 @@ class App extends Component {
     super(props);
     this.state = {
       groups: fakeGroups,
-      selectedGroup: fakeGroups[0]
+      selectedGroup: fakeGroups[0],
+      loggedInUser: null      //Estado para o Usuário logado
     };
     this.addMember = this.addMember.bind(this);
+    this.getTheUser = this.getTheUser.bind(this);  // BIND do Método que guarda o usuário logado no estado *
   }
+ 
+  getTheUser(userObj) {     // Método que guarda o usuário logado no estado *
+    this.setState({
+      loggedInUser: userObj
+    })
+  }
+
   createGroup(newGroup) {
     this.state.groups.push(newGroup);
   }
@@ -124,7 +133,10 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route exact path="/" component={Index} />
+          {/* Passa o getUser para o componente index.jsx */}
+          <Route exact path='/' render={() => <Index getUser={this.getTheUser}/>}/> 
+          {/* <Route exact path="/" component={Index} /> */}
+
           {/* <Route exact path="/dashboard" component={Dashboard} /> */}
 
           <Route
