@@ -9,7 +9,7 @@ const Navbar = (props) => {
     <>
       <nav className="navbar navbar-light bg-yellow justify-content-between">
         <div>
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/dashboard">
             <strong>BANANA</strong>
             <em>SPLIT</em>
           </Link>

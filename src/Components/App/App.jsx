@@ -113,15 +113,14 @@ class App extends Component {
   );
   
   addMember = (newMember) => {
-    let newArr = [];
-    newArr = { ...this.state.selectedGroup };
-    newArr.members.push(newMember);
+    const groupCopy = {...this.state.selectedGroup}
+    groupCopy.members.push(newMember);
 
     this.setState({
-      selectedGroup: newArr,
+      selectedGroup: groupCopy,
     });
   };
-
+b
   render() {
     return (
       <div className="App">
