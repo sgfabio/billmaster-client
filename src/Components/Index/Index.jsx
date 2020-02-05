@@ -8,13 +8,33 @@ export class Index extends Component {
         super(props);
         this.state = {username:'', password:''};
         
-        //TODO BINDS dos métodos
+        //BINDS dos métodos
+        this.handleLoginFormSubmit = this.handleLoginFormSubmit.bind(this);
+        this.handleSignUpFormSubmit = this.handleSignUpFormSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 
     }
 
-    //TODO handleSignUpFormSubmit(event)
+    // handleLoginFormSubmit(event)
+    handleLoginFormSubmit(event) {
+        console.log("Oi Login")   
+        event.preventDefault();
+        auth.login(this.state.username, this.state.password)
+        .then(userObj => {
+            console.log('userObj do handleLoginFormSubmit', userObj);
+            this.setState({
+                username:'',
+                password:'',
+            });
+            this.props.getUser(userObj)
+        })
+        .catch(error => console.log('erro handleSignUpFormSubmit:', error))
+    }
+    
+    // handleSignUpFormSubmit(event)
     handleSignUpFormSubmit(event) {
-        event.preventDefaut();
+        console.log("Oi SignUp")   
+        event.preventDefault();
         auth.signup(this.state.username, this.state.password)
         .then(userObj => {
             console.log('userObj do handleSignUpFormSubmit', userObj);
@@ -27,14 +47,11 @@ export class Index extends Component {
         .catch(error => console.log('erro handleSignUpFormSubmit:', error))
     }
 
-    //TODO handleLoginFormSubmit(event)
-
-
-
-    //TODO handleChange(event)
+    // handleChange(event)
     handleChange(event){
         const {name, value} = event.target;
         this.setState({[name]: value});
+        console.log("this.state.username:", this.state.username, " this.state.password:", this.state.password)
     }
     
 
@@ -65,7 +82,7 @@ export class Index extends Component {
               <p>Outro texto, mas agora explicando como funciona</p>
           </div>
       
-          {/* <!-- SIGNIN MODAL --> */}
+          {/* <!-- LOGIN MODAL --> */}
           <div className="modal fade" id="loginbutton" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div className="modal-dialog modal-dialog-centered" role="document">
                   <div className="modal-content">
@@ -75,18 +92,21 @@ export class Index extends Component {
                               <span aria-hidden="true">&times;</span>
                           </button>
                       </div>
+
                       <div className="modal-body">
-                          <form action="/dashboard">
+                          <form  onSubmit={this.handleLoginFormSubmit} >
                               <div className="form-group">
                                   <label htmlFor="recipient-user" className="col-form-label">Usuário:</label>
-                                  <input type="text" className="form-control" id="recipient-user"/>
+                                  <input type="text" className="form-control" id="recipient-user" name='username' value={this.state.username} onChange={this.handleChange}/>
                               </div>
                               <div className="form-group">
                                   <label htmlFor="recipient-password" className="col-form-label">Senha:</label>
-                                  <input type="password" className="form-control" id="recipient-password"/>
+                                  <input type="password" className="form-control" id="recipient-password" name='password' value={this.state.password} onChange={this.handleChange} />
                               </div>
+                              
                       <div className="modal-footer">
                           <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                          {/* <button type="submit" onClick={this.handleLoginFormSubmit} className="btn btn-primary" data-dismiss="modal">Entrar</button> */}
                             <input type="submit" value="Entrar" className="btn btn-primary" />
                       </div>
                           </form>
@@ -107,18 +127,19 @@ export class Index extends Component {
                       </div>
                       <div className="modal-body">
                       
-                          <form action="/signup">
+                          <form onSubmit={this.handleSignUpFormSubmit}>
                               <div className="form-group">
-                                  <label htmlFor="recipient-email" className="col-form-label">Usuário:</label>
-                                  <input type="email" className="form-control" id="recipient-email"/>
+                                  <label htmlFor="recipient-usuario" className="col-form-label">Usuário:</label>
+                                  <input type="text" className="form-control" id="recipient-usuario" name='username' value={this.state.username} onChange={this.handleChange}/>
                               </div>
-                              <div className="form-group">
+                              {/* API ainda não recebe e-mail para o signup */}
+                              {/* <div className="form-group">
                                   <label htmlFor="recipient-email" className="col-form-label">E-mail:</label>
                                   <input type="email" className="form-control" id="recipient-email"/>
-                              </div>
+                              </div> */}
                               <div className="form-group">
                                   <label htmlFor="recipient-password" className="col-form-label">Senha:</label>
-                                  <input type="password" className="form-control" id="recipient-password"/>
+                                  <input type="password" className="form-control" id="recipient-password" name='password' value={this.state.password} onChange={this.handleChange} />
                               </div>
                       <div className="modal-footer">
                           <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</button>

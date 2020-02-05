@@ -4,6 +4,7 @@ export const auth = {
     endpoint: process.env.REACT_APP_API, // 'http://localhost:5000/api', //Dev
 
     login(username, password) {
+      console.log('Login chamando API:',username,password)
       return axios.post(
         `${this.endpoint}/login`,
         { 
@@ -15,6 +16,7 @@ export const auth = {
     },
 
     signup(username,password) {
+      console.log('SigUp chamando API:',username,password)
       return axios.post(
         `${this.endpoint}/signup`,
         {
