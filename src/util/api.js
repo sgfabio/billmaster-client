@@ -1,53 +1,52 @@
 import axios from 'axios';
 
 export const auth = {
-    endpoint: process.env.REACT_APP_API, // 'http://localhost:5000/api', //Dev
+  endpoint: process.env.REACT_APP_API, // 'http://localhost:5000/api', //Dev
 
-    login(username, password) {
-      console.log('Login chamando API:',username,password)
-      return axios.post(
+  // TODO: não consegui buscar o erro do servidor. Se consologar a resposta do retorno sem resolver a promessa, eu vejo o erro... mas se tratar a promessa, não vejo mais o erro! tornei async e coloquei error handling pra conseguir detectar que o login falhou no componente login
+  async login(username, password) {
+    try {
+      const response = await axios.post(
         `${this.endpoint}/login`,
-        { 
-          username, 
-          password,
-        },
-        { withCredentials: true }
-      );
-    },
-
-    signup(username,password) {
-      console.log('SigUp chamando API:',username,password)
-      return axios.post(
-        `${this.endpoint}/signup`,
         {
           username,
           password,
         },
-        {withCredentials:true}
+        { withCredentials: true }
       );
-    },
+      return response;
+    } catch (error) {
+      console.log(error)
+      return undefined;
+    }
+  },
 
-    isAuth() {
-      return axios.get(
-        `${this.endpoint}/is-auth`,
-        {withCredentials:true}
-      );
-    },
+  signup(username, password) {
+    console.log('SigUp chamando API:', username, password);
+    return axios.post(
+      `${this.endpoint}/signup`,
+      {
+        username,
+        password,
+      },
+      { withCredentials: true }
+    );
+  },
 
-    logout() {
-      return axios.get(
-        `${this.endpoint}/logout`,
-        {withCredentials:true}
-      );
-    },
+  isAuth() {
+    return axios.get(`${this.endpoint}/is-auth`, { withCredentials: true });
+  },
 
-  }
+  logout() {
+    return axios.get(`${this.endpoint}/logout`, { withCredentials: true });
+  },
+};
 
-  export const groups = {
-    endpoint: process.env.REACT_APP_API, // 'http://localhost:5000/api', //Dev
+export const groups = {
+  endpoint: process.env.REACT_APP_API, // 'http://localhost:5000/api', //Dev
 
-    //GROUPS
-    /* Example:
+  //GROUPS
+  /* Example:
 
       {
           "members": [
@@ -82,50 +81,55 @@ export const auth = {
           "__v": 0
       }
     */
-    create(groupName, description, date){   // User must be logged in
-      return axios.post(
-        `${this.endpoint}/groups`,
-        {
-          groupName,
-          description,
-          date
-        },
-        {withCredentials:true}
-      );
-    },
+  create(groupName, description, date) {
+    // User must be logged in
+    return axios.post(
+      `${this.endpoint}/groups`,
+      {
+        groupName,
+        description,
+        date,
+      },
+      { withCredentials: true }
+    );
+  },
 
-    getAll() {
-      return axios.get(          // User must be logged in
-        `${this.endpoint}/grupos`,
-        {withCredentials:true}
-      );
-    },
-    
-    getOne(groupId) {
-      return axios.get(        // User must be logged in
-        `${this.endpoint}/grupos/${groupId}`,
-        {withCredentials:true}
-      );
-    },
+  getAll() {
+    return axios.get(
+      // User must be logged in
+      `${this.endpoint}/grupos`,
+      { withCredentials: true }
+    );
+  },
 
-    put( groupID , groupDataObj ) {    // groupData é o objeto contendo as modificações nos atributos do grupo
-      return axios.put(        // User must be logged in
-        `${this.endpoint}/grupos/${groupID}`,
-        groupDataObj,            // Verificar modo de passar dados do grupo que serão modificados 
-        {withCredentials:true}
-      );
-    },
+  getOne(groupId) {
+    return axios.get(
+      // User must be logged in
+      `${this.endpoint}/grupos/${groupId}`,
+      { withCredentials: true }
+    );
+  },
 
-    delete(groupId) {
-      return axios.delete(        // User must be logged in
-        `${this.endpoint}/grupos/${groupId}`,
-        {withCredentials:true}
-      );
-    },
+  put(groupID, groupDataObj) {
+    // groupData é o objeto contendo as modificações nos atributos do grupo
+    return axios.put(
+      // User must be logged in
+      `${this.endpoint}/grupos/${groupID}`,
+      groupDataObj, // Verificar modo de passar dados do grupo que serão modificados
+      { withCredentials: true }
+    );
+  },
 
+  delete(groupId) {
+    return axios.delete(
+      // User must be logged in
+      `${this.endpoint}/grupos/${groupId}`,
+      { withCredentials: true }
+    );
+  },
 
-    //EXPENSES
-    /*Example:
+  //EXPENSES
+  /*Example:
 
       expenseData: {
        "description": "picanha",
@@ -137,32 +141,34 @@ export const auth = {
       }
     
       */
-    createExpense(groupID, expenseDataObj){   // User must be logged in
-      return axios.post(
-        `${this.endpoint}/groups/${groupID}/expenses`,
-        expenseDataObj,
-        {withCredentials:true}
-      );
-    },
+  createExpense(groupID, expenseDataObj) {
+    // User must be logged in
+    return axios.post(
+      `${this.endpoint}/groups/${groupID}/expenses`,
+      expenseDataObj,
+      { withCredentials: true }
+    );
+  },
 
-    putExpense(groupID, expenseID, expenseDataObj){   // User must be logged in
-      return axios.put(
-        `${this.endpoint}/groups/${groupID}/expenses/${expenseID}`,
-        expenseDataObj,
-        {withCredentials:true}
-      );
-    },
+  putExpense(groupID, expenseID, expenseDataObj) {
+    // User must be logged in
+    return axios.put(
+      `${this.endpoint}/groups/${groupID}/expenses/${expenseID}`,
+      expenseDataObj,
+      { withCredentials: true }
+    );
+  },
 
-    deleteExpense(groupID, expenseID){   // User must be logged in
-      return axios.delete(
-        `${this.endpoint}/groups/${groupID}/expenses/${expenseID}`,
-        {withCredentials:true}
-      );
-    },
+  deleteExpense(groupID, expenseID) {
+    // User must be logged in
+    return axios.delete(
+      `${this.endpoint}/groups/${groupID}/expenses/${expenseID}`,
+      { withCredentials: true }
+    );
+  },
 
-
-    //SETTLES
-    /*Model:
+  //SETTLES
+  /*Model:
       {
         owner: { type: Schema.Types.ObjectId, ref: 'Group', required: true },
         value: { type: Number, required: true },
@@ -179,32 +185,29 @@ export const auth = {
       }
     
       */
-     createSettle(groupID, settleDataObj){   // User must be logged in
-      return axios.post(
-        `${this.endpoint}/groups/${groupID}/settles`,
-        settleDataObj,
-        {withCredentials:true}
-      );
-    },
+  createSettle(groupID, settleDataObj) {
+    // User must be logged in
+    return axios.post(
+      `${this.endpoint}/groups/${groupID}/settles`,
+      settleDataObj,
+      { withCredentials: true }
+    );
+  },
 
-    putSettle(groupID, settleID, settleDataObj){   // User must be logged in
-      return axios.put(
-        `${this.endpoint}/groups/${groupID}/settles/${settleID}`,
-        settleDataObj,
-        {withCredentials:true}
-      );
-    },
+  putSettle(groupID, settleID, settleDataObj) {
+    // User must be logged in
+    return axios.put(
+      `${this.endpoint}/groups/${groupID}/settles/${settleID}`,
+      settleDataObj,
+      { withCredentials: true }
+    );
+  },
 
-    deleteSettle(groupID, settleID){   // User must be logged in
-      return axios.delete(
-        `${this.endpoint}/groups/${groupID}/settles/${settleID}`,
-        {withCredentials:true}
-      );
-    },
-
-  }
-
-  
-
-
-
+  deleteSettle(groupID, settleID) {
+    // User must be logged in
+    return axios.delete(
+      `${this.endpoint}/groups/${groupID}/settles/${settleID}`,
+      { withCredentials: true }
+    );
+  },
+};

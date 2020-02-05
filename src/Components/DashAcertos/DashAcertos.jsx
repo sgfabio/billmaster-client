@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import DashNavbar from "../DashNavbar/DashNavbar";
+import "./DashAcertos.css"
 
 class DashAcertos extends Component {
   constructor(props) {
@@ -115,35 +116,45 @@ class DashAcertos extends Component {
               Submit
             </button>
           </form>
-            <div className="zindex-modal alert alert-warning bg-transparent m-2 py-auto px-auto" role="alert">
+            <div className="zindex-modal alert alert-warning bg-transparent m-2 py-auto px-auto noBorder" role="alert">
               {this.state.errorMessage}
-              </div>
+            </div>
           <hr />
 
-          <div className="dashSettleList">
+          <div className="dashSettleList row">
             {[...this.state.settles].map(e => {
-              return (
-                <div className="col-lg-6 p-0 my-1">
-                  <button className="btn btn-outline-dark col-10 mr-2">
-                    {e.paidBy} pagou para {e.paidTo} o valor de R${e.value}.
-                  </button>
-                  <button
-                    className="btn btn-danger col-1"
-                    type="button"
-                    data-toggle="modal"
-                    data-target={`#deleteButton${e.id}`}
-                  >
-                    X
-                  </button>
-                  {this.props.renderModalDelete(
-                    `O pagamento de ${e.paidBy} para ${e.paidTo}`,
-                    e
-                  )}
+              return (      
+                <div className="col-lg p-0 ml-0 dashComponents">
+                  <div className="col-9 p-0">
+                    <button className="btn btn-outline-dark boxComponent">
+                      {e.paidBy} pagou para {e.paidTo} o valor de R${e.value}
+                    </button>
+                  </div>
+                  <div className="col-2 p-0">
+                    <button
+                      className="btn btn-warning buttonOptions"
+                      type="button"
+                      data-toggle="modal"
+                      data-target={`#deleteButton${e.id}`}
+                      >
+                        Editar  
+                    </button>
+                    <button
+                      className="btn btn-danger buttonOptions"
+                      type="button"
+                      data-toggle="modal"
+                      data-target={`#deleteButton${e.id}`}
+                      >
+                      Excluir
+                    </button>
+                    {this.props.renderModalDelete(
+                      `O pagamento de ${e.paidBy} para ${e.paidTo}`,
+                      e
+                    )}
+                  </div>
                 </div>
-              );
-            })}
+              )})}
           </div>
-          
         </div>
       </>
     );
