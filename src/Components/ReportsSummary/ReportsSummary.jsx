@@ -12,7 +12,7 @@ class ReportsSummary extends Component {
     }
 
     componentDidMount() {
-        groups.getBalance('5e39a5dcd92dfc45cc871308')
+        groups.getBalance(this.props.groupId) //props do Id do grupo; 
         .then(qryObj => {
             console.log('componentDidMount',qryObj);
             this.setState({msg: qryObj.data.msg, balances:qryObj.data.queryResult}, () => console.log(this.state) )
@@ -21,12 +21,6 @@ class ReportsSummary extends Component {
         .catch(error => console.log('erro ReportSummary', error))
 
     }
-
-
-    //Teste Enxertar o GoupID=5e39a5dcd92dfc45cc871308 e testar a API e renderização da tabela com os saldos
-    //03. TODO Receber Prop com um GroupID e bater na API [ http://localhost:5000/api/groups/5e39a5dcd92dfc45cc871308/balance ]e renderizar os saldos que vierem 
-    
-   
 
 
     render(){
