@@ -89,7 +89,6 @@ class App extends Component {
   }
 
   async fetchUser() {
-    console.log(this.state.uer);
     if (this.state.isAuth) {
       try {
         const loggedInUser = await auth.isAuth();
@@ -106,7 +105,6 @@ class App extends Component {
     }
   }
   getUser(userObj) {
-    console.log('userObj:', userObj);
     this.setState({
       user: userObj,
       isAuth: true,

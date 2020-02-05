@@ -16,11 +16,9 @@ export class Index extends Component {
 
     // handleLoginFormSubmit(event)
     handleLoginFormSubmit(event) {
-        console.log("Oi Login")   
         event.preventDefault();
         auth.login(this.state.username, this.state.password)
         .then(userObj => {
-            console.log('userObj do handleLoginFormSubmit', userObj);
             this.setState({
                 username:'',
                 password:'',
@@ -32,7 +30,6 @@ export class Index extends Component {
     
     // handleSignUpFormSubmit(event)
     handleSignUpFormSubmit(event) {
-        console.log("Oi SignUp")   
         event.preventDefault();
         auth.signup(this.state.username, this.state.password)
         .then(userObj => {

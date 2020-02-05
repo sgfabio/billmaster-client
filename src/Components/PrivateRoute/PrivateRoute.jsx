@@ -9,7 +9,6 @@ export default function PrivateRoute({
   authed,
   ...rest
 }) {
-  console.log('rest:', rest) // element aqui
   return (
     <Route
       {...rest}

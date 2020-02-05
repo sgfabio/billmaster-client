@@ -4,7 +4,6 @@ import { Switch, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
 const Dashboard = props => {
-  console.log('props de dashboard:', props)
   return (
     <>
       <Navbar />

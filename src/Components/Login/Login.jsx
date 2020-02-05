@@ -32,7 +32,6 @@ export default class Login extends Component {
         })
         return
       }
-      console.log('to recebendo o user?', user)
       this.props.getUser(user);
       this.setState({
         redirectToReferrer: true,
