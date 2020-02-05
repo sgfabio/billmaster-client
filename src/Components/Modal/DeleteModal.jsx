@@ -9,6 +9,8 @@ class DeleteModal extends Component {
     }
   }
   render(){
+    console.log('oioioioioi')
+    console.log(this.state.member)
     return (
       <>
       {/* // CONFIRM EXCLUSION MODAL */}

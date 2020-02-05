@@ -3,17 +3,20 @@ import { Switch, Route, Link, Redirect } from 'react-router-dom';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import $ from 'jquery'; ----SE DER PAU usar $(document).ready()
-import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { auth } from '../../util/api';
 
 // Components
 import Index from '../Index/Index';
+
+import Login from '../Login/Login';
+
 import Dashboard from '../Dashboard/Dashboard';
 import Pessoas from '../DashPessoas/DashPessoas';
 import Despesas from '../DashDespesas/DashDespesas';
 import Acertos from '../DashAcertos/DashAcertos';
 import DeleteModal from '../Modal/DeleteModal';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 // fake data
 const fakeExpense01 = {
@@ -36,7 +39,6 @@ const fakeExpense02 = {
     divideBy: ['CICLANO-01', 'CICLANO-02'],
   },
 };
-
 const fakeSettle01 = {
   ID: 31,
   group: 'GROUP ID',
@@ -51,9 +53,7 @@ const fakeSettle02 = {
   paidBy: 'PAGOOUUU',
   paidTo: 'QUEEMMMM RECEBEU',
 };
-
-const fakeMembers = ['Fulano', 'Ciclano', 'Barbosa']
-
+const fakeMembers = ['Fulano', 'Ciclano', 'Barbosa'];
 const fakeGroups = [
   {
     ID: 11,
@@ -79,18 +79,37 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: null,
+      isAuth: false,
       groups: fakeGroups,
       selectedGroup: fakeGroups[0],
-      loggedInUser: null, //Estado para o Usuário logado
     };
     this.addMember = this.addMember.bind(this);
-    this.getTheUser = this.getTheUser.bind(this); // BIND do Método que guarda o usuário logado no estado *
+    this.getUser = this.getUser.bind(this); // BIND do Método que guarda o usuário logado no estado *
   }
 
-  getTheUser(userObj) {
-    // Método que guarda o usuário logado no estado *
+  async fetchUser() {
+    console.log(this.state.uer);
+    if (this.state.isAuth) {
+      try {
+        const loggedInUser = await auth.isAuth();
+        this.setState({
+          user: loggedInUser,
+          isAuth: true,
+        });
+      } catch (error) {
+        console.log(error);
+        this.setState({
+          isAuth: false,
+        });
+      }
+    }
+  }
+  getUser(userObj) {
+    console.log('userObj:', userObj);
     this.setState({
-      loggedInUser: userObj,
+      user: userObj,
+      isAuth: true,
     });
   }
 
@@ -111,7 +130,7 @@ class App extends Component {
       element={element}
     />
   );
-  
+
   addMember = (newMember) => {
     let newArr = [];
     newArr = { ...this.state.selectedGroup };
@@ -122,14 +141,34 @@ class App extends Component {
     });
   };
 
+  // <Route path="*" render={() => <Redirect to="/login" />} />
+
   render() {
+    // TODO: essa primeira private route é um exemplo. Dashboard recebe element!
+    const element = {
+      _id: 123456,
+    };
     return (
       <div className="App">
         <Switch>
+          <PrivateRoute
+            exact
+            path="/oi"
+            authed={this.state.isAuth}
+            element={element}
+            component={Dashboard}
+          />
+          <Route
+            exact
+            path="/login"
+            render={(props) => {
+              return <Login getUser={this.getUser} {...props} />;
+            }}
+          />
           <Route
             exact
             path="/"
-            render={() => <Index getUser={this.getTheUser} />}
+            render={() => <Index getUser={this.getUser} />}
           />
           <Route
             exact

@@ -60,7 +60,8 @@ export class Index extends Component {
         <>
           <nav className="navbar navbar-light bg-yellow justify-content-between">
               <div>
-                  <Link className="navbar-brand" to="/"><strong>BANANA</strong><em>SPLIT</em></Link>
+                  <Link
+                   className="navbar-brand" to="/"><strong>BANANA</strong><em>SPLIT</em></Link>
               </div>
               <div>
                   {/* <!-- Modal Triggers --> */}
@@ -81,7 +82,7 @@ export class Index extends Component {
               <p>Outro texto, mas agora explicando como funciona</p>
           </div>
       
-          {/* <!-- LOGIN MODAL --> */}
+          {/* <!-- LOGIN MODAL DELETAR DAQUI  --> */}
           <div className="modal fade" id="loginbutton" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div className="modal-dialog modal-dialog-centered" role="document">
                   <div className="modal-content">
