@@ -97,11 +97,19 @@ class DashDespesas extends Component {
       <>
         <DashNavbar />
 
-        <div className="dashMainContent mx-2">
+        <div className="dashMainContent mx-2 p-0">
           {/* <!-- Add bills --> */}
           <h2>Adicionar nova despesa:</h2>
-          <form onSubmit="" className="dashAddBills d-flex justify-content-between align-items-end flex-wrap px-4">
-            <div className="form-group text-left col-lg-3 mt-1 mb-0 p-0">
+          <form onSubmit="" className="dashAddBills d-flex justify-content-between align-items-end flex-wrap">
+            <div className="form-group text-left col-xl-3 m-1 mb-0 p-0">
+              Descrição:
+              <input
+                type="text"
+                className="form-control"
+                maxLength="25"
+              />
+            </div>
+            <div className="form-group text-left col-xl-2 m-1 mb-0 p-0">
               Pagou:
               <select className="form-control">
                 {[...this.state.members].sort((a,b)=>a.name.localeCompare(b.name)).map(member => {
@@ -111,7 +119,7 @@ class DashDespesas extends Component {
                 })}
               </select>
             </div>
-            <div className="form-group text-left col-lg-2 mb-0 mt-1 p-0">
+            <div className="form-group text-left col-xl-2 mb-0 m-1 p-0">
               Valor:
               <input
                 type="number"
@@ -125,7 +133,7 @@ class DashDespesas extends Component {
               />
             </div>
 
-            <div className="form-group text-left col-lg-3 mb-0 mt-1 p-0">
+            <div className="form-group text-left col-xl-2 mb-0 m-1 p-0">
               Dividir Por:
               <div className="btn btn-outline-dark dropdown dropdown-toggle form-control">
                 Selecione os membros
@@ -161,7 +169,7 @@ class DashDespesas extends Component {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-warning mt-2 col-lg-2">
+            <button type="submit" className="btn btn-warning mb-1 col-xl-1">
               Submit
             </button>
           </form>
