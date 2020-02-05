@@ -60,7 +60,7 @@ const fakeGroups = [
     groupName: 'GRUPO 001',
     description: 'bla bla bla grupo',
     owner: 200,
-    members: fakeMembers,
+    members: [fakeMembers],
     expense: [fakeExpense01, fakeExpense02],
     settles: [fakeSettle01, fakeSettle02],
   },
@@ -69,7 +69,7 @@ const fakeGroups = [
     groupName: 'GRUPO 002',
     description: 'lalala',
     owner: 200,
-    members: fakeMembers,
+    members: [fakeMembers],
     expense: [fakeExpense02, fakeExpense01],
     settles: [fakeSettle02, fakeSettle01],
   },
@@ -130,12 +130,11 @@ class App extends Component {
   );
 
   addMember = (newMember) => {
-    let newArr = [];
-    newArr = { ...this.state.selectedGroup };
-    newArr.members.push(newMember);
+    const groupCopy = {...this.state.selectedGroup}
+    groupCopy.members.push(newMember);
 
     this.setState({
-      selectedGroup: newArr,
+      selectedGroup: groupCopy,
     });
   };
 
