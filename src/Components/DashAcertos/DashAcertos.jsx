@@ -43,7 +43,7 @@ class DashAcertos extends Component {
     } else {
       //TODO this.props.addSettle(this.state.newSettle);
       const copyNewSettle = { ...this.state.newSettle };
-      const { newSettle } = this.state;
+      // const { newSettle } = this.state;
       copyNewSettle.value = 0;
       copyNewSettle.paidBy = "";
       copyNewSettle.paidTo = "";
