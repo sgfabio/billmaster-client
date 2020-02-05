@@ -60,7 +60,7 @@ const fakeGroups = [
     groupName: 'GRUPO 001',
     description: 'bla bla bla grupo',
     owner: 200,
-    members: [fakeMembers],
+    members: fakeMembers,
     expense: [fakeExpense01, fakeExpense02],
     settles: [fakeSettle01, fakeSettle02],
   },
@@ -69,7 +69,7 @@ const fakeGroups = [
     groupName: 'GRUPO 002',
     description: 'lalala',
     owner: 200,
-    members: [fakeMembers],
+    members: fakeMembers, //STRING
     expense: [fakeExpense02, fakeExpense01],
     settles: [fakeSettle02, fakeSettle01],
   },
@@ -84,6 +84,8 @@ class App extends Component {
       loggedInUser: null, //Estado para o Usuário logado
     };
     this.addMember = this.addMember.bind(this);
+    this.addExpense = this.addExpense.bind(this);
+    this.addSettle = this.addSettle.bind(this);
     this.getTheUser = this.getTheUser.bind(this); // BIND do Método que guarda o usuário logado no estado *
   }
 
@@ -99,6 +101,7 @@ class App extends Component {
   }
 
   deleteOneElement = (elementID) => {
+    //TODO deletar por ID ou ... name se for o caso do members
     // const index = this.state.selectedGroup.members.indexOf(memberID);
     // if (index > -1) {
     //   this.state.selectedGroup.members.splice(index, 1);
@@ -120,7 +123,25 @@ class App extends Component {
       selectedGroup: groupCopy,
     });
   };
-b
+
+  addExpense = (newExpense) => {
+    const groupCopy = {...this.state.selectedGroup}
+    groupCopy.expense.push(newExpense);
+
+    this.setState({
+      selectedGroup: groupCopy,
+    });
+  };
+
+  addSettle = (newSettle) => {
+    const groupCopy = {...this.state.selectedGroup}
+    groupCopy.settles.push(newSettle);
+
+    this.setState({
+      selectedGroup: groupCopy,
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -160,7 +181,7 @@ b
                   {...props}
                   oneGroup={this.state.selectedGroup}
                   renderModalDelete={this.renderModalDelete}
-                  addMember={this.addMember}
+                  addExpense={this.addExpense}
                 />
               );
             }}
@@ -174,7 +195,7 @@ b
                   {...props}
                   oneGroup={this.state.selectedGroup}
                   renderModalDelete={this.renderModalDelete}
-                  addMember={this.addMember}
+                  addSettle={this.addSettle}
                 />
               );
             }}
@@ -186,3 +207,5 @@ b
 }
 
 export default App;
+
+

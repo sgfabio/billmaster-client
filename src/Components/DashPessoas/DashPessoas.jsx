@@ -16,6 +16,7 @@ class DashPessoas extends Component {
   handleChange(event) {
     const { value } = event.target;
     this.setState({newMember: value});
+    //teste
   }
   handleSubmit(event) {
     event.preventDefault();
