@@ -8,7 +8,89 @@ const Dashboard = props => {
     <>
       <Navbar />
       <h1>OLHA ESSE H1</h1>
-      <article>EXPLICANDO COMO FAZ</article>
+      <article>Estes são os seus grupos:</article><br/>
+
+      <hr/>
+      <div className="row m-1 d-flex justify-content-center">
+        <div class="col-md-7 d-flex flex-column mt-1">
+          <button class="btn btn-outline-secondary ">Botão com o nome do grupo</button>
+        </div>
+        <div class="col-md-4 p-0 ml-1 d-flex flex-row justify-content-center mt-1">
+          <button class="btn btn-secondary mr-1">Relatório</button>
+          <button class="btn btn-warning mr-1">Editar</button> 
+          <button class="btn btn-danger">Excluir</button> 
+        </div>
+      </div>
+      
+      <hr/>
+      <div className="row m-1 d-flex justify-content-center">
+        <div class="col-md-7 d-flex flex-column mt-1">
+          <button class="btn btn-outline-secondary ">Botão com o nome do grupo</button>
+        </div>
+        <div class="col-md-4 p-0 ml-1 d-flex flex-row justify-content-center mt-1">
+          <button class="btn btn-secondary mr-1">Relatório</button>
+          <button class="btn btn-warning mr-1">Editar</button> 
+          <button class="btn btn-danger">Excluir</button> 
+        </div>
+      </div>
+      <hr/>
+      <div className="row m-1 d-flex justify-content-center">
+        <div class="col-md-7 d-flex flex-column mt-1">
+          <button class="btn btn-outline-secondary ">Botão com o nome do grupo</button>
+        </div>
+        <div class="col-md-4 p-0 ml-1 d-flex flex-row justify-content-center mt-1">
+          <button class="btn btn-secondary mr-1">Relatório</button>
+          <button class="btn btn-warning mr-1">Editar</button> 
+          <button class="btn btn-danger">Excluir</button> 
+        </div>
+      </div>
+      <hr/>
+      <div className="row m-1 d-flex justify-content-center">
+        <div class="col-md-7 d-flex flex-column mt-1">
+          <button class="btn btn-outline-secondary ">Botão com o nome do grupo</button>
+        </div>
+        <div class="col-md-4 p-0 ml-1 d-flex flex-row justify-content-center mt-1">
+          <button class="btn btn-secondary mr-1">Relatório</button>
+          <button class="btn btn-warning mr-1">Editar</button> 
+          <button class="btn btn-danger">Excluir</button> 
+        </div>
+      </div>
+      <hr/>
+      <div className="row m-1 d-flex justify-content-center">
+        <div class="col-md-7 d-flex flex-column mt-1">
+          <button class="btn btn-outline-secondary ">Botão com o nome do grupo</button>
+        </div>
+        <div class="col-md-4 p-0 ml-1 d-flex flex-row justify-content-center mt-1">
+          <button class="btn btn-secondary mr-1">Relatório</button>
+          <button class="btn btn-warning mr-1">Editar</button> 
+          <button class="btn btn-danger">Excluir</button> 
+        </div>
+      </div>
+      <hr/>
+      <div className="row m-1 d-flex justify-content-center">
+        <div class="col-md-7 d-flex flex-column mt-1">
+          <button class="btn btn-outline-secondary ">Botão com o nome do grupo</button>
+        </div>
+        <div class="col-md-4 p-0 ml-1 d-flex flex-row justify-content-center mt-1">
+          <button class="btn btn-secondary mr-1">Relatório</button>
+          <button class="btn btn-warning mr-1">Editar</button> 
+          <button class="btn btn-danger">Excluir</button> 
+        </div>
+      </div>
+      <hr/>
+      <div className="row m-1 d-flex justify-content-center">
+        <div class="col-md-7 d-flex flex-column mt-1">
+          <button class="btn btn-outline-secondary ">Botão com o nome do grupo</button>
+        </div>
+        <div class="col-md-4 p-0 ml-1 d-flex flex-row justify-content-center mt-1">
+          <button class="btn btn-secondary mr-1">Relatório</button>
+          <button class="btn btn-warning mr-1">Editar</button> 
+          <button class="btn btn-danger">Excluir</button> 
+        </div>
+      </div>
+
+      
+
       {/* <div className="dashContent row py-0 my-2">
           <div className="btn-group btn-group-toggle mx-auto my-0" data-toggle="buttons">
 
