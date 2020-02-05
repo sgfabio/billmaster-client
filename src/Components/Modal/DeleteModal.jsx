@@ -9,10 +9,11 @@ class DeleteModal extends Component {
     }
   }
   render(){
+    console.log(this.state.member)
     return (
       <>
       {/* // CONFIRM EXCLUSION MODAL */}
-      <div className="modal fade" id={`deleteButton${this.props.element._id}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div className="modal fade" id={`deleteButton${this.props.element}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-header">

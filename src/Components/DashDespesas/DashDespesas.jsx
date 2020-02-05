@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import DashNavbar from "../DashNavbar/DashNavbar";
 import CheckBox from "./Checkbox";
+import "./DashDespesas.css"
 
 class DashDespesas extends Component {
   constructor(props) {
@@ -96,11 +97,19 @@ class DashDespesas extends Component {
       <>
         <DashNavbar />
 
-        <div className="dashMainContent mx-2">
+        <div className="dashMainContent mx-2 p-0">
           {/* <!-- Add bills --> */}
           <h2>Adicionar nova despesa:</h2>
-          <form onSubmit="" className="dashAddBills d-flex justify-content-between align-items-end flex-wrap px-4">
-            <div className="form-group text-left col-lg-3 mt-1 mb-0 p-0">
+          <form onSubmit="" className="dashAddBills d-flex justify-content-between align-items-end flex-wrap">
+            <div className="form-group text-left col-xl-3 m-1 mb-0 p-0">
+              Descrição:
+              <input
+                type="text"
+                className="form-control"
+                maxLength="25"
+              />
+            </div>
+            <div className="form-group text-left col-xl-2 m-1 mb-0 p-0">
               Pagou:
               <select className="form-control">
                 {[...this.state.members].sort((a,b)=>a.name.localeCompare(b.name)).map(member => {
@@ -110,7 +119,7 @@ class DashDespesas extends Component {
                 })}
               </select>
             </div>
-            <div className="form-group text-left col-lg-2 mb-0 mt-1 p-0">
+            <div className="form-group text-left col-xl-2 mb-0 m-1 p-0">
               Valor:
               <input
                 type="number"
@@ -124,7 +133,7 @@ class DashDespesas extends Component {
               />
             </div>
 
-            <div className="form-group text-left col-lg-3 mb-0 mt-1 p-0">
+            <div className="form-group text-left col-xl-2 mb-0 m-1 p-0">
               Dividir Por:
               <div className="btn btn-outline-dark dropdown dropdown-toggle form-control">
                 Selecione os membros
@@ -160,41 +169,55 @@ class DashDespesas extends Component {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-warning mt-2 col-lg-2">
+            <button type="submit" className="btn btn-warning mb-1 col-xl-1">
               Submit
             </button>
           </form>
           <hr />
+          
+          
           {/* <!-- Bills list --> */}
-          <div className="dashBillsList">
-            <div className="row">
+          <div className="dashBillsList m-1">
+            <div className="row m-0">
               {
               [...this.state.expense].map(e => {
                 return(
-              <div className="col-lg-6 p-0 my-1">
-                <button className="btn btn-outline-dark col-10 mr-2">
-                  {e.split.paidBy} pagou {e.description} dividindo o {e.value} com {(e.split.isDivideByAll)?"todos os membros":`${e.split.divideBy.legth} dos membros`} 
-                </button>
-                <button
-                  className="btn btn-danger col-1"
-                  type="button"
-                  data-toggle="modal"
-                  data-target={`#deleteButton${e.id}`}
-                >
-                  X
-                </button>
+              <div className="col-lg p-0 ml-0 dashComponents">
+                <div className="col-9 p-0">
+                  <button className="btn btn-outline-dark boxComponent">
+                    {e.split.paidBy} pagou {e.description} dividindo o {e.value} com {(e.split.isDivideByAll)?"todos os membros":`${e.split.divideBy.legth} dos membros`} 
+                  </button>
+                </div>
+                <div className="col-2 p-0">
+                  <button
+                    className="btn btn-warning buttonOptions"
+                    type="button"
+                    data-toggle="modal"
+                    data-target={`#deleteButton${e.id}`}
+                    >
+                      Editar  
+                  </button>
+                  <button
+                    className="btn btn-danger buttonOptions"
+                    type="button"
+                    data-toggle="modal"
+                    data-target={`#deleteButton${e.id}`}
+                    >
+                    Excluir
+                  </button>
+                </div>
                 {this.props.renderModalDelete(e.description, e)}
               </div>
                 )
               })
-              }
+            }
+            </div>     
 
 
 
 
             </div>
           </div>
-        </div>
 
       </>
     );
