@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import {auth} from '../../util/api';  // Importa componente de serviços de autenticação que conversam com a API
 
-
 export class Index extends Component {
     constructor (props) {
         super(props);

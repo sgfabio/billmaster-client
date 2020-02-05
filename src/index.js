@@ -6,12 +6,11 @@ import App from '../src/Components/App/App';
 import * as serviceWorker from './serviceWorker';
 import 'typeface-roboto';
 
-
 ReactDOM.render(
-    <Router>
-        <App />
-    </Router>, 
-    document.getElementById('root'));
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById('root')
+);
 
 serviceWorker.unregister();
-

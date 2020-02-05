@@ -1,88 +1,78 @@
-import React, { Component } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Switch, Route, Link, Redirect } from 'react-router-dom';
 
-import "./App.css";
-// import logo from './logo.svg';
-import Index from "../Index/Index";
-import Dashboard from "../Dashboard/Dashboard";
-import "bootstrap/dist/css/bootstrap.min.css";
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 // import $ from 'jquery'; ----SE DER PAU usar $(document).ready()
-import Popper from "popper.js";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import Pessoas from "../DashPessoas/DashPessoas";
-import Despesas from "../DashDespesas/DashDespesas";
-import Acertos from "../DashAcertos/DashAcertos";
-import DeleteModal from "../Modal/DeleteModal";
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
+// Components
+import Index from '../Index/Index';
+import Dashboard from '../Dashboard/Dashboard';
+import Pessoas from '../DashPessoas/DashPessoas';
+import Despesas from '../DashDespesas/DashDespesas';
+import Acertos from '../DashAcertos/DashAcertos';
+import DeleteModal from '../Modal/DeleteModal';
+
+// fake data
 const fakeExpense01 = {
   ID: 21,
-  group: "000",
-  description: "ABC EXPENSE",
+  group: '000',
+  description: 'ABC EXPENSE',
   value: 1000,
   split: {
-    paidBy: "FULANO",
-    divideBy: ["CICLANO-01", "CICLANO-02"]
-  }
+    paidBy: 'FULANO',
+    divideBy: ['CICLANO-01', 'CICLANO-02'],
+  },
 };
 const fakeExpense02 = {
   ID: 21,
-  group: "000",
-  description: "ABC EXPENSE 0002",
+  group: '000',
+  description: 'ABC EXPENSE 0002',
   value: 1000,
   split: {
-    paidBy: "FULANO 02",
-    divideBy: ["CICLANO-01", "CICLANO-02"]
-  }
+    paidBy: 'FULANO 02',
+    divideBy: ['CICLANO-01', 'CICLANO-02'],
+  },
 };
 
 const fakeSettle01 = {
   ID: 31,
-  group: "GROUP ID",
+  group: 'GROUP ID',
   value: 200,
-  paidBy: "PAGOOUUU",
-  paidTo: "QUEEMMMM RECEBEU"
+  paidBy: 'PAGOOUUU',
+  paidTo: 'QUEEMMMM RECEBEU',
 };
 const fakeSettle02 = {
   ID: 32,
-  group: "GROUP ID",
+  group: 'GROUP ID',
   value: 300,
-  paidBy: "PAGOOUUU",
-  paidTo: "QUEEMMMM RECEBEU"
+  paidBy: 'PAGOOUUU',
+  paidTo: 'QUEEMMMM RECEBEU',
 };
 
-const fakeMembers = [
-  {
-    id: "id-01",
-    name: "Joao do GRUPO 0001",
-    contact: "Joao e-mail"
-  },
-  {
-    id: "id-02",
-    name: "Pedro do GRUPO 0001",
-    contact: "Pedro e-mail"
-  },
-  {
-    id: "id-03",
-    name: "Xablau do GRUPO 0001",
-    contact: "Xablau e-mail"
-  },
-  {
-    id: "id-04",
-    name: "Otonome do GRUPO 0001",
-    contact: "Otonome whats"
-  }
-];
+const fakeMembers = ['Fulano', 'Ciclano', 'Barbosa']
 
 const fakeGroups = [
   {
     ID: 11,
-    groupName: "GRUPO 001",
-    owner: "ID_USER_OWNER",
-    members: fakeMembers, //TODO ALTERAR????
-    description: "bla bla bla grupo",
+    groupName: 'GRUPO 001',
+    description: 'bla bla bla grupo',
+    owner: 200,
+    members: fakeMembers,
     expense: [fakeExpense01, fakeExpense02],
-    settles: [fakeSettle01, fakeSettle02]
-  }
+    settles: [fakeSettle01, fakeSettle02],
+  },
+  {
+    ID: 12,
+    groupName: 'GRUPO 002',
+    description: 'lalala',
+    owner: 200,
+    members: fakeMembers,
+    expense: [fakeExpense02, fakeExpense01],
+    settles: [fakeSettle02, fakeSettle01],
+  },
 ];
 
 class App extends Component {
@@ -91,22 +81,24 @@ class App extends Component {
     this.state = {
       groups: fakeGroups,
       selectedGroup: fakeGroups[0],
-      loggedInUser: null      //Estado para o Usuário logado
+      loggedInUser: null, //Estado para o Usuário logado
     };
     this.addMember = this.addMember.bind(this);
-    this.getTheUser = this.getTheUser.bind(this);  // BIND do Método que guarda o usuário logado no estado *
+    this.getTheUser = this.getTheUser.bind(this); // BIND do Método que guarda o usuário logado no estado *
   }
- 
-  getTheUser(userObj) {     // Método que guarda o usuário logado no estado *
+
+  getTheUser(userObj) {
+    // Método que guarda o usuário logado no estado *
     this.setState({
-      loggedInUser: userObj
-    })
+      loggedInUser: userObj,
+    });
   }
 
   createGroup(newGroup) {
     this.state.groups.push(newGroup);
   }
-  deleteOneElement = elementID => {
+
+  deleteOneElement = (elementID) => {
     // const index = this.state.selectedGroup.members.indexOf(memberID);
     // if (index > -1) {
     //   this.state.selectedGroup.members.splice(index, 1);
@@ -119,13 +111,14 @@ class App extends Component {
       element={element}
     />
   );
-  addMember = newMember => {
+  
+  addMember = (newMember) => {
     let newArr = [];
     newArr = { ...this.state.selectedGroup };
     newArr.members.push(newMember);
 
     this.setState({
-      selectedGroup: newArr
+      selectedGroup: newArr,
     });
   };
 
@@ -133,24 +126,22 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          {/* Passa o getUser para o componente index.jsx */}
-          <Route exact path='/' render={() => <Index getUser={this.getTheUser}/>}/> 
-          {/* <Route exact path="/" component={Index} /> */}
-
-          {/* <Route exact path="/dashboard" component={Dashboard} /> */}
-
+          <Route
+            exact
+            path="/"
+            render={() => <Index getUser={this.getTheUser} />}
+          />
           <Route
             exact
             path="/dashboard"
-            render={props => {
+            render={(props) => {
               return <Dashboard data={this.state} {...props} />;
             }}
           />
-
           <Route
             exact
             path="/dashboard/pessoas"
-            render={props => {
+            render={(props) => {
               return (
                 <Pessoas
                   {...props}
@@ -161,11 +152,10 @@ class App extends Component {
               );
             }}
           />
-
           <Route
             exact
             path="/dashboard/despesas"
-            render={props => {
+            render={(props) => {
               return (
                 <Despesas
                   {...props}
@@ -176,7 +166,10 @@ class App extends Component {
               );
             }}
           />
-          <Route exact path="/dashboard/acertos" render={props => {
+          <Route
+            exact
+            path="/dashboard/acertos"
+            render={(props) => {
               return (
                 <Acertos
                   {...props}
