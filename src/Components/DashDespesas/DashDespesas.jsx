@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import DashNavbar from "../DashNavbar/DashNavbar";
 import CheckBox from "./Checkbox";
+import "./DashDespesas.css"
 
 class DashDespesas extends Component {
   constructor(props) {
@@ -165,36 +166,50 @@ class DashDespesas extends Component {
             </button>
           </form>
           <hr />
+          
+          
           {/* <!-- Bills list --> */}
-          <div className="dashBillsList">
-            <div className="row">
+          <div className="dashBillsList m-1">
+            <div className="row m-0">
               {
               [...this.state.expense].map(e => {
                 return(
-              <div className="col-lg-6 p-0 my-1">
-                <button className="btn btn-outline-dark col-10 mr-2">
-                  {e.split.paidBy} pagou {e.description} dividindo o {e.value} com {(e.split.isDivideByAll)?"todos os membros":`${e.split.divideBy.legth} dos membros`} 
-                </button>
-                <button
-                  className="btn btn-danger col-1"
-                  type="button"
-                  data-toggle="modal"
-                  data-target={`#deleteButton${e.id}`}
-                >
-                  X
-                </button>
+              <div className="col-lg p-0 ml-0 dashComponents">
+                <div className="col-9 p-0">
+                  <button className="btn btn-outline-dark boxComponent">
+                    {e.split.paidBy} pagou {e.description} dividindo o {e.value} com {(e.split.isDivideByAll)?"todos os membros":`${e.split.divideBy.legth} dos membros`} 
+                  </button>
+                </div>
+                <div className="col-2 p-0">
+                  <button
+                    className="btn btn-warning buttonOptions"
+                    type="button"
+                    data-toggle="modal"
+                    data-target={`#deleteButton${e.id}`}
+                    >
+                      Editar  
+                  </button>
+                  <button
+                    className="btn btn-danger buttonOptions"
+                    type="button"
+                    data-toggle="modal"
+                    data-target={`#deleteButton${e.id}`}
+                    >
+                    Excluir
+                  </button>
+                </div>
                 {this.props.renderModalDelete(e.description, e)}
               </div>
                 )
               })
-              }
+            }
+            </div>     
 
 
 
 
             </div>
           </div>
-        </div>
 
       </>
     );
