@@ -114,11 +114,10 @@ class DashAcertos extends Component {
             >
               Submit
             </button>
-            <br/>
-            <div className="zindex-modal alert alert-warning bg-transparent mt-2 " role="alert">
+          </form>
+            <div className="zindex-modal alert alert-warning bg-transparent m-2 py-auto px-auto" role="alert">
               {this.state.errorMessage}
               </div>
-          </form>
           <hr />
 
           <div className="dashSettleList">
@@ -144,6 +143,7 @@ class DashAcertos extends Component {
               );
             })}
           </div>
+          
         </div>
       </>
     );
