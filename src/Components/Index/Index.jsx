@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import {auth} from '../../util/api';  // Importa componente de serviços de autenticação que conversam com a API
+import ReportsSummary from '../ReportsSummary/ReportsSummary'; //TESTE DO COMPONENTE NA HOME PAGE
 
 export class Index extends Component {
     constructor (props) {
@@ -80,6 +81,13 @@ export class Index extends Component {
               <p>Um textão bonito aqui pra chamar atenção</p>
               <p>Outro texto, mas agora explicando como funciona</p>
           </div>
+          <div>
+              <h1> ReportsSummary  </h1>
+              <div>
+                  <ReportsSummary />
+              </div>
+          </div>
+          
       
           {/* <!-- LOGIN MODAL --> */}
           <div className="modal fade" id="loginbutton" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
