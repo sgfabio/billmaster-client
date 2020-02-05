@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import DashNavbar from "../DashNavbar/DashNavbar";
+import "./DashAcertos.css"
 
 class DashAcertos extends Component {
   constructor(props) {
@@ -115,7 +116,7 @@ class DashAcertos extends Component {
               Submit
             </button>
           </form>
-            <div className="zindex-modal alert alert-warning bg-transparent m-2 py-auto px-auto" role="alert">
+            <div className="zindex-modal alert alert-warning bg-transparent m-2 py-auto px-auto noBorder" role="alert">
               {this.state.errorMessage}
             </div>
           <hr />

@@ -74,11 +74,19 @@ const Navbar = (props) => {
 
             <div className="modal-body">
               <form>
-                <div className="form-group">
+                <div className="form-group text-left ">
                   <label htmlFor="recipient" className="col-form-label">
-                    Digite um titulo para o grupo:
+                    Nome do grupo:
                   </label>
                   <input type="text" className="form-control" id="recipient" />
+                  <label htmlFor="recipient" className="col-form-label">
+                    Descrição:
+                  </label>
+                  <input type="text" className="form-control" id="recipient" />
+                  <label htmlFor="recipient" className="col-form-label">
+                    Data do evento:
+                  </label>
+                  <input type="date" className="form-control" id="recipient" />
                 </div>
               </form>
             </div>

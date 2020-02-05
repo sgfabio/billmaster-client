@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
+import "./Dashboard.css"
 
 const Dashboard = props => {
   // const {group} = props.data;
