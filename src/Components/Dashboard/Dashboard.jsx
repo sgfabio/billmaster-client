@@ -4,6 +4,8 @@ import { Switch, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
 const Dashboard = props => {
+  // const {group} = props.data;
+  // {console.log(this.groups)
   return (
     <>
       <Navbar />
