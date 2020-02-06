@@ -38,7 +38,6 @@ class DashPessoas extends Component {
   
   
   render() {
-    console.log(this.props)
     return (
       <>
         <DashNavbar description={this.state.selectedGroup.description} groupName={this.state.selectedGroup.groupName} />

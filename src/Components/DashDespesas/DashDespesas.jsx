@@ -20,7 +20,6 @@ class DashDespesas extends Component {
       expense: this.props.oneGroup.expense,
       selectedMembers: [],
       newExpense:{
-        ID: "Aleatorio",
         group: this.props.oneGroup._id,
         description: '',
         value: 0,
@@ -31,6 +30,8 @@ class DashDespesas extends Component {
         }
       }
     };
+    this.editExpense = this.editExpense.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleAllChecked = event => {
     const newExpense = {...this.state.newExpense};
@@ -46,8 +47,11 @@ class DashDespesas extends Component {
     this.setState({ newExpense: newExpense }, () => console.log("TESTE",this.state.newExpense.split.divideBy));
 
   };
-  doSomething = (e) => {
-    console.log("something is happening",e);
+  editExpense = (e) => {
+    let { newExpense } = this.state;
+    newExpense = e;
+
+    this.setState({newExpense: newExpense});
   };
   handleCheckChieldElement = event => {
     const { newExpense } = this.state;
@@ -104,8 +108,9 @@ class DashDespesas extends Component {
     const {newExpense} = this.state;
     newExpense.split.divideBy = this.state.selectedMembers;
 
+    // If has an id got to edit function and else add new one expense
+    (newExpense._id) ? this.props.editExpense(newExpense._id, newExpense) : this.props.addExpense(newExpense);
 
-    this.props.addExpense(newExpense);
     this.setState({ newExpense: newExpense });
   }
 
@@ -215,8 +220,7 @@ class DashDespesas extends Component {
                   <button
                     className="btn btn-warning buttonOptions"
                     type="button"
-                    data-toggle="modal"
-                    data-target={`#deleteButton${e.id}`}
+                    onClick={() => this.editExpense(e)}
                     >
                       Editar  
                   </button>
@@ -224,13 +228,12 @@ class DashDespesas extends Component {
                     className="btn btn-danger buttonOptions"
                     type="button"
                     data-toggle="modal"
-                    data-target={`#deleteButton${e.ID}`}
+                    data-target={`#deleteButton${e._id}`}
                     >
                     Excluir
                   </button>
                 </div>
-                {this.props.renderModalDelete(e.description, e.ID,"expense")}
-                {this.props.renderModalEdit(e,"expense")}
+                {this.props.renderModalDelete(e.description, e._id,"expense")}
               </div>
                 )
               })

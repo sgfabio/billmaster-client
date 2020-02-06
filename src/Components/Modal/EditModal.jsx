@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CheckBox from "../DashDespesas/Checkbox"
 
 class EditModal extends Component {
   constructor(props) {
@@ -12,31 +13,23 @@ class EditModal extends Component {
         description: this.props.element.description,
         date: this.props.element.date,
       },
-      newInfoExpense: {
-        description: "02",
-        value: 10,
-        split: {
-          paidBy: "a",
-          dividedBy: ["b", "c"]
-        }
-      }
     };
     this.handleChange=this.handleChange.bind(this);
   }
   handleChange = (event) => {
     //"dashboard"
-    // const newInfoGroup = {...this.state.newInfoGroup};
-    // const { name, value } = event.target;
-    // newInfoGroup[name] = value;
+    const newInfoGroup = {...this.state.newInfoGroup};
+    const { name, value } = event.target;
+    newInfoGroup[name] = value;
     
-    // this.setState({newInfoGroup: newInfoGroup});
+    this.setState({newInfoGroup: newInfoGroup});
 
     //"expense"
-    // const newInfoGroup = {...this.state.newInfoGroup};
+    // const newInfoExpense = {...this.state.newInfoExpense};
     // const { name, value } = event.target;
-    // newInfoGroup[name] = value;
+    // newInfoExpense[name] = value;
     
-    // this.setState({newInfoGroup: newInfoGroup});    
+    // this.setState({newInfoExpense: newInfoExpense});    
   };
   whatIsMyPage = iAmInThisPage => {
     switch (iAmInThisPage) {
@@ -44,10 +37,10 @@ class EditModal extends Component {
         this.state.editGroup(this.state.element._id, this.state.newInfoGroup)
         break;
       case "member":
-        // this.state.editMember(this.state.element);
+        // this.state.editMember(this.state.element); --- one day
         break;
       case "expense":
-        this.props.editExpense();
+        // this.props.editExpense(); --- one day
         break;
       case "settle":
         console.log("Error");
@@ -80,27 +73,7 @@ class EditModal extends Component {
             </form>
           </div>
         );
-        case "dashboard":
-        return (
-          <div className="modal-body">
-            <form>
-              <div className="form-group text-left ">
-                <label htmlFor="groupName" className="col-form-label">
-                  Nome do grupo:
-                </label>
-                <input onChange={this.handleChange} type="text" value={this.state.newInfoGroup.groupName} className="form-control" id="groupName" name="groupName" />
-                <label htmlFor="description" className="col-form-label">
-                  Descrição:
-                </label>
-                <input onChange={this.handleChange} type="text" value={this.state.newInfoGroup.description} className="form-control" id="description" name="description" />
-                <label htmlFor="date" className="col-form-label">
-                  Data do evento:
-                </label>
-                <input onChange={this.handleChange} type="date" value={this.state.newInfoGroup.date} className="form-control" id="date" name="date"/>
-              </div>
-            </form>
-          </div>
-        );
+        case "expense":
         
       default:
         break;
