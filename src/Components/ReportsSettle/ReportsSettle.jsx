@@ -49,13 +49,9 @@ class ReportsSettle extends Component {
                                         <td>{qry.member}</td>
                                         <td>{qry.expensePaid}</td>
                                         <td>{qry.share}</td>
-                                        <td>{qry.settlePaid}</td>
-                                        <td>{qry.settleReceived}</td>
-                                        <td>{qry.balance}</td>
                                     </tr>
                                 )
                             })}
-    
                         </tbody>
                     </table>
                 </div>
