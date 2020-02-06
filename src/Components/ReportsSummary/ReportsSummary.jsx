@@ -31,8 +31,8 @@ class ReportsSummary extends Component {
                     Resumo de contas por participante:
                 </p>
                 
-                <div className="resultTable">
-                    <table className="table">
+                <div className="resultTable table-responsive-md">
+                    <table className="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Integrante</th>
