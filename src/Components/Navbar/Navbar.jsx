@@ -71,7 +71,7 @@ export default class Navbar extends Component {
               <div>
                 <Link className="navbar-brand" to="/groups">
                   <strong>BANANA</strong>
-                  <em>SPLIT</em>
+                  <em><i>SPLIT</i></em>
                 </Link>
               </div>
 

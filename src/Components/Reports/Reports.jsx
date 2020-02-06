@@ -25,7 +25,7 @@ const Reports = props => {
 
             </div>
             <p>
-                <Link className="" data-toggle="collapse" href="/" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <Link className="" data-toggle="collapse" to="/" role="button" aria-expanded="false" aria-controls="collapseExample">
                     Crie seu próprio grupo!
                 </Link>
             </p>

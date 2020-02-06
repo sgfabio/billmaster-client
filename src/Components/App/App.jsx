@@ -382,7 +382,17 @@ class App extends Component {
               render={(props) => {
                 return <Reports data={this.state} {...props} />;
               }}
-            />
+
+              />
+              <PrivateRoute
+                exact
+                path="/dashboard"
+                authed={this.state.isAuth}
+                component={Dashboard}
+                data={this.state}
+              />
+            
+            
             <PrivateRoute
               exact
               path="/groups"
@@ -391,6 +401,7 @@ class App extends Component {
               data={this.state}
             />
           </Switch>
+
         )}
       </div>
     );
