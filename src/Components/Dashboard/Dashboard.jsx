@@ -24,7 +24,7 @@ class Dashboard extends Component {
               <div className="row m-1 d-flex justify-content-center">
                 <div class="col-md-7 d-flex flex-column mt-1">
                   <Link
-                    to={`${match.url}/${e._id}`}
+                    to={`${match.url}/${e._id}/pessoas`}
                     class="btn btn-outline-secondary "
                   >
                     {e.groupName} - {e.description}

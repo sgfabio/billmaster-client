@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./Navbar.css";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Navbar.css';
 
-import { auth } from "../../util/api";
+import { auth } from '../../util/api';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -14,16 +14,16 @@ export default class Navbar extends Component {
       groups: this.props.groups,
       addGroup: this.props.addGroup,
       newInfoGroup: {
-        groupName: "",
-        description: "",
-        date: ""
-      }
+        groupName: '',
+        description: '',
+        date: '',
+      },
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmitNewGroup = this.handleSubmitNewGroup.bind(this);
     this.logout = this.logout.bind(this);
   }
-  handleChange = event => {
+  handleChange = (event) => {
     const newInfoGroup = { ...this.state.newInfoGroup };
     const { name, value } = event.target;
     newInfoGroup[name] = value;
@@ -32,12 +32,11 @@ export default class Navbar extends Component {
   };
   handleSubmitNewGroup = (event) => {
     event.preventDefault();
-    const {newInfoGroup} = this.state;
+    const { newInfoGroup } = this.state;
     newInfoGroup = this.state.newInfoGroup;
 
-
     this.props.addGroup(newInfoGroup);
-  }
+  };
 
   componentDidUpdate(prevProps) {
     if (this.props.userInSession !== prevProps.userInSession) {
@@ -54,7 +53,7 @@ export default class Navbar extends Component {
       // Eu não poderia só atualizar o state do app?
       this.setState({
         user: null,
-        isAuth: false
+        isAuth: false,
       });
       this.props.getUser(null);
     } catch (error) {
@@ -87,12 +86,16 @@ export default class Navbar extends Component {
                     Criar Grupo
                   </button>
                   <hr className="py-0 my-1" />
-                  {this.state.groups.map(e=> {
-                    return(
-                    <Link to={`/groups/${e._id}`} className="dropdown-item px-1" type="button">
-                    {e.groupName}
-                  </Link>
-                    )
+                  {this.state.groups.map((e) => {
+                    return (
+                      <Link
+                        to={`/groups/${e._id}/pessoas`}
+                        className="dropdown-item px-1"
+                        type="button"
+                      >
+                        {e.groupName}
+                      </Link>
+                    );
                   })}
                 </div>
               </div>
@@ -183,7 +186,11 @@ export default class Navbar extends Component {
                     >
                       Cancelar
                     </button>
-                    <button onClick={this.handleSubmitNewGroup} type="submit" className="btn btn-primary">
+                    <button
+                      onClick={this.handleSubmitNewGroup}
+                      type="submit"
+                      className="btn btn-primary"
+                    >
                       CRIAR
                     </button>
                   </div>
