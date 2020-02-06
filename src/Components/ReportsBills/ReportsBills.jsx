@@ -31,8 +31,8 @@ class ReportsBills extends Component {
                     Todos os gastos do grupo:
                 </p>
                 
-                <div className="resultTable">
-                    <table className="table">
+                <div className="resultTable table-responsive-md">
+                    <table className="table table3 table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Integrante</th>

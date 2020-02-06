@@ -25,7 +25,7 @@ import Reports from '../Reports/Reports';
 
 // fake data
 const fakeExpense01 = {
-  ID: 21,
+  _id: 21,
   group: '000',
   description: 'ABC EXPENSE',
   value: 1000,
@@ -35,7 +35,7 @@ const fakeExpense01 = {
   },
 };
 const fakeExpense02 = {
-  ID: 25,
+  _id: 25,
   group: '000',
   description: 'ABC EXPENSE 0002',
   value: 1000,
@@ -44,21 +44,21 @@ const fakeExpense02 = {
     divideBy: ['CICLANO-01', 'CICLANO-02'],
   },
 };
+const fakeMembers = ['Fulano', 'Ciclano', 'Barbosa'];
 const fakeSettle01 = {
-  ID: 31,
+  _id: 31,
   group: 'GROUP ID',
   value: 200,
-  paidBy: 'PAGOU',
-  paidTo: 'QUEM RECEBEU 02',
+  paidBy: fakeMembers[0],
+  paidTo: fakeMembers[1],
 };
 const fakeSettle02 = {
-  ID: 32,
+  _id: 32,
   group: 'GROUP ID',
   value: 300,
-  paidBy: 'PAGOU',
-  paidTo: 'QUEM RECEBEU 03',
+  paidBy: fakeMembers[1],
+  paidTo: fakeMembers[2],
 };
-const fakeMembers = ['Fulano', 'Ciclano', 'Barbosa'];
 const fakeGroups = [
   {
     _id: '11',
@@ -168,6 +168,7 @@ class App extends Component {
           console.log('ESSA SAO AS INFORMAÇÕES DO GRUPO PARA EDITAR', newInfo);
         })
       }
+      
     />
   );
   renderModalDelete = (midleText, element, thisPage) => (
@@ -184,12 +185,12 @@ class App extends Component {
         (this.removeMember = (memberToRemove) => {
           console.log('ESSE É O MEMBRO PARA REMOVER', memberToRemove);
 
-          const groupCopy = { ...this.state.selectedGroup };
-          let idx = groupCopy.members.indexOf(memberToRemove);
-          groupCopy.members.splice(idx, 1);
-          this.setState({
-            selectedGroup: groupCopy,
-          });
+        //   const groupCopy = { ...this.state.selectedGroup }; -----------APAGAR
+        //   let idx = groupCopy.members.indexOf(memberToRemove);
+        //   groupCopy.members.splice(idx, 1);
+        //   this.setState({
+        //     selectedGroup: groupCopy,
+        //   });
         })
       }
       removeExpense={
@@ -207,8 +208,10 @@ class App extends Component {
           });
         })
       }
-      // removeSettle={this.removeSettle(idToRemove)} //TODO
-      // console.log("ESSE É O ID DO ACERTO PARA REMOVER",idToRemove);
+      removeSettle={
+        this.removeSettle = (idToRemove) => {
+          console.log("ESSE É O ID DO ACERTO PARA REMOVER",idToRemove);
+        }}
     />
   );
 
@@ -223,31 +226,46 @@ class App extends Component {
   };
 
   addMember = (newMember) => {
-    const groupCopy = { ...this.state.selectedGroup };
-    groupCopy.members.push(newMember);
+    console.log('ESSA SAO AS INFORMAÇÕES DO NOVO MEMBRO', newMember);
 
-    this.setState({
-      selectedGroup: groupCopy,
-    });
+    // const groupCopy = { ...this.state.selectedGroup };
+    // groupCopy.members.push(newMember);
+
+    // this.setState({
+    //   selectedGroup: groupCopy,
+    // });
   };
 
   addExpense = (newExpense) => {
-    const groupCopy = { ...this.state.selectedGroup };
-    groupCopy.expense.push(newExpense);
+    console.log('ESSA SAO AS INFORMAÇÕES DA NOVA DESPESA', newExpense);
 
-    this.setState({
-      selectedGroup: groupCopy,
-    });
+    // const groupCopy = { ...this.state.selectedGroup }; -------------- APAGAR -------------
+    // groupCopy.expense.push(newExpense);
+
+    // this.setState({
+    //   selectedGroup: groupCopy,
+    // });
   };
+  editExpense = (idOfExpenseToEdit, newInfo) => {
+      console.log('ESSE É O ID DA DESPESA PARA EDITAR', idOfExpenseToEdit);
+      console.log('ESSA SAO AS INFORMAÇÕES DA DESPESA PARA EDITAR', newInfo);
+    }
+  editSettle = (idOfSettleToEdit, newInfo) => {
+    const {group, value, paidBy, paidTo} = newInfo;
+    console.log('ESSE É O ID DO ACERTO PARA EDITAR', idOfSettleToEdit);
+    console.log('ESSA SAO AS INFORMAÇÕES DO ACERTO PARA EDITAR', {group, value, paidBy, paidTo});
+  }
 
   addSettle = (newSettle) => {
-    const groupCopy = { ...this.state.selectedGroup };
-    groupCopy.settles.push(newSettle);
-    console.log(newSettle);
+    console.log('ESSA SAO AS INFORMAÇÕES DO NOVO ACERTO', newSettle);
 
-    this.setState({
-      selectedGroup: groupCopy,
-    });
+    // const groupCopy = { ...this.state.selectedGroup };
+    // groupCopy.settles.push(newSettle);
+    // console.log(newSettle);
+
+    // this.setState({
+    //   selectedGroup: groupCopy,
+    // });
   };
 
   render() {
@@ -312,6 +330,7 @@ class App extends Component {
                     {...props}
                     oneGroup={this.state.selectedGroup}
                     renderModalDelete={this.renderModalDelete}
+                    renderModalEdit={this.renderModalEdit}
                     addMember={this.addMember}
                   />
                 );
@@ -326,6 +345,7 @@ class App extends Component {
                     {...props}
                     oneGroup={this.state.selectedGroup}
                     renderModalDelete={this.renderModalDelete}
+                    editExpense={this.editExpense}
                     addExpense={this.addExpense}
                   />
                 );
@@ -341,6 +361,7 @@ class App extends Component {
                     oneGroup={this.state.selectedGroup}
                     renderModalDelete={this.renderModalDelete}
                     addSettle={this.addSettle}
+                    editSettle={this.editSettle}
                   />
                 );
               }}
@@ -372,7 +393,17 @@ class App extends Component {
               render={(props) => {
                 return <Reports data={this.state} {...props} />;
               }}
-            />
+
+              />
+              <PrivateRoute
+                exact
+                path="/dashboard"
+                authed={this.state.isAuth}
+                component={Dashboard}
+                data={this.state}
+              />
+            
+            
             <PrivateRoute
               exact
               path="/groups"
@@ -381,6 +412,7 @@ class App extends Component {
               data={this.state}
             />
           </Switch>
+
         )}
       </div>
     );

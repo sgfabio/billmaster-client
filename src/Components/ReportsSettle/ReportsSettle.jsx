@@ -31,8 +31,8 @@ class ReportsSettle extends Component {
                     Pagamentos a serem realizados:
                 </p>
                 
-                <div className="resultTable">
-                    <table className="table">
+                <div className="resultTable table-responsive-md">
+                    <table className="table table3 table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Integrante</th>
@@ -49,13 +49,9 @@ class ReportsSettle extends Component {
                                         <td>{qry.member}</td>
                                         <td>{qry.expensePaid}</td>
                                         <td>{qry.share}</td>
-                                        <td>{qry.settlePaid}</td>
-                                        <td>{qry.settleReceived}</td>
-                                        <td>{qry.balance}</td>
                                     </tr>
                                 )
                             })}
-    
                         </tbody>
                     </table>
                 </div>

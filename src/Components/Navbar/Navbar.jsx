@@ -32,9 +32,8 @@ export default class Navbar extends Component {
   };
   handleSubmitNewGroup = (event) => {
     event.preventDefault();
-    const { newInfoGroup } = this.state;
-    newInfoGroup = this.state.newInfoGroup;
-
+    const {newInfoGroup} = this.state;
+    
     this.props.addGroup(newInfoGroup);
   };
 
@@ -70,7 +69,7 @@ export default class Navbar extends Component {
               <div>
                 <Link className="navbar-brand" to="/groups">
                   <strong>BANANA</strong>
-                  <em>SPLIT</em>
+                  <em><i>SPLIT</i></em>
                 </Link>
               </div>
 
@@ -186,11 +185,7 @@ export default class Navbar extends Component {
                     >
                       Cancelar
                     </button>
-                    <button
-                      onClick={this.handleSubmitNewGroup}
-                      type="submit"
-                      className="btn btn-primary"
-                    >
+                    <button onClick={this.handleSubmitNewGroup} type="submit" className="btn btn-primary" data-dismiss="modal">
                       CRIAR
                     </button>
                   </div>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CheckBox from "../DashDespesas/Checkbox"
 
 class EditModal extends Component {
   constructor(props) {
@@ -11,16 +12,24 @@ class EditModal extends Component {
         groupName: this.props.element.groupName,
         description: this.props.element.description,
         date: this.props.element.date,
-      }
+      },
     };
     this.handleChange=this.handleChange.bind(this);
   }
   handleChange = (event) => {
+    //"dashboard"
     const newInfoGroup = {...this.state.newInfoGroup};
     const { name, value } = event.target;
     newInfoGroup[name] = value;
     
     this.setState({newInfoGroup: newInfoGroup});
+
+    //"expense"
+    // const newInfoExpense = {...this.state.newInfoExpense};
+    // const { name, value } = event.target;
+    // newInfoExpense[name] = value;
+    
+    // this.setState({newInfoExpense: newInfoExpense});    
   };
   whatIsMyPage = iAmInThisPage => {
     switch (iAmInThisPage) {
@@ -28,10 +37,10 @@ class EditModal extends Component {
         this.state.editGroup(this.state.element._id, this.state.newInfoGroup)
         break;
       case "member":
-        this.state.removeMember(this.state.element);
+        // this.state.editMember(this.state.element); --- one day
         break;
       case "expense":
-        this.state.removeExpense(this.state.element.ID);
+        // this.props.editExpense(); --- one day
         break;
       case "settle":
         console.log("Error");
@@ -41,8 +50,8 @@ class EditModal extends Component {
         break;
     }
   };
-  renderThis(x) {
-    switch (x) {
+  renderThis(actualPage) {
+    switch (actualPage) {
       case "dashboard":
         return (
           <div className="modal-body">
@@ -64,9 +73,8 @@ class EditModal extends Component {
             </form>
           </div>
         );
-
-        break;
-
+        case "expense":
+        
       default:
         break;
     }
