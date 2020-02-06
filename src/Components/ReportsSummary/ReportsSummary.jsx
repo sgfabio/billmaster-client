@@ -1,79 +1,102 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import {groups} from '../../util/api'       // Groups component from API service 
 
-const ReportSummary = props => {
-  return (
-<div>
-    <nav class="navbar navbar-light bg-yellow justify-content-between">
-        <div>
-            <a class="navbar-brand"><strong>BANANA</strong><em>SPLIT</em></a>
-        </div>
-        <div>
-            Grupo: {}
-        </div>
-    </nav>
+class ReportsSummary extends Component {
+    constructor(props){
+        super(props);
+        this.state = {msg:'', balances: []};
+
+        //BINDS
+
+    }
+
+    componentDidMount() {
+        groups.getBalance(this.props.groupId) //props do Id do grupo; 
+        .then(qryObj => {
+            console.log('componentDidMount',qryObj);
+            this.setState({msg: qryObj.data.msg, balances:qryObj.data.queryResult}, () => console.log(this.state) )
+
+        })
+        .catch(error => console.log('erro ReportSummary', error))
+
+    }
 
 
-<div class="mt-2">
-    <h2>BARRA DE NAV AQUI: Resumo, Gastos, Acertos</h2>
-    <hr/>
-</div>
-
-    <p>
-         Resumo dos gastos por participante
-    </p>
+    render(){
+                
+        if (this.state.balances) {//Conditional return 
+            return(
+            <div>
+                <nav className="navbar navbar-light bg-yellow justify-content-between">
+                    <div>
+                        <a className="navbar-brand"><strong>BANANA</strong><em>SPLIT</em></a>
+                    </div>
+                    <div>
+                        Grupo: {}
+                    </div>
+                </nav>
+            
+            <div className="mt-2">
+                <h2>BARRA DE NAV AQUI: Resumo, Gastos, Acertos</h2>
+                <hr/>
+            </div>
+            
+                <p>
+                    Resumo dos gastos por participante
+                </p>
+                
+            
+                <div className="resultTable">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Integrante</th>
+                                <th scope="col">Gastou</th>
+                                <th scope="col">Pagou</th>
+                                <th scope="col">Recebeu</th>
+                                <th scope="col">Rateio</th>
+                                <th scope="col">Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            
+                            {/* Map que recebe os registros da API e cria uma row de tabela - vide exemplo abaixo */}
+                            {this.state.balances.map((qry, idx) => {
+                                return (
+                                    <tr key={idx} >    
+                                        <td>{qry.member}</td>
+                                        <td>{qry.expensePaid}</td>
+                                        <td>{qry.settlePaid}</td>
+                                        <td>{qry.settleReceived}</td>
+                                        <td>{qry.share}</td>
+                                        <td>{qry.balance}</td>
+                                    </tr>
+                                )
+                            })}
     
+                        </tbody>
+                    </table>
+                </div>
+                <br/>
+                <hr/>
+                <br/>
+            
+                <p>
+                    <a className="" data-toggle="collapse" href="/" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Crie seu próprio grupo!
+                    </a>
+                </p>
+            </div>
+            )
+        } else { //Conditional return FALSE
+            return(
+                <div>
+                    <h1>Carregando...</h1>
+                </div>
+            )
+        }
+    }//render()
+}//ReportsSummary
 
-    <div class="resultTable">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Integrante</th>
-                    <th scope="col">Gastou</th>
-                    <th scope="col">Consumiu</th>
-                    <th scope="col">Saldo</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Alison</td>
-                    <td>R$200,00</td>
-                    <td>R$350,00</td>
-                    <td>- R$150,00</td>
-                </tr>
-                <tr>
-                    <td>Reginaldo</td>
-                    <td>R$100,00</td>
-                    <td>R$220,00</td>
-                    <td>- R$120,00</td>
-                </tr>
-                <tr>
-                    <td>Fábio</td>
-                    <td>R$500,00</td>
-                    <td>R$310,00</td>
-                    <td>R$190,00</td>
-                </tr>
-                <tr>
-                    <td>Leonardo</td>
-                    <td>R$320,00</td>
-                    <td>R$240,00</td>
-                    <td>R$80,00</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <br/>
-    <hr/>
-    <br/>
-
-    <p>
-        <a class="" data-toggle="collapse" href="/" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Crie seu próprio grupo!
-        </a>
-    </p>
-</div>
-);
-};
-
-
-export default ReportSummary;
+export default ReportsSummary

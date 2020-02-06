@@ -14,23 +14,30 @@ export const auth = {
         },
         { withCredentials: true }
       );
-      return response;
+      const { data, status } = response;
+      return { data, status };
     } catch (error) {
-      console.log(error)
-      return undefined;
+      const { data, status } = error.response;
+      return { data, status };
     }
   },
 
-  signup(username, password) {
-    console.log('SigUp chamando API:', username, password);
-    return axios.post(
-      `${this.endpoint}/signup`,
-      {
-        username,
-        password,
-      },
-      { withCredentials: true }
-    );
+  async signup(username, password) {
+    try {
+      const response = await axios.post(
+        `${this.endpoint}/signup`,
+        {
+          username,
+          password,
+        },
+        { withCredentials: true }
+      );
+      const { data, status } = response;
+      return { data, status };
+    } catch (error) {
+      const { data, status } = error.response;
+      return { data, status };
+    }
   },
 
   isAuth() {
@@ -178,6 +185,7 @@ export const groups = {
 
       Example: settleDataObj / JSON
 
+
       {
         "value": 40,
         "paidBy": "Superman",
@@ -207,6 +215,19 @@ export const groups = {
     // User must be logged in
     return axios.delete(
       `${this.endpoint}/groups/${groupID}/settles/${settleID}`,
+      { withCredentials: true }
+    );
+  },
+
+  //REPORTS
+  //API:
+  //http://localhost:5000/api/groups/5e39a5dcd92dfc45cc871308/balance
+
+  getBalance(groupId) {
+    console.log('getBalance of a group', groupId);
+    return axios.get(
+      //
+      `${this.endpoint}/groups/${groupId}/balance`,
       { withCredentials: true }
     );
   },
