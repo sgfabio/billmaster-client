@@ -49,7 +49,7 @@ export default class Login extends Component {
     // no sucesso, redireciona de onde ele veio ou leva ele de volta para login
     // TODO: conferir redirect
     const { from } = this.props.location.state || {
-      from: { pathname: '/dashboard' },
+      from: { pathname: '/groups' },
     };
     const { redirectToReferrer } = this.state;
 

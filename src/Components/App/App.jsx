@@ -166,6 +166,13 @@ class App extends Component {
           console.log('ESSA SAO AS INFORMAÇÕES DO GRUPO PARA EDITAR', newInfo);
         })
       }
+      editExpense={
+        this.editExpense = (idOfExpenseToRemove, newInfo) => {
+          console.log('ESSE É O ID DA DESPESA PARA EDITAR', idOfExpenseToRemove);
+          console.log('ESSA SAO AS INFORMAÇÕES DA DESPESA PARA EDITAR', newInfo);
+        }
+
+      }
     />
   );
   renderModalDelete = (midleText, element, thisPage) => (
@@ -248,8 +255,6 @@ class App extends Component {
     });
   };
 
-  // <Route path="*" render={() => <Redirect to="/login" />} />
-
   render() {
     this.fetchUser();
     return (
@@ -270,13 +275,6 @@ class App extends Component {
                 return <Reports data={this.state} {...props} />;
               }}
             />
-            {/* <PrivateRoute
-              exact
-              path="/oi"
-              authed={this.state.isAuth}
-              fetchGroups={this.fetchGroups}
-              component={Dashboard}
-            /> */}
             <Route
               exact
               path="/login"
@@ -298,7 +296,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/dashboard"
+              path="/groups"
               render={(props) => {
                 return (
                   <Dashboard
@@ -310,15 +308,17 @@ class App extends Component {
                 );
               }}
             />
+            {/* tudo depois daqui é nested.. */}
             <Route
               exact
-              path="/dashboard/pessoas"
+              path="/groups/pessoas"
               render={(props) => {
                 return (
                   <Pessoas
                     {...props}
                     oneGroup={this.state.selectedGroup}
                     renderModalDelete={this.renderModalDelete}
+                    renderModalEdit={this.renderModalEdit}
                     addMember={this.addMember}
                   />
                 );
@@ -326,13 +326,14 @@ class App extends Component {
             />
             <Route
               exact
-              path="/dashboard/despesas"
+              path="/groups/despesas"
               render={(props) => {
                 return (
                   <Despesas
                     {...props}
                     oneGroup={this.state.selectedGroup}
                     renderModalDelete={this.renderModalDelete}
+                    renderModalEdit={this.renderModalEdit}
                     addExpense={this.addExpense}
                   />
                 );
@@ -340,7 +341,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/dashboard/acertos"
+              path="/groups/acertos"
               render={(props) => {
                 return (
                   <Acertos
@@ -379,6 +380,7 @@ class App extends Component {
               render={(props) => {
                 return <Reports data={this.state} {...props} />;
               }}
+<<<<<<< HEAD
               />
               <PrivateRoute
                 exact
@@ -388,6 +390,17 @@ class App extends Component {
                 data={this.state}
               />
             </Switch>
+=======
+            />
+            <PrivateRoute
+              exact
+              path="/groups"
+              authed={this.state.isAuth}
+              component={Dashboard}
+              data={this.state}
+            />
+          </Switch>
+>>>>>>> 1d52c839c202b5126f335abb4c60855026d4d271
         )}
       </div>
     );

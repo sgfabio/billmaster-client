@@ -230,6 +230,7 @@ class DashDespesas extends Component {
                   </button>
                 </div>
                 {this.props.renderModalDelete(e.description, e.ID,"expense")}
+                {this.props.renderModalEdit(e,"expense")}
               </div>
                 )
               })

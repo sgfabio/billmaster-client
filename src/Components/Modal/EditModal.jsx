@@ -11,28 +11,43 @@ class EditModal extends Component {
         groupName: this.props.element.groupName,
         description: this.props.element.description,
         date: this.props.element.date,
+      },
+      newInfoExpense: {
+        description: "02",
+        value: 10,
+        split: {
+          paidBy: "a",
+          dividedBy: ["b", "c"]
+        }
       }
     };
     this.handleChange=this.handleChange.bind(this);
   }
   handleChange = (event) => {
-    const newInfoGroup = {...this.state.newInfoGroup};
-    const { name, value } = event.target;
-    newInfoGroup[name] = value;
+    //"dashboard"
+    // const newInfoGroup = {...this.state.newInfoGroup};
+    // const { name, value } = event.target;
+    // newInfoGroup[name] = value;
     
-    this.setState({newInfoGroup: newInfoGroup});
+    // this.setState({newInfoGroup: newInfoGroup});
+
+    //"expense"
+    // const newInfoGroup = {...this.state.newInfoGroup};
+    // const { name, value } = event.target;
+    // newInfoGroup[name] = value;
+    
+    // this.setState({newInfoGroup: newInfoGroup});    
   };
   whatIsMyPage = iAmInThisPage => {
     switch (iAmInThisPage) {
       case "dashboard":
         this.state.editGroup(this.state.element._id, this.state.newInfoGroup)
-
         break;
       case "member":
-        this.state.removeMember(this.state.element);
+        // this.state.editMember(this.state.element);
         break;
       case "expense":
-        this.state.removeExpense(this.state.element.ID);
+        this.props.editExpense();
         break;
       case "settle":
         console.log("Error");
@@ -42,8 +57,8 @@ class EditModal extends Component {
         break;
     }
   };
-  renderThis(x) {
-    switch (x) {
+  renderThis(actualPage) {
+    switch (actualPage) {
       case "dashboard":
         return (
           <div className="modal-body">
@@ -65,9 +80,28 @@ class EditModal extends Component {
             </form>
           </div>
         );
-
-        break;
-
+        case "dashboard":
+        return (
+          <div className="modal-body">
+            <form>
+              <div className="form-group text-left ">
+                <label htmlFor="groupName" className="col-form-label">
+                  Nome do grupo:
+                </label>
+                <input onChange={this.handleChange} type="text" value={this.state.newInfoGroup.groupName} className="form-control" id="groupName" name="groupName" />
+                <label htmlFor="description" className="col-form-label">
+                  Descrição:
+                </label>
+                <input onChange={this.handleChange} type="text" value={this.state.newInfoGroup.description} className="form-control" id="description" name="description" />
+                <label htmlFor="date" className="col-form-label">
+                  Data do evento:
+                </label>
+                <input onChange={this.handleChange} type="date" value={this.state.newInfoGroup.date} className="form-control" id="date" name="date"/>
+              </div>
+            </form>
+          </div>
+        );
+        
       default:
         break;
     }
