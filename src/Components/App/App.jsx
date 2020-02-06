@@ -11,7 +11,7 @@ import Index from '../Index/Index'; // isso precisa morrer
 import Navbar from '../Navbar/Navbar';
 
 import Login from '../Login/Login';
-
+import Signup from '../Signup/Signup';
 import Dashboard from '../Dashboard/Dashboard';
 import Pessoas from '../DashPessoas/DashPessoas';
 import Despesas from '../DashDespesas/DashDespesas';
