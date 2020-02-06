@@ -14,7 +14,6 @@ import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 
 import Dashboard from '../Dashboard/Dashboard';
-import Group from '../Groups/Groups';
 
 import Pessoas from '../DashPessoas/DashPessoas';
 import Despesas from '../DashDespesas/DashDespesas';
