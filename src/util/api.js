@@ -213,4 +213,13 @@ export const groups = {
     );
   },
 
+  getSettle(groupId) {
+    console.log('getBills of a group', groupId);
+    return axios.get(
+      //
+      `${this.endpoint}/groups/${groupId}/historySettles`,
+      { withCredentials: true }
+    );
+  },
+
 };
