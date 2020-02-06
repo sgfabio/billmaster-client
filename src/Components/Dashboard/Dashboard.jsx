@@ -13,6 +13,7 @@ class Dashboard extends Component {
     };
   }
   render() {
+    const { match } = this.props;
     return (
       <>
         <h1>Seus Grupos</h1>
@@ -23,7 +24,7 @@ class Dashboard extends Component {
               <div className="row m-1 d-flex justify-content-center">
                 <div class="col-md-7 d-flex flex-column mt-1">
                   <Link
-                    to={`/groups/${e._id}`}
+                    to={`${match.url}/${e._id}`}
                     class="btn btn-outline-secondary "
                   >
                     {e.groupName} - {e.description}
@@ -52,6 +53,17 @@ class Dashboard extends Component {
             </>
           );
         })}
+        <Route 
+          path={`${match.path}/:id`}
+          render={({match}) => {
+            return (
+              <div>
+              {" "}
+              <h1>{match.params.id}</h1>
+              </div>
+            )
+          }}
+        />
       </>
     );
   }

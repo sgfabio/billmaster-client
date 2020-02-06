@@ -33,6 +33,21 @@ class DashDespesas extends Component {
     this.editExpense = this.editExpense.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentDidMount() {
+    this.getSingleGroup()
+  }
+
+  // async getSingleGroup() {
+  //   const { params } = this.props.match;
+  //   const group = await groups.getOne(params.id);
+    
+  //   console.log('group:', group)
+  //   this.setState({
+  //     group: group.data,
+  //   });
+  // }
+
   handleAllChecked = event => {
     const newExpense = {...this.state.newExpense};
     let isDivideByAll = "Error";

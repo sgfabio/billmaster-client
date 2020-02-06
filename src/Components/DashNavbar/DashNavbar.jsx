@@ -13,6 +13,7 @@ class DashNavbar extends Component {
     }
   }
   render(){
+    // consologar o props para achar o id
     return(
 
       <>
