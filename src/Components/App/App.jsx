@@ -248,8 +248,6 @@ class App extends Component {
     });
   };
 
-  // <Route path="*" render={() => <Redirect to="/login" />} />
-
   render() {
     this.fetchUser();
     return (
@@ -270,13 +268,6 @@ class App extends Component {
                 return <Reports data={this.state} {...props} />;
               }}
             />
-            {/* <PrivateRoute
-              exact
-              path="/oi"
-              authed={this.state.isAuth}
-              fetchGroups={this.fetchGroups}
-              component={Dashboard}
-            /> */}
             <Route
               exact
               path="/login"
@@ -298,7 +289,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/dashboard"
+              path="/groups"
               render={(props) => {
                 return (
                   <Dashboard
@@ -310,9 +301,10 @@ class App extends Component {
                 );
               }}
             />
+            {/* tudo depois daqui é nested.. */}
             <Route
               exact
-              path="/dashboard/pessoas"
+              path="/groups/pessoas"
               render={(props) => {
                 return (
                   <Pessoas
@@ -326,7 +318,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/dashboard/despesas"
+              path="/groups/despesas"
               render={(props) => {
                 return (
                   <Despesas
@@ -340,7 +332,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/dashboard/acertos"
+              path="/groups/acertos"
               render={(props) => {
                 return (
                   <Acertos
@@ -382,7 +374,7 @@ class App extends Component {
             />
             <PrivateRoute
               exact
-              path="/dashboard"
+              path="/groups"
               authed={this.state.isAuth}
               component={Dashboard}
               data={this.state}

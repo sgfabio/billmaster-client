@@ -69,7 +69,7 @@ export default class Navbar extends Component {
           <>
             <nav className="navbar navbar-light bg-yellow justify-content-between">
               <div>
-                <Link className="navbar-brand" to="/dashboard">
+                <Link className="navbar-brand" to="/groups">
                   <strong>BANANA</strong>
                   <em>SPLIT</em>
                 </Link>

@@ -26,7 +26,6 @@ class EditModal extends Component {
     switch (iAmInThisPage) {
       case "dashboard":
         this.state.editGroup(this.state.element._id, this.state.newInfoGroup)
-
         break;
       case "member":
         this.state.removeMember(this.state.element);
