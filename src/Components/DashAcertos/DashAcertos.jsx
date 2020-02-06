@@ -13,8 +13,8 @@ class DashAcertos extends Component {
       renderModalDelete: this.props.renderModalDelete,
       errorMessage: "",
       newSettle: {
-        _id: "ID",
-        group: "this.state.group.ID",
+        _id: null,
+        group: this.props.oneGroup._id,
         value: 0,
         paidBy: "",
         paidTo: ""
@@ -22,29 +22,37 @@ class DashAcertos extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+  editSettle = (e) => {
+    let { newSettle } = this.state;
+    newSettle = e;
+
+    this.setState({newSettle: newSettle});
+  };
   handleChange(event) {
     let newErrorMessage = "";
     const { name, value } = event.target;
     const newSettleCopy = { ...this.state.newSettle };
     newSettleCopy[name] = value;
-    newSettleCopy.group = this.state.group.ID;
     newSettleCopy.value = +(newSettleCopy.value);
 
-    this.setState({ newSettle: newSettleCopy, errorMessage: newErrorMessage });
+
+
+    this.setState({ newSettle: newSettleCopy, errorMessage: newErrorMessage }, console.log(this.state.newSettle));
   }
   handleSubmit(event) {
+    event.preventDefault();
     let newErrorMessage = "";
     if ( (this.state.newSettle.paidBy === "") || (this.state.newSettle.paidTo === "") ) {
-      event.preventDefault();
       newErrorMessage = "Por favor, preencha todos os dados";
     } else if (this.state.newSettle.paidBy === this.state.newSettle.paidTo) {
       event.preventDefault();
       newErrorMessage = "Não é possível pagar a si mesmo";
     } else {
-      //TODO this.props.addSettle(this.state.newSettle);
       const copyNewSettle = { ...this.state.newSettle };
-      // const { newSettle } = this.state;
+      (copyNewSettle._id) ? this.props.editSettle(this.state.newSettle._id,this.state.newSettle) : this.props.addSettle(this.state.newSettle);
+      copyNewSettle._id = null;
       copyNewSettle.value = 0;
       copyNewSettle.paidBy = "";
       copyNewSettle.paidTo = "";
@@ -67,6 +75,7 @@ class DashAcertos extends Component {
                 onChange={this.handleChange}
                 name="paidBy"
                 className="form-control"
+                value={this.state.newSettle.paidBy}
                 required
               >
                 <option value="">Selecione um nome</option>
@@ -83,6 +92,7 @@ class DashAcertos extends Component {
                 onChange={this.handleChange}
                 name="paidTo"
                 className="form-control"
+                value={this.state.newSettle.paidTo}
                 required
               >
                 <option value="">Selecione um nome</option>
@@ -105,6 +115,7 @@ class DashAcertos extends Component {
                 step="0.01"
                 id="acertoValor"
                 placeholder="R$ 10,00"
+                value={this.state.newSettle.value}
                 required
               />
             </div>
@@ -134,8 +145,7 @@ class DashAcertos extends Component {
                     <button
                       className="btn btn-warning buttonOptions"
                       type="button"
-                      data-toggle="modal"
-                      data-target={`#deleteButton${e.id}`}
+                      onClick={() => this.editSettle(e)}
                       >
                         Editar  
                     </button>
@@ -143,14 +153,11 @@ class DashAcertos extends Component {
                       className="btn btn-danger buttonOptions"
                       type="button"
                       data-toggle="modal"
-                      data-target={`#deleteButton${e.id}`}
+                      data-target={`#deleteButton${e._id}`}
                       >
                       Excluir
                     </button>
-                    {this.props.renderModalDelete(
-                      `O pagamento de ${e.paidBy} para ${e.paidTo}`,
-                      e
-                    )}
+                    {this.props.renderModalDelete(`O pagamento de ${e.paidBy} para ${e.paidTo}`,e._id,"settle")}
                   </div>
                 </div>
               )})}

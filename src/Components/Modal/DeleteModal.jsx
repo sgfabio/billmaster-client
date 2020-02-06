@@ -25,7 +25,7 @@ class DeleteModal extends Component {
         this.state.removeExpense(this.state.element)
         break;
       case "settle":
-        console.log("Error");
+        this.props.removeSettle(this.state.element)
         break;
       default:
           console.log("Delete mode is not defined");

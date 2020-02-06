@@ -42,21 +42,21 @@ const fakeExpense02 = {
     divideBy: ['CICLANO-01', 'CICLANO-02'],
   },
 };
+const fakeMembers = ['Fulano', 'Ciclano', 'Barbosa'];
 const fakeSettle01 = {
   _id: 31,
   group: 'GROUP ID',
   value: 200,
-  paidBy: 'PAGOU',
-  paidTo: 'QUEM RECEBEU 02',
+  paidBy: fakeMembers[0],
+  paidTo: fakeMembers[1],
 };
 const fakeSettle02 = {
   _id: 32,
   group: 'GROUP ID',
   value: 300,
-  paidBy: 'PAGOU',
-  paidTo: 'QUEM RECEBEU 03',
+  paidBy: fakeMembers[1],
+  paidTo: fakeMembers[2],
 };
-const fakeMembers = ['Fulano', 'Ciclano', 'Barbosa'];
 const fakeGroups = [
   {
     _id: '11',
@@ -206,8 +206,10 @@ class App extends Component {
           });
         })
       }
-      // removeSettle={this.removeSettle(idToRemove)} //TODO
-      // console.log("ESSE É O ID DO ACERTO PARA REMOVER",idToRemove);
+      removeSettle={
+        this.removeSettle = (idToRemove) => {
+          console.log("ESSE É O ID DO ACERTO PARA REMOVER",idToRemove);
+        }}
     />
   );
 
@@ -242,19 +244,26 @@ class App extends Component {
     //   selectedGroup: groupCopy,
     // });
   };
-  editExpense = (idOfExpenseToRemove, newInfo) => {
-      console.log('ESSE É O ID DA DESPESA PARA EDITAR', idOfExpenseToRemove);
+  editExpense = (idOfExpenseToEdit, newInfo) => {
+      console.log('ESSE É O ID DA DESPESA PARA EDITAR', idOfExpenseToEdit);
       console.log('ESSA SAO AS INFORMAÇÕES DA DESPESA PARA EDITAR', newInfo);
     }
+  editSettle = (idOfSettleToEdit, newInfo) => {
+    const {group, value, paidBy, paidTo} = newInfo;
+    console.log('ESSE É O ID DO ACERTO PARA EDITAR', idOfSettleToEdit);
+    console.log('ESSA SAO AS INFORMAÇÕES DO ACERTO PARA EDITAR', {group, value, paidBy, paidTo});
+  }
 
   addSettle = (newSettle) => {
-    const groupCopy = { ...this.state.selectedGroup };
-    groupCopy.settles.push(newSettle);
-    console.log(newSettle);
+    console.log('ESSA SAO AS INFORMAÇÕES DO NOVO ACERTO', newSettle);
 
-    this.setState({
-      selectedGroup: groupCopy,
-    });
+    // const groupCopy = { ...this.state.selectedGroup };
+    // groupCopy.settles.push(newSettle);
+    // console.log(newSettle);
+
+    // this.setState({
+    //   selectedGroup: groupCopy,
+    // });
   };
 
   render() {
@@ -351,6 +360,7 @@ class App extends Component {
                     oneGroup={this.state.selectedGroup}
                     renderModalDelete={this.renderModalDelete}
                     addSettle={this.addSettle}
+                    editSettle={this.editSettle}
                   />
                 );
               }}
