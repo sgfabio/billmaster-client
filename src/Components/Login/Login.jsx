@@ -60,12 +60,6 @@ export default class Login extends Component {
     return (
       <div>
         <div
-        // className="modal fade"
-        // id="loginbutton"
-        // tabIndex="-1"
-        // role="dialog"
-        // aria-labelledby="exampleModalCenterTitle"
-        // aria-hidden="true"
         >
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
