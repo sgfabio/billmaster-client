@@ -26,7 +26,7 @@ class DashNavbar extends Component {
             data-toggle="buttons"
           >
             <NavLink
-              to="/dashboard/pessoas"
+              to="/groups/pessoas"
               className="btn btn-outline-secondary btn-yellow-dashboard"
             >
               <input type="radio" name="options" id="dashPessoas" />
@@ -34,7 +34,7 @@ class DashNavbar extends Component {
             </NavLink>
   
             <NavLink
-              to="/dashboard/despesas"
+              to="/groups/despesas"
               className="btn btn-outline-secondary btn-yellow-dashboard"
             >
               <input type="radio" name="options" id="dashDespesas" />
@@ -42,7 +42,7 @@ class DashNavbar extends Component {
             </NavLink>
   
             <NavLink
-              to="/dashboard/acertos"
+              to="/groups/acertos"
               className="btn btn-outline-secondary btn-yellow-dashboard"
             >
               <input type="radio" name="options" id="dashAcertos" />

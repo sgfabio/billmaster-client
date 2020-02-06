@@ -1,8 +1,7 @@
-import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Switch, Route } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
-import "./Dashboard.css";
+import React, { Component } from 'react';
+import { Link, Route } from 'react-router-dom';
+import Navbar from '../Navbar/Navbar';
+import './Dashboard.css';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -16,17 +15,17 @@ class Dashboard extends Component {
   render() {
     return (
       <>
-        <h1>OLHA ESSE H1</h1>
-        <article>Estes são os seus grupos:</article>
-        <br />
-
-        {this.state.userGroups.map(e => {
+        <h1>Seus Grupos</h1>
+        {this.state.userGroups.map((e) => {
           return (
             <>
               <hr />
               <div className="row m-1 d-flex justify-content-center">
                 <div class="col-md-7 d-flex flex-column mt-1">
-                  <Link to={`/groups/${e._id}`} class="btn btn-outline-secondary ">
+                  <Link
+                    to={`/groups/${e._id}`}
+                    class="btn btn-outline-secondary "
+                  >
                     {e.groupName} - {e.description}
                   </Link>
                 </div>
@@ -37,7 +36,6 @@ class Dashboard extends Component {
                     data-target={`#editButton${e._id}`}
                     class="btn btn-warning mr-1"
                   >
-                    {console.log(e._id)}
                     Editar
                   </button>
                   <button
@@ -49,8 +47,8 @@ class Dashboard extends Component {
                   </button>
                 </div>
               </div>
-              {this.props.renderModalDelete(e.groupName, e._id, "dashboard")}
-              {this.props.renderModalEdit(e, "dashboard")}
+              {this.props.renderModalDelete(e.groupName, e._id, 'dashboard')}
+              {this.props.renderModalEdit(e, 'dashboard')}
             </>
           );
         })}
