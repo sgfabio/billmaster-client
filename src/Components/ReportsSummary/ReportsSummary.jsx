@@ -10,7 +10,7 @@ class ReportsSummary extends Component {
     }
 
     componentDidMount() {
-        groups.getBalance(this.props.groupId) //props do Id do grupo; 
+        groups.getBalance(this.props.groupId) //props do Id dlocalhost:500o grupo; 
         .then(qryObj => {
             console.log('componentDidMount',qryObj);
             this.setState({msg: qryObj.data.msg, balances:qryObj.data.queryResult}, () => console.log(this.state) )
@@ -32,7 +32,7 @@ class ReportsSummary extends Component {
                 </p>
                 
                 <div className="resultTable table-responsive-md">
-                    <table className="table table-striped">
+                    <table className="table table6 table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Integrante</th>

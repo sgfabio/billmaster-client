@@ -379,15 +379,15 @@ class App extends Component {
               render={(props) => {
                 return <Reports data={this.state} {...props} />;
               }}
-            />
-            <PrivateRoute
-              exact
-              path="/dashboard"
-              authed={this.state.isAuth}
-              component={Dashboard}
-              data={this.state}
-            />
-          </Switch>
+              />
+              <PrivateRoute
+                exact
+                path="/dashboard"
+                authed={this.state.isAuth}
+                component={Dashboard}
+                data={this.state}
+              />
+            </Switch>
         )}
       </div>
     );
