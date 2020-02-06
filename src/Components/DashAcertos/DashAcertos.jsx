@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import DashNavbar from "../DashNavbar/DashNavbar";
-import "./DashAcertos.css"
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import DashNavbar from '../DashNavbar/DashNavbar';
+import './DashAcertos.css';
 
 class DashAcertos extends Component {
   constructor(props) {
@@ -11,14 +11,14 @@ class DashAcertos extends Component {
       members: this.props.oneGroup.members,
       settles: this.props.oneGroup.settles,
       renderModalDelete: this.props.renderModalDelete,
-      errorMessage: "",
+      errorMessage: '',
       newSettle: {
         _id: null,
         group: this.props.oneGroup._id,
         value: 0,
-        paidBy: "",
-        paidTo: ""
-      }
+        paidBy: '',
+        paidTo: '',
+      },
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,7 +29,7 @@ class DashAcertos extends Component {
   // async getSingleGroup() {
   //   const { params } = this.props.match;
   //   const group = await groups.getOne(params.id);
-    
+
   //   console.log('group:', group)
   //   this.setState({
   //     group: group.data,
@@ -40,43 +40,54 @@ class DashAcertos extends Component {
     let { newSettle } = this.state;
     newSettle = e;
 
-    this.setState({newSettle: newSettle});
+    this.setState({ newSettle: newSettle });
   };
   handleChange(event) {
-    let newErrorMessage = "";
+    let newErrorMessage = '';
     const { name, value } = event.target;
     const newSettleCopy = { ...this.state.newSettle };
     newSettleCopy[name] = value;
-    newSettleCopy.value = +(newSettleCopy.value);
+    newSettleCopy.value = +newSettleCopy.value;
 
-
-
-    this.setState({ newSettle: newSettleCopy, errorMessage: newErrorMessage }, console.log(this.state.newSettle));
+    this.setState(
+      { newSettle: newSettleCopy, errorMessage: newErrorMessage },
+      console.log(this.state.newSettle)
+    );
   }
   handleSubmit(event) {
     event.preventDefault();
-    let newErrorMessage = "";
-    if ( (this.state.newSettle.paidBy === "") || (this.state.newSettle.paidTo === "") ) {
-      newErrorMessage = "Por favor, preencha todos os dados";
+    let newErrorMessage = '';
+    if (
+      this.state.newSettle.paidBy === '' ||
+      this.state.newSettle.paidTo === ''
+    ) {
+      newErrorMessage = 'Por favor, preencha todos os dados';
     } else if (this.state.newSettle.paidBy === this.state.newSettle.paidTo) {
       event.preventDefault();
-      newErrorMessage = "Não é possível pagar a si mesmo";
+      newErrorMessage = 'Não é possível pagar a si mesmo';
     } else {
       const copyNewSettle = { ...this.state.newSettle };
-      (copyNewSettle._id) ? this.props.editSettle(this.state.newSettle._id,this.state.newSettle) : this.props.addSettle(this.state.newSettle);
+      copyNewSettle._id
+        ? this.props.editSettle(this.state.newSettle._id, this.state.newSettle)
+        : this.props.addSettle(this.state.newSettle);
       copyNewSettle._id = null;
       copyNewSettle.value = 0;
-      copyNewSettle.paidBy = "";
-      copyNewSettle.paidTo = "";
+      copyNewSettle.paidBy = '';
+      copyNewSettle.paidTo = '';
       this.setState({ newSettle: copyNewSettle });
     }
     this.setState({ errorMessage: newErrorMessage });
   }
   render() {
+    const { id: paramId } = this.props.match.params;
     return (
       <>
-        <DashNavbar description={this.state.group.description} groupName={this.state.group.groupName} />
-        
+        <DashNavbar
+          paramId={paramId}
+          description={this.state.group.description}
+          groupName={this.state.group.groupName}
+        />
+
         <div className="dashMainContent">
           {/* <!-- Add Settle --> */}
           <h2>Adicionar novo acerto:</h2>
@@ -93,7 +104,7 @@ class DashAcertos extends Component {
                 <option value="">Selecione um nome</option>
                 {[...this.state.members]
                   .sort((a, b) => a.localeCompare(b))
-                  .map(member => {
+                  .map((member) => {
                     return <option value={member}>{member}</option>;
                   })}
               </select>
@@ -110,7 +121,7 @@ class DashAcertos extends Component {
                 <option value="">Selecione um nome</option>
                 {[...this.state.members]
                   .sort((a, b) => a.localeCompare(b))
-                  .map(member => {
+                  .map((member) => {
                     return <option value={member}>{member}</option>;
                   })}
               </select>
@@ -139,14 +150,17 @@ class DashAcertos extends Component {
               Submit
             </button>
           </form>
-            <div className="zindex-modal alert alert-warning bg-transparent m-2 py-auto px-auto noBorder" role="alert">
-              {this.state.errorMessage}
-            </div>
+          <div
+            className="zindex-modal alert alert-warning bg-transparent m-2 py-auto px-auto noBorder"
+            role="alert"
+          >
+            {this.state.errorMessage}
+          </div>
           <hr />
 
           <div className="dashSettleList row">
-            {[...this.state.settles].map(e => {
-              return (      
+            {[...this.state.settles].map((e) => {
+              return (
                 <div className="col-lg p-0 ml-0 dashComponents">
                   <div className="col-9 p-0">
                     <button className="btn btn-outline-secondary boxComponent">
@@ -158,21 +172,26 @@ class DashAcertos extends Component {
                       className="btn btn-warning buttonOptions"
                       type="button"
                       onClick={() => this.editSettle(e)}
-                      >
-                        Editar  
+                    >
+                      Editar
                     </button>
                     <button
                       className="btn btn-danger buttonOptions"
                       type="button"
                       data-toggle="modal"
                       data-target={`#deleteButton${e._id}`}
-                      >
+                    >
                       Excluir
                     </button>
-                    {this.props.renderModalDelete(`O pagamento de ${e.paidBy} para ${e.paidTo}`,e._id,"settle")}
+                    {this.props.renderModalDelete(
+                      `O pagamento de ${e.paidBy} para ${e.paidTo}`,
+                      e._id,
+                      'settle'
+                    )}
                   </div>
                 </div>
-              )})}
+              );
+            })}
           </div>
         </div>
       </>

@@ -1,49 +1,50 @@
-import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Switch, Route } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
+import React, { Component } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import Navbar from '../Navbar/Navbar';
 
 class DashNavbar extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       ID: this.props.ID,
       groupName: this.props.groupName,
-      description: this.props.description
-    }
+      description: this.props.description,
+    };
   }
-  render(){
-    // consologar o props para achar o id
-    return(
-
+  render() {
+    const { paramId } = this.props;
+    console.log('props da dashNavbar:', this.props);
+    return (
       <>
-    <h1>Grupo: {this.props.groupName}
-    <h5>{this.props.description}</h5>
-    </h1>
-      
+        <h1>
+          Grupo: {this.props.groupName}
+          <h5>{this.props.description}</h5>
+        </h1>
+
         <div className="dashContent row py-0 my-2">
           <div
             className="btn-group btn-group-toggle mx-auto my-0"
             data-toggle="buttons"
           >
             <NavLink
-              to="/groups/pessoas"
+              to={`/groups/${paramId}/pessoas`}
               className="btn btn-outline-secondary btn-yellow-dashboard"
             >
               <input type="radio" name="options" id="dashPessoas" />
               Pessoas
             </NavLink>
-  
+
             <NavLink
-              to="/groups/despesas"
+              to={`/groups/${paramId}/despesas`}
               className="btn btn-outline-secondary btn-yellow-dashboard"
             >
               <input type="radio" name="options" id="dashDespesas" />
               Despesas
             </NavLink>
-  
+
             <NavLink
-              to="/groups/acertos"
+              to={`/groups/${paramId}/acertos`}
               className="btn btn-outline-secondary btn-yellow-dashboard"
             >
               <input type="radio" name="options" id="dashAcertos" />
@@ -54,7 +55,7 @@ class DashNavbar extends Component {
         <hr className="my-2" />
       </>
     );
-  };
+  }
 }
 
 export default DashNavbar;

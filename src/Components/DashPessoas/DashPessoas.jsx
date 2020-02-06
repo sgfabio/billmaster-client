@@ -37,24 +37,28 @@ class DashPessoas extends Component {
       newMember: ' ',
     });
   }
-  componentDidMount() {
-    this.getSingleGroup()
-  }
+  // componentDidMount() {
+  //   this.getSingleGroup();
+  // }
 
   async getSingleGroup() {
     const { params } = this.props.match;
     const group = await groups.getOne(params.id);
-    
-    console.log('group:', group)
+
+    // console.log('group:', group)
     this.setState({
       selectedGroup: group.data,
     });
   }
 
   render() {
+    const { id: paramId } = this.props.match.params;
+    console.log(this.props.match.params.id)
+    console.log(paramId)
     return (
       <>
         <DashNavbar
+          paramId={paramId}
           // description={this.state.selectedGroup.description}
           // groupName={this.state.selectedGroup.groupName}
         />
