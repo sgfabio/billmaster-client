@@ -303,9 +303,6 @@ class App extends Component {
                 );
               }}
             />
-            {/* tudo depois daqui é nested.. */}
-            {/* criar 3 rotas dessa para cada componente */}
-            {/* cada componente específico vai receber esse Id e buscar. */}
             <Route
               exact
               path="/groups/:id/pessoas"
