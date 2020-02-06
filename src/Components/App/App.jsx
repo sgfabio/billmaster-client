@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Switch, Route, Link, Redirect } from "react-router-dom";
 
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { auth } from '../../util/api';
-import { groups } from '../../util/api';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import { auth } from "../../util/api";
+import { groups } from "../../util/api";
 // Components
 import Index from "../Index/Index";
 
@@ -16,6 +16,7 @@ import Pessoas from "../DashPessoas/DashPessoas";
 import Despesas from "../DashDespesas/DashDespesas";
 import Acertos from "../DashAcertos/DashAcertos";
 import DeleteModal from "../Modal/DeleteModal";
+import EditModal from "../Modal/EditModal";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 // fake data
@@ -56,7 +57,7 @@ const fakeSettle02 = {
 const fakeMembers = ["Fulano", "Ciclano", "Barbosa"];
 const fakeGroups = [
   {
-    ID: 11,
+    _id: "11",
     groupName: "GRUPO 001",
     description: "bla bla bla grupo",
     owner: 200,
@@ -65,7 +66,7 @@ const fakeGroups = [
     settles: [fakeSettle01, fakeSettle02]
   },
   {
-    ID: 12,
+    _id: "12",
     groupName: "GRUPO 002",
     description: "lalala",
     owner: 200,
@@ -84,10 +85,10 @@ class App extends Component {
       groups: fakeGroups,
       selectedGroup: fakeGroups[0]
     };
-    this.addMember = this.addMember.bind(this);
-    this.addExpense = this.addExpense.bind(this);
-    this.addSettle = this.addSettle.bind(this);
-    this.renderModalDelete = this.renderModalDelete.bind(this);
+    // this.addMember = this.addMember.bind(this); ===> PRECISA???
+    // this.addExpense = this.addExpense.bind(this);
+    // this.addSettle = this.addSettle.bind(this);
+    this.renderModalDelete = this.renderModalDelete.bind(this); //TODOS OS DELETES ESTAO AQUI
     this.getUser = this.getUser.bind(this);
     this.fetchGroups = this.fetchGroups.bind(this);
   }
@@ -113,12 +114,12 @@ class App extends Component {
     try {
       const response = await groups.getAll();
       const { status, data } = response;
-      console.log('data para os grupos:', data);
+      console.log("data para os grupos:", data);
       if (status !== 200) {
-        console.log('Erro api', data);
+        console.log("Erro api", data);
       } else {
         this.setState({
-          groups: data,
+          groups: data
         });
       }
     } catch (error) {
@@ -144,13 +145,32 @@ class App extends Component {
     //   this.state.selectedGroup.members.splice(index, 1);
     // } return message = "Can not find ID Member";
   };
+  renderModalEdit = (element, thisPage) => (
+    <EditModal
+      element={element}
+      iAmInThisPage={thisPage}
+      editGroup={
+        (this.editGroup = (idOfGroupToRemove, newInfo) => {
+          console.log("ESSE É O ID DO GRUPO PARA EDITAR", idOfGroupToRemove);
+          console.log("ESSA SAO AS INFORMAÇÕES DO GRUPO PARA EDITAR", newInfo);
+        })
+      }
+    />
+  );
   renderModalDelete = (midleText, element, thisPage) => (
     <DeleteModal
       midleText={midleText}
       element={element}
       iAmInThisPage={thisPage}
+      removeGroup={
+        (this.removeGroup = idOfGroupToRemove => {
+          console.log("ESSE É O ID DO GRUPO PARA REMOVER", idOfGroupToRemove);
+        })
+      }
       removeMember={
         (this.removeMember = memberToRemove => {
+          console.log("ESSE É O MEMBRO PARA REMOVER", memberToRemove);
+
           const groupCopy = { ...this.state.selectedGroup };
           let idx = groupCopy.members.indexOf(memberToRemove);
           groupCopy.members.splice(idx, 1);
@@ -159,33 +179,39 @@ class App extends Component {
           });
         })
       }
-      removeExpense={this.removeExpense = (idToRemove) => {
-        const groupCopy = { ...this.state.selectedGroup };
-        let idx;
-        let test = 0;
-        groupCopy.expense.map(e=>{(e.ID === idToRemove) ? idx = test : test += 1 }); //TODO Verificar a forma que o ID é passada
-        groupCopy.expense.splice(idx, 1);
-        this.setState({
-          selectedGroup: groupCopy
-        });
-      }}
-      // removeSettle={this.removeSettle(idToRemove)}
+      removeExpense={
+        (this.removeExpense = idToRemove => {
+          console.log("ESSE É O ID DA DESPESA PARA REMOVER", idToRemove);
+          const groupCopy = { ...this.state.selectedGroup };
+          let idx;
+          let test = 0;
+          groupCopy.expense.map(e => {
+            e.ID === idToRemove ? (idx = test) : (test += 1);
+          }); //TODO Verificar a forma que o ID é passada
+          groupCopy.expense.splice(idx, 1);
+          this.setState({
+            selectedGroup: groupCopy
+          });
+        })
+      }
+      // removeSettle={this.removeSettle(idToRemove)} //TODO
+      // console.log("ESSE É O ID DO ACERTO PARA REMOVER",idToRemove);
     />
   );
 
-  addMember = newMember => {
+  addGroup = newGroup => {
     const groupCopy = { ...this.state.selectedGroup };
-    groupCopy.members.push(newMember);
+    groupCopy.Groups.push(newGroup);
 
     this.setState({
       selectedGroup: groupCopy
     });
   };
 
-  removeMember = memberToRemove => {
+  addMember = newMember => {
     const groupCopy = { ...this.state.selectedGroup };
-    let idx = groupCopy.members.indexOf(memberToRemove);
-    groupCopy.members.splice(idx, 1);
+    groupCopy.members.push(newMember);
+
     this.setState({
       selectedGroup: groupCopy
     });
@@ -200,32 +226,16 @@ class App extends Component {
     });
   };
 
-  removeExpense = expenseToRemove => {
-    const groupCopy = { ...this.state.selectedGroup };
-    groupCopy.expense.push(expenseToRemove);
-
-    this.setState({
-      selectedGroup: groupCopy
-    });
-  };
-
   addSettle = newSettle => {
     const groupCopy = { ...this.state.selectedGroup };
     groupCopy.settles.push(newSettle);
+    console.log(newSettle);
 
     this.setState({
       selectedGroup: groupCopy
     });
   };
 
-  removeSettle = settleToRemove => {
-    const groupCopy = { ...this.state.selectedGroup };
-    groupCopy.settles.push(settleToRemove);
-
-    this.setState({
-      selectedGroup: groupCopy
-    });
-  };
   // <Route path="*" render={() => <Redirect to="/login" />} />
 
   render() {
@@ -233,7 +243,7 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-        {/* teste */}
+          {/* teste */}
           <PrivateRoute
             exact
             path="/oi"
@@ -257,7 +267,14 @@ class App extends Component {
             exact
             path="/dashboard"
             render={props => {
-              return <Dashboard data={this.state} {...props} />;
+              return (
+                <Dashboard
+                  data={this.state}
+                  {...props}
+                  renderModalDelete={this.renderModalDelete}
+                  renderModalEdit={this.renderModalEdit}
+                />
+              );
             }}
           />
           <Route
