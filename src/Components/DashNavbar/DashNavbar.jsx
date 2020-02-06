@@ -26,7 +26,7 @@ class DashNavbar extends Component {
           >
             <NavLink
               to="/dashboard/pessoas"
-              className="btn btn-outline-dark btn-yellow-dashboard"
+              className="btn btn-outline-secondary btn-yellow-dashboard"
             >
               <input type="radio" name="options" id="dashPessoas" />
               Pessoas
@@ -34,7 +34,7 @@ class DashNavbar extends Component {
   
             <NavLink
               to="/dashboard/despesas"
-              className="btn btn-outline-dark btn-yellow-dashboard"
+              className="btn btn-outline-secondary btn-yellow-dashboard"
             >
               <input type="radio" name="options" id="dashDespesas" />
               Despesas
@@ -42,7 +42,7 @@ class DashNavbar extends Component {
   
             <NavLink
               to="/dashboard/acertos"
-              className="btn btn-outline-dark btn-yellow-dashboard"
+              className="btn btn-outline-secondary btn-yellow-dashboard"
             >
               <input type="radio" name="options" id="dashAcertos" />
               Acertos

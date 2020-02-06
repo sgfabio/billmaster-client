@@ -15,7 +15,7 @@ const Navbar = (props) => {
           </Link>
         </div>
 
-        <div className="dropdown ml-auto mr-3 btn btn-outline-dark dropdown-toggle">
+        <div className="dropdown ml-auto mr-3 btn btn-outline-secondary dropdown-toggle">
           <button className="dropbtn">Grupos</button>
           <div className="dropdown-content">
             <button
@@ -39,7 +39,7 @@ const Navbar = (props) => {
         <div>
           <button
             type="button"
-            className="btn btn-outline-dark"
+            className="btn btn-outline-secondary"
             data-toggle="modal"
             data-target="#logoutButton"
           >

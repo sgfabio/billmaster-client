@@ -80,7 +80,7 @@ class DashPessoas extends Component {
                 return (
                   <>
                     <div className="col-lg-6 p-0 my-1">
-                      <button className="btn btn-outline-dark col-10">
+                      <button className="btn btn-outline-secondary col-10">
                         {e}
                       </button>{" "}
                       <button

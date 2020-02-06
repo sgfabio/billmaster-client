@@ -157,7 +157,7 @@ class DashDespesas extends Component {
 
             <div className="form-group text-left col-xl-2 mb-0 m-1 p-0">
               Dividir Por:
-              <div className="btn btn-outline-dark dropdown dropdown-toggle form-control">
+              <div className="btn btn-outline-secondary dropdown dropdown-toggle form-control">
                 Selecione os membros
                 <div className="dropdown-content form-group">
                   <div className="dropdown-item d-flex form-group">
@@ -205,9 +205,9 @@ class DashDespesas extends Component {
               {
               [...this.state.expense].map(e => {
                 return(
-              <div className="col-lg p-0 ml-0 dashComponents">
+              <div className="col-lg-5 p-0 m-1 mx-auto dashComponents">
                 <div className="col-9 p-0">
-                  <button className="btn btn-outline-dark boxComponent">
+                  <button className="btn btn-outline-secondary boxComponent">
                     {e.description} 
                   </button>
                 </div>

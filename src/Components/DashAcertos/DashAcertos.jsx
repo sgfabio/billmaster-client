@@ -126,7 +126,7 @@ class DashAcertos extends Component {
               return (      
                 <div className="col-lg p-0 ml-0 dashComponents">
                   <div className="col-9 p-0">
-                    <button className="btn btn-outline-dark boxComponent">
+                    <button className="btn btn-outline-secondary boxComponent">
                       {e.paidBy} pagou para {e.paidTo} o valor de R${e.value}
                     </button>
                   </div>

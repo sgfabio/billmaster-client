@@ -63,10 +63,10 @@ export class Index extends Component {
               </div>
               <div>
                   {/* <!-- Modal Triggers --> */}
-                  <button type="button" className="btn btn-outline-dark mr-3" data-toggle="modal" data-target="#loginbutton">
+                  <button type="button" className="btn btn-outline-secondary mr-3" data-toggle="modal" data-target="#loginbutton">
                       Entre
                   </button>
-                  <button type="button" className="btn btn-outline-dark" data-toggle="modal" data-target="#signupbutton">
+                  <button type="button" className="btn btn-outline-secondary" data-toggle="modal" data-target="#signupbutton">
                       Cadastre-se
                   </button>
               </div>
