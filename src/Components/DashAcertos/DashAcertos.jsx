@@ -23,6 +23,18 @@ class DashAcertos extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  // TODO: ARRUMAR NAS 3
+  // async getSingleGroup() {
+  //   const { params } = this.props.match;
+  //   const group = await groups.getOne(params.id);
+    
+  //   console.log('group:', group)
+  //   this.setState({
+  //     group: group.data,
+  //   });
+  // }
+
   handleChange(event) {
     let newErrorMessage = "";
     const { name, value } = event.target;

@@ -81,12 +81,19 @@ export const groups = {
     }
   },
 
-  getOne(groupId) {
-    return axios.get(
-      // User must be logged in
-      `${this.endpoint}/grupos/${groupId}`,
-      { withCredentials: true }
-    );
+  async getOne(groupId) {
+    try {
+      const response = await axios.get(
+        // User must be logged in
+        `${this.endpoint}/groups/${groupId}`,
+        { withCredentials: true }
+      );
+      const { data, status } = response;
+      return { data, status };
+    } catch (error) {
+      const { data, status } = error.response;
+      return { data, status };
+    }
   },
 
   put(groupID, groupDataObj) {
@@ -212,5 +219,4 @@ export const groups = {
       { withCredentials: true }
     );
   },
-
 };
