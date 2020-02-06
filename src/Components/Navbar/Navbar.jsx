@@ -212,7 +212,33 @@ export default class Navbar extends Component {
             </div>
           </>
         ) : (
-          <h1>Deslogado!</h1>
+          <nav className="navbar navbar-light bg-yellow justify-content-between">
+            <div>
+              <Link className="navbar-brand" to="/">
+                <strong>BANANA</strong>
+                <em>SPLIT</em>
+              </Link>
+            </div>
+            <div>
+              {/* <!-- Modal Triggers --> */}
+              <button
+                type="button"
+                className="btn btn-outline-dark mr-3"
+                data-toggle="modal"
+                data-target="#loginbutton"
+              >
+                Entre
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline-dark"
+                data-toggle="modal"
+                data-target="#signupbutton"
+              >
+                Cadastre-se
+              </button>
+            </div>
+          </nav>
         )}
       </div>
     );
