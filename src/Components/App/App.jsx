@@ -1,81 +1,81 @@
-import React, { Component } from "react";
-import { Switch, Route, Link, Redirect } from "react-router-dom";
+import React, { Component } from 'react';
+import { Switch, Route, Link, Redirect } from 'react-router-dom';
 
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import { auth } from "../../util/api";
-import { groups } from "../../util/api";
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { auth } from '../../util/api';
+import { groups } from '../../util/api';
 // Components
-import Index from "../Index/Index";
+import Index from '../Index/Index'; // isso precisa morrer
+import Navbar from '../Navbar/Navbar';
 
-import Login from "../Login/Login";
-
-import Dashboard from "../Dashboard/Dashboard";
-import Pessoas from "../DashPessoas/DashPessoas";
-import Despesas from "../DashDespesas/DashDespesas";
-import Acertos from "../DashAcertos/DashAcertos";
-import DeleteModal from "../Modal/DeleteModal";
-import EditModal from "../Modal/EditModal";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import Reports from "../Reports/Reports";
-
+import Login from '../Login/Login';
+import Signup from '../Signup/Signup';
+import Dashboard from '../Dashboard/Dashboard';
+import Pessoas from '../DashPessoas/DashPessoas';
+import Despesas from '../DashDespesas/DashDespesas';
+import Acertos from '../DashAcertos/DashAcertos';
+import DeleteModal from '../Modal/DeleteModal';
+import EditModal from '../Modal/EditModal';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import Reports from '../Reports/Reports';
 
 // fake data
 const fakeExpense01 = {
   ID: 21,
-  group: "000",
-  description: "ABC EXPENSE",
+  group: '000',
+  description: 'ABC EXPENSE',
   value: 1000,
   split: {
-    paidBy: "FULANO",
-    divideBy: ["CICLANO-01", "CICLANO-02"]
-  }
+    paidBy: 'FULANO',
+    divideBy: ['CICLANO-01', 'CICLANO-02'],
+  },
 };
 const fakeExpense02 = {
   ID: 25,
-  group: "000",
-  description: "ABC EXPENSE 0002",
+  group: '000',
+  description: 'ABC EXPENSE 0002',
   value: 1000,
   split: {
-    paidBy: "FULANO 02",
-    divideBy: ["CICLANO-01", "CICLANO-02"]
-  }
+    paidBy: 'FULANO 02',
+    divideBy: ['CICLANO-01', 'CICLANO-02'],
+  },
 };
 const fakeSettle01 = {
   ID: 31,
-  group: "GROUP ID",
+  group: 'GROUP ID',
   value: 200,
-  paidBy: "PAGOU",
-  paidTo: "QUEM RECEBEU 02"
+  paidBy: 'PAGOU',
+  paidTo: 'QUEM RECEBEU 02',
 };
 const fakeSettle02 = {
   ID: 32,
-  group: "GROUP ID",
+  group: 'GROUP ID',
   value: 300,
-  paidBy: "PAGOU",
-  paidTo: "QUEM RECEBEU 03"
+  paidBy: 'PAGOU',
+  paidTo: 'QUEM RECEBEU 03',
 };
-const fakeMembers = ["Fulano", "Ciclano", "Barbosa"];
+const fakeMembers = ['Fulano', 'Ciclano', 'Barbosa'];
 const fakeGroups = [
   {
-    _id: "11",
-    groupName: "GRUPO 001",
-    description: "bla bla bla grupo",
+    _id: '11',
+    groupName: 'GRUPO 001',
+    description: 'bla bla bla grupo',
     owner: 200,
     members: fakeMembers,
     expense: [fakeExpense01, fakeExpense02],
-    settles: [fakeSettle01, fakeSettle02]
+    settles: [fakeSettle01, fakeSettle02],
   },
   {
-    _id: "12",
-    groupName: "GRUPO 002",
-    description: "lalala",
+    _id: '12',
+    groupName: 'GRUPO 002',
+    description: 'lalala',
     owner: 200,
     members: fakeMembers, //STRING
     expense: [fakeExpense02, fakeExpense01],
-    settles: [fakeSettle02, fakeSettle01]
-  }
+    settles: [fakeSettle02, fakeSettle01],
+  },
 ];
 
 class App extends Component {
@@ -85,7 +85,7 @@ class App extends Component {
       user: null,
       isAuth: false,
       groups: fakeGroups,
-      selectedGroup: fakeGroups[0]
+      selectedGroup: fakeGroups[0],
     };
     // this.addMember = this.addMember.bind(this); ===> PRECISA???
     // this.addExpense = this.addExpense.bind(this);
@@ -96,32 +96,48 @@ class App extends Component {
   }
 
   async fetchUser() {
-    if (this.state.isAuth) {
+    if (this.state.isAuth === false) {
       try {
         const loggedInUser = await auth.isAuth();
         this.setState({
           user: loggedInUser,
-          isAuth: true
+          isAuth: true,
         });
       } catch (error) {
         console.log(error);
-        this.setState({
-          isAuth: false
-        });
+        // this.setState({
+        //   user: null,
+        //   isAuth: false,
+        // });
       }
     }
   }
+
+  getUser(userObj) {
+    if (userObj === null) {
+      this.setState({
+        user: null,
+        isAuth: false,
+      });
+    } else {
+      this.setState({
+        user: userObj,
+        isAuth: true,
+      });
+    }
+  }
+
   // não testado
   async fetchGroups() {
     try {
       const response = await groups.getAll();
       const { status, data } = response;
-      console.log("data para os grupos:", data);
+      console.log('data para os grupos:', data);
       if (status !== 200) {
-        console.log("Erro api", data);
+        console.log('Erro api', data);
       } else {
         this.setState({
-          groups: data
+          groups: data,
         });
       }
     } catch (error) {
@@ -129,18 +145,11 @@ class App extends Component {
     }
   }
 
-  getUser(userObj) {
-    this.setState({
-      user: userObj,
-      isAuth: true
-    });
-  }
-
   createGroup(newGroup) {
     this.state.groups.push(newGroup);
   }
 
-  deleteOneElement = elementID => {
+  deleteOneElement = (elementID) => {
     //TODO deletar por ID ou ... name se for o caso do members
     // const index = this.state.selectedGroup.members.indexOf(memberID);
     // if (index > -1) {
@@ -153,8 +162,8 @@ class App extends Component {
       iAmInThisPage={thisPage}
       editGroup={
         (this.editGroup = (idOfGroupToRemove, newInfo) => {
-          console.log("ESSE É O ID DO GRUPO PARA EDITAR", idOfGroupToRemove);
-          console.log("ESSA SAO AS INFORMAÇÕES DO GRUPO PARA EDITAR", newInfo);
+          console.log('ESSE É O ID DO GRUPO PARA EDITAR', idOfGroupToRemove);
+          console.log('ESSA SAO AS INFORMAÇÕES DO GRUPO PARA EDITAR', newInfo);
         })
       }
     />
@@ -165,34 +174,34 @@ class App extends Component {
       element={element}
       iAmInThisPage={thisPage}
       removeGroup={
-        (this.removeGroup = idOfGroupToRemove => {
-          console.log("ESSE É O ID DO GRUPO PARA REMOVER", idOfGroupToRemove);
+        (this.removeGroup = (idOfGroupToRemove) => {
+          console.log('ESSE É O ID DO GRUPO PARA REMOVER', idOfGroupToRemove);
         })
       }
       removeMember={
-        (this.removeMember = memberToRemove => {
-          console.log("ESSE É O MEMBRO PARA REMOVER", memberToRemove);
+        (this.removeMember = (memberToRemove) => {
+          console.log('ESSE É O MEMBRO PARA REMOVER', memberToRemove);
 
           const groupCopy = { ...this.state.selectedGroup };
           let idx = groupCopy.members.indexOf(memberToRemove);
           groupCopy.members.splice(idx, 1);
           this.setState({
-            selectedGroup: groupCopy
+            selectedGroup: groupCopy,
           });
         })
       }
       removeExpense={
-        (this.removeExpense = idToRemove => {
-          console.log("ESSE É O ID DA DESPESA PARA REMOVER", idToRemove);
+        (this.removeExpense = (idToRemove) => {
+          console.log('ESSE É O ID DA DESPESA PARA REMOVER', idToRemove);
           const groupCopy = { ...this.state.selectedGroup };
           let idx;
           let test = 0;
-          groupCopy.expense.map(e => {
+          groupCopy.expense.map((e) => {
             e.ID === idToRemove ? (idx = test) : (test += 1);
           }); //TODO Verificar a forma que o ID é passada
           groupCopy.expense.splice(idx, 1);
           this.setState({
-            selectedGroup: groupCopy
+            selectedGroup: groupCopy,
           });
         })
       }
@@ -201,140 +210,171 @@ class App extends Component {
     />
   );
 
-  addGroup = newGroup => {
-    const groupCopy = { ...this.state.selectedGroup };
-    groupCopy.Groups.push(newGroup);
+  addGroup = (newGroup) => {
+    console.log("ESSAS SÃO AS INFORMAÇÕES DO NOVO GRUPO", newGroup)
+    // const groupCopy = { ...this.state.selectedGroup };
+    // groupCopy.Groups.push(newGroup);
 
-    this.setState({
-      selectedGroup: groupCopy
-    });
+    // this.setState({
+    //   selectedGroup: groupCopy,
+    // });
   };
 
-  addMember = newMember => {
+  addMember = (newMember) => {
     const groupCopy = { ...this.state.selectedGroup };
     groupCopy.members.push(newMember);
 
     this.setState({
-      selectedGroup: groupCopy
+      selectedGroup: groupCopy,
     });
   };
 
-  addExpense = newExpense => {
+  addExpense = (newExpense) => {
     const groupCopy = { ...this.state.selectedGroup };
     groupCopy.expense.push(newExpense);
 
     this.setState({
-      selectedGroup: groupCopy
+      selectedGroup: groupCopy,
     });
   };
 
-  addSettle = newSettle => {
+  addSettle = (newSettle) => {
     const groupCopy = { ...this.state.selectedGroup };
     groupCopy.settles.push(newSettle);
     console.log(newSettle);
 
     this.setState({
-      selectedGroup: groupCopy
+      selectedGroup: groupCopy,
     });
   };
 
   // <Route path="*" render={() => <Redirect to="/login" />} />
 
   render() {
-    // TODO: essa primeira private route é um exemplo. Dashboard recebe element!
+    this.fetchUser();
     return (
       <div className="App">
-        <Switch>
-          {/* teste */}
-          <PrivateRoute
-            exact
-            path="/oi"
-            authed={this.state.isAuth}
-            fetchGroups={this.fetchGroups}
-            component={Dashboard}
-          />
-          <Route
-            exact
-            path="/login"
-            render={props => {
-              return <Login getUser={this.getUser} {...props} />;
-            }}
-          />
-          <Route
-            exact
-            path="/"
-            render={() => <Index getUser={this.getUser} />}
-          />
-          <Route
-            exact
-            path="/dashboard"
-            render={props => {
-              return (
-                <Dashboard
-                  data={this.state}
-                  {...props}
-                  renderModalDelete={this.renderModalDelete}
-                  renderModalEdit={this.renderModalEdit}
-                />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/dashboard/pessoas"
-            render={props => {
-              return (
-                <Pessoas
-                  {...props}
-                  oneGroup={this.state.selectedGroup}
-                  renderModalDelete={this.renderModalDelete}
-                  addMember={this.addMember}
-                  removeMember={this.removeMember}
-                />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/dashboard/despesas"
-            render={props => {
-              return (
-                <Despesas
-                  {...props}
-                  oneGroup={this.state.selectedGroup}
-                  renderModalDelete={this.renderModalDelete}
-                  addExpense={this.addExpense}
-                  removeExpense={this.removeExpense}
-                />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/dashboard/acertos"
-            render={props => {
-              return (
-                <Acertos
-                  {...props}
-                  oneGroup={this.state.selectedGroup}
-                  renderModalDelete={this.renderModalDelete}
-                  addSettle={this.addSettle}
-                  removeSettle={this.removeSettle}
-                />
-              );
-            }}
-          />
-
-{/* ROTAS P/ RELATÓRIOS */}
-          <Route
-            exact
-            path="/reports"
-            render={props => {
-              return <Reports data={this.state} {...props} />;
-            }}
-          />  
-            
-        </Switch>
+        <Navbar 
+        userInSession={this.state.user} 
+        getUser={this.getUser} 
+        authed={this.state.isAuth}
+        groups={this.state.groups} 
+        addGroup={this.addGroup}
+        />
+        {this.state.isAuth ? (
+          <Switch>
+            {/* <PrivateRoute
+              exact
+              path="/oi"
+              authed={this.state.isAuth}
+              fetchGroups={this.fetchGroups}
+              component={Dashboard}
+            /> */}
+            <Route
+              exact
+              path="/login"
+              render={(props) => {
+                return <Login getUser={this.getUser} {...props} />;
+              }}
+            />
+            <Route
+              exact
+              path="/signup"
+              render={(props) => {
+                return <Signup getUser={this.getUser} {...props} />;
+              }}
+            />
+            <Route
+              exact
+              path="/"
+              render={() => <Index getUser={this.getUser} />}
+            />
+            <Route
+              exact
+              path="/dashboard"
+              render={(props) => {
+                return (
+                  <Dashboard
+                    data={this.state}
+                    {...props}
+                    renderModalDelete={this.renderModalDelete}
+                    renderModalEdit={this.renderModalEdit}
+                  />
+                );
+              }}
+            />
+            <Route
+              exact
+              path="/dashboard/pessoas"
+              render={(props) => {
+                return (
+                  <Pessoas
+                    {...props}
+                    oneGroup={this.state.selectedGroup}
+                    renderModalDelete={this.renderModalDelete}
+                    addMember={this.addMember}
+                  />
+                );
+              }}
+            />
+            <Route
+              exact
+              path="/dashboard/despesas"
+              render={(props) => {
+                return (
+                  <Despesas
+                    {...props}
+                    oneGroup={this.state.selectedGroup}
+                    renderModalDelete={this.renderModalDelete}
+                    addExpense={this.addExpense}
+                  />
+                );
+              }}
+            />
+            <Route
+              exact
+              path="/dashboard/acertos"
+              render={(props) => {
+                return (
+                  <Acertos
+                    {...props}
+                    oneGroup={this.state.selectedGroup}
+                    renderModalDelete={this.renderModalDelete}
+                    addSettle={this.addSettle}
+                  />
+                );
+              }}
+            />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route
+              exact
+              path="/login"
+              user={this.state.user}
+              render={(props) => <Login getUser={this.getUser} {...props} />}
+            />
+            <Route
+              exact
+              path="/signup"
+              user={this.state.user}
+              render={(props) => <Signup getUser={this.getUser} {...props} />}
+            />
+            <Route
+              exact
+              path="/"
+              user={this.state.user}
+              render={(props) => <Index getUser={this.getUser} {...props} />}
+            />
+            <Route
+              exact
+              path="/reports"
+              render={(props) => {
+                return <Reports data={this.state} {...props} />;
+              }}
+            />
+          </Switch>
+        )}
       </div>
     );
   }

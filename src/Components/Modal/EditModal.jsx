@@ -8,9 +8,9 @@ class EditModal extends Component {
       element: this.props.element,
       editGroup: this.props.editGroup, //(idOfGroupToRemove, info)
       newInfoGroup: {
-        groupName: "",
-        description: "",
-        data: ""
+        groupName: this.props.element.groupName,
+        description: this.props.element.description,
+        date: this.props.element.date,
       }
     };
     this.handleChange=this.handleChange.bind(this);
@@ -52,15 +52,15 @@ class EditModal extends Component {
                 <label htmlFor="groupName" className="col-form-label">
                   Nome do grupo:
                 </label>
-                <input onChange={this.handleChange} type="text" className="form-control" id="groupName" name="groupName" />
+                <input onChange={this.handleChange} type="text" value={this.state.newInfoGroup.groupName} className="form-control" id="groupName" name="groupName" />
                 <label htmlFor="description" className="col-form-label">
                   Descrição:
                 </label>
-                <input onChange={this.handleChange} type="text" className="form-control" id="description" name="description" />
-                <label htmlFor="data" className="col-form-label">
+                <input onChange={this.handleChange} type="text" value={this.state.newInfoGroup.description} className="form-control" id="description" name="description" />
+                <label htmlFor="date" className="col-form-label">
                   Data do evento:
                 </label>
-                <input onChange={this.handleChange} type="date" className="form-control" id="data" name="data"/>
+                <input onChange={this.handleChange} type="date" value={this.state.newInfoGroup.date} className="form-control" id="date" name="date"/>
               </div>
             </form>
           </div>
@@ -86,7 +86,7 @@ class EditModal extends Component {
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Deseja realmente remover?</h5>
+                <h5 className="modal-title">Insira os dados para editar</h5>
                 <button
                   type="button"
                   className="close"

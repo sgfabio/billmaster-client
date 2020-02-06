@@ -10,13 +10,12 @@ class Dashboard extends Component {
     this.state = {
       userGroups: this.props.data.groups,
       renderModalDelete: this.props.renderModalDelete,
-      renderModalEdit: this.props.renderModalEdit
+      renderModalEdit: this.props.renderModalEdit,
     };
   }
   render() {
     return (
       <>
-        <Navbar />
         <h1>OLHA ESSE H1</h1>
         <article>Estes são os seus grupos:</article>
         <br />
