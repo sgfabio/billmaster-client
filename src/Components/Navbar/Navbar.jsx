@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Navbar.css';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Navbar.css";
 
-import { auth } from '../../util/api';
+import { auth } from "../../util/api";
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -11,7 +11,31 @@ export default class Navbar extends Component {
     this.state = {
       user: null,
       isAuth: false,
+      groups: this.props.groups,
+      addGroup: this.props.addGroup,
+      newInfoGroup: {
+        groupName: "",
+        description: "",
+        date: ""
+      }
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmitNewGroup = this.handleSubmitNewGroup.bind(this);
+  }
+  handleChange = event => {
+    const newInfoGroup = { ...this.state.newInfoGroup };
+    const { name, value } = event.target;
+    newInfoGroup[name] = value;
+
+    this.setState({ newInfoGroup: newInfoGroup });
+  };
+  handleSubmitNewGroup = (event) => {
+    event.preventDefault();
+    const {newInfoGroup} = this.state;
+    newInfoGroup = this.state.newInfoGroup;
+
+
+    this.props.addGroup(newInfoGroup);
   }
 
   componentDidUpdate(prevProps) {
@@ -26,7 +50,7 @@ export default class Navbar extends Component {
       // Eu não poderia só atualizar o state do app?
       this.setState({
         user: null,
-        isAuth: false,
+        isAuth: false
       });
       this.props.getUser(null);
     } catch (error) {
@@ -35,7 +59,7 @@ export default class Navbar extends Component {
   }
 
   render() {
-    console.log('isAuth?', this.state.isAuth);
+    console.log("isAuth?", this.state.isAuth);
     return (
       <div>
         {this.state.isAuth ? (
@@ -60,12 +84,13 @@ export default class Navbar extends Component {
                     Criar Grupo
                   </button>
                   <hr className="py-0 my-1" />
-                  <button className="dropdown-item px-0" type="button">
-                    GRUPO-01
+                  {this.state.groups.map(e=> {
+                    return(
+                    <button className="dropdown-item px-1" type="button">
+                    {e.groupName}
                   </button>
-                  <button className="dropdown-item px-0" type="button">
-                    GRUPO-02
-                  </button>
+                    )
+                  })}
                 </div>
               </div>
 
@@ -95,7 +120,7 @@ export default class Navbar extends Component {
                 className="modal-dialog modal-dialog-centered"
                 role="document"
               >
-                <div className="modal-content">
+                <form className="modal-content">
                   <div className="modal-header">
                     <h5 className="modal-title">NOVO GRUPO</h5>
                     <button
@@ -109,34 +134,43 @@ export default class Navbar extends Component {
                   </div>
 
                   <div className="modal-body">
-                    <form>
+                    <div>
                       <div className="form-group text-left ">
-                        <label htmlFor="recipient" className="col-form-label">
+                        <label htmlFor="groupName" className="col-form-label">
                           Nome do grupo:
                         </label>
                         <input
+                          onChange={this.handleChange}
                           type="text"
+                          value={this.state.newInfoGroup.groupName}
                           className="form-control"
-                          id="recipient"
+                          id="groupName"
+                          name="groupName"
                         />
-                        <label htmlFor="recipient" className="col-form-label">
+                        <label htmlFor="description" className="col-form-label">
                           Descrição:
                         </label>
                         <input
+                          onChange={this.handleChange}
                           type="text"
+                          value={this.state.newInfoGroup.description}
                           className="form-control"
-                          id="recipient"
+                          id="description"
+                          name="description"
                         />
-                        <label htmlFor="recipient" className="col-form-label">
+                        <label htmlFor="date" className="col-form-label">
                           Data do evento:
                         </label>
                         <input
+                          onChange={this.handleChange}
                           type="date"
+                          value={this.state.newInfoGroup.date}
                           className="form-control"
-                          id="recipient"
+                          id="date"
+                          name="date"
                         />
                       </div>
-                    </form>
+                    </div>
                   </div>
 
                   <div className="modal-footer">
@@ -147,11 +181,11 @@ export default class Navbar extends Component {
                     >
                       Cancelar
                     </button>
-                    <button type="button" className="btn btn-primary">
+                    <button onClick={this.handleSubmitNewGroup} type="submit" className="btn btn-primary">
                       CRIAR
                     </button>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
 
@@ -186,8 +220,8 @@ export default class Navbar extends Component {
                     <form>
                       <div className="form-group">
                         <label htmlFor="recipient" className="col-form-label">
-                          {' '}
-                          SAD IMAGE{' '}
+                          {" "}
+                          SAD IMAGE{" "}
                         </label>
                       </div>
                     </form>
@@ -199,12 +233,12 @@ export default class Navbar extends Component {
                       className="btn btn-secondary"
                       data-dismiss="modal"
                     >
-                      {' '}
-                      Cancelar{' '}
+                      {" "}
+                      Cancelar{" "}
                     </button>
                     <button type="button" className="btn btn-danger">
-                      {' '}
-                      Sair{' '}
+                      {" "}
+                      Sair{" "}
                     </button>
                   </div>
                 </div>

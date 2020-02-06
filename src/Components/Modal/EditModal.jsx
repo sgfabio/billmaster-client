@@ -56,11 +56,11 @@ class EditModal extends Component {
                 <label htmlFor="description" className="col-form-label">
                   Descrição:
                 </label>
-                <input onChange={this.handleChange} type="text" value={this.state.element.description} className="form-control" id="description" name="description" />
+                <input onChange={this.handleChange} type="text" value={this.state.newInfoGroup.description} className="form-control" id="description" name="description" />
                 <label htmlFor="date" className="col-form-label">
                   Data do evento:
                 </label>
-                <input onChange={this.handleChange} type="date" value={this.state.element.date} className="form-control" id="date" name="date"/>
+                <input onChange={this.handleChange} type="date" value={this.state.newInfoGroup.date} className="form-control" id="date" name="date"/>
               </div>
             </form>
           </div>
