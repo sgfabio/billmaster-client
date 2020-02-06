@@ -7,7 +7,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { auth } from '../../util/api';
 import { groups } from '../../util/api';
 // Components
-import Index from '../Index/Index';
+import Index from '../Index/Index'; // isso precisa morrer
+import Navbar from '../Navbar/Navbar';
 
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
@@ -93,7 +94,7 @@ class App extends Component {
   }
 
   async fetchUser() {
-    if (this.state.isAuth) {
+    if (this.state.isAuth === false) {
       try {
         const loggedInUser = await auth.isAuth();
         this.setState({
@@ -103,11 +104,27 @@ class App extends Component {
       } catch (error) {
         console.log(error);
         this.setState({
+          user: null,
           isAuth: false,
         });
       }
     }
   }
+
+  getUser(userObj) {
+    if (userObj === null) {
+      this.setState({
+        user: null,
+        isAuth: false,
+      });
+    } else {
+      this.setState({
+        user: userObj,
+        isAuth: true,
+      });
+    }
+  }
+
   // não testado
   async fetchGroups() {
     try {
@@ -124,13 +141,6 @@ class App extends Component {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  getUser(userObj) {
-    this.setState({
-      user: userObj,
-      isAuth: true,
-    });
   }
 
   createGroup(newGroup) {
@@ -180,88 +190,107 @@ class App extends Component {
   };
   // <Route path="*" render={() => <Redirect to="/login" />} />
 
+  // TODO: por que a navbar receber getUser?
   render() {
-    // TODO: essa primeira private route é um exemplo. Dashboard recebe element!
+    this.fetchUser();
     return (
       <div className="App">
-        <Switch>
-        {/* teste */}
-          <PrivateRoute
-            exact
-            path="/oi"
-            authed={this.state.isAuth}
-            fetchGroups={this.fetchGroups}
-            component={Dashboard}
-          />
-          <Route
-            exact
-            path="/login"
-            render={(props) => {
-              return <Login getUser={this.getUser} {...props} />;
-            }}
-          />
-          <Route
-            exact
-            path="/signup"
-            render={(props) => {
-              return <Signup getUser={this.getUser} {...props} />;
-            }}
-          />
-          <Route
-            exact
-            path="/"
-            render={() => <Index getUser={this.getUser} />}
-          />
-          <Route
-            exact
-            path="/dashboard"
-            render={(props) => {
-              return <Dashboard data={this.state} {...props} />;
-            }}
-          />
-          <Route
-            exact
-            path="/dashboard/pessoas"
-            render={(props) => {
-              return (
-                <Pessoas
-                  {...props}
-                  oneGroup={this.state.selectedGroup}
-                  renderModalDelete={this.renderModalDelete}
-                  addMember={this.addMember}
-                />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/dashboard/despesas"
-            render={(props) => {
-              return (
-                <Despesas
-                  {...props}
-                  oneGroup={this.state.selectedGroup}
-                  renderModalDelete={this.renderModalDelete}
-                  addExpense={this.addExpense}
-                />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/dashboard/acertos"
-            render={(props) => {
-              return (
-                <Acertos
-                  {...props}
-                  oneGroup={this.state.selectedGroup}
-                  renderModalDelete={this.renderModalDelete}
-                  addSettle={this.addSettle}
-                />
-              );
-            }}
-          />
-        </Switch>
+        <Navbar userInSession={this.state.user} getUser={this.getUser} />
+        {this.state.isAuth ? (
+          <Switch>
+            {/* teste */}
+            <PrivateRoute
+              exact
+              path="/oi"
+              authed={this.state.isAuth}
+              fetchGroups={this.fetchGroups}
+              component={Dashboard}
+            />
+            <Route
+              exact
+              path="/login"
+              render={(props) => {
+                return <Login getUser={this.getUser} {...props} />;
+              }}
+            />
+            <Route
+              exact
+              path="/signup"
+              render={(props) => {
+                return <Signup getUser={this.getUser} {...props} />;
+              }}
+            />
+            <Route
+              exact
+              path="/"
+              render={() => <Index getUser={this.getUser} />}
+            />
+            <Route
+              exact
+              path="/dashboard"
+              render={(props) => {
+                return <Dashboard data={this.state} {...props} />;
+              }}
+            />
+            <Route
+              exact
+              path="/dashboard/pessoas"
+              render={(props) => {
+                return (
+                  <Pessoas
+                    {...props}
+                    oneGroup={this.state.selectedGroup}
+                    renderModalDelete={this.renderModalDelete}
+                    addMember={this.addMember}
+                  />
+                );
+              }}
+            />
+            <Route
+              exact
+              path="/dashboard/despesas"
+              render={(props) => {
+                return (
+                  <Despesas
+                    {...props}
+                    oneGroup={this.state.selectedGroup}
+                    renderModalDelete={this.renderModalDelete}
+                    addExpense={this.addExpense}
+                  />
+                );
+              }}
+            />
+            <Route
+              exact
+              path="/dashboard/acertos"
+              render={(props) => {
+                return (
+                  <Acertos
+                    {...props}
+                    oneGroup={this.state.selectedGroup}
+                    renderModalDelete={this.renderModalDelete}
+                    addSettle={this.addSettle}
+                  />
+                );
+              }}
+            />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route
+              exact
+              path="/signup"
+              user={this.state.user}
+              render={(props) => <Signup getUser={this.getUser} {...props} />}
+            />
+            <Route
+              exact
+              path="/"
+              user={this.state.user}
+              render={(props) => <Login getUser={this.getUser} {...props} />}
+            />
+          </Switch>
+        )}
       </div>
     );
   }
