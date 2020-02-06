@@ -41,7 +41,7 @@ class DashPessoas extends Component {
     console.log(this.props)
     return (
       <>
-        <DashNavbar />
+        <DashNavbar description={this.state.selectedGroup.description} groupName={this.state.selectedGroup.groupName} />
         <div className="dashMainContent mx-4">
           <h2>Adicionar pessoa:</h2>
           <form onSubmit={this.handleSubmit} className="dashAddBills d-flex justify-content-between align-items-end flex-wrap">

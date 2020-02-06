@@ -16,8 +16,9 @@ class DashNavbar extends Component {
     return(
 
       <>
-        <Navbar />
-    <h2>Grupo: {this.props.groupName}</h2>    {console.log(this.props.groupName)}
+    <h1>Grupo: {this.props.groupName}
+    <h5>{this.props.description}</h5>
+    </h1>
       
         <div className="dashContent row py-0 my-2">
           <div

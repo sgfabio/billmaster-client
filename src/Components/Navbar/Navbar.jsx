@@ -89,9 +89,9 @@ export default class Navbar extends Component {
                   <hr className="py-0 my-1" />
                   {this.state.groups.map(e=> {
                     return(
-                    <button className="dropdown-item px-1" type="button">
+                    <Link to={`/groups/${e._id}`} className="dropdown-item px-1" type="button">
                     {e.groupName}
-                  </button>
+                  </Link>
                     )
                   })}
                 </div>

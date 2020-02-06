@@ -112,7 +112,7 @@ class DashDespesas extends Component {
   render() {
     return (
       <>
-        <DashNavbar />
+        <DashNavbar description={this.state.group.description} groupName={this.state.group.groupName} />
 
         <div className="dashMainContent mx-2 p-0">
           {/* <!-- Add bills --> */}

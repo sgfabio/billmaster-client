@@ -55,7 +55,7 @@ class DashAcertos extends Component {
   render() {
     return (
       <>
-        <DashNavbar />
+        <DashNavbar description={this.state.group.description} groupName={this.state.group.groupName} />
         
         <div className="dashMainContent">
           {/* <!-- Add Settle --> */}
