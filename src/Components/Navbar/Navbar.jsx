@@ -21,6 +21,7 @@ export default class Navbar extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmitNewGroup = this.handleSubmitNewGroup.bind(this);
+    this.logout = this.logout.bind(this);
   }
   handleChange = event => {
     const newInfoGroup = { ...this.state.newInfoGroup };
@@ -40,7 +41,10 @@ export default class Navbar extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.userInSession !== prevProps.userInSession) {
-      this.setState({ user: this.props.userInSession, isAuth: true });
+      this.setState({
+        user: this.props.userInSession,
+        isAuth: this.props.authed,
+      });
     }
   }
 
@@ -59,7 +63,6 @@ export default class Navbar extends Component {
   }
 
   render() {
-    console.log("isAuth?", this.state.isAuth);
     return (
       <div>
         {this.state.isAuth ? (
@@ -95,14 +98,13 @@ export default class Navbar extends Component {
               </div>
 
               <div>
-                <button
-                  type="button"
+                <Link
                   className="btn btn-outline-dark"
-                  data-toggle="modal"
-                  data-target="#logoutButton"
+                  to="/"
+                  onClick={this.logout}
                 >
                   Sair
-                </button>
+                </Link>
               </div>
             </nav>
 
@@ -188,62 +190,6 @@ export default class Navbar extends Component {
                 </form>
               </div>
             </div>
-
-            {/* // CONFIRM LOGOUT MODAL */}
-
-            <div
-              className="modal fade"
-              id="logoutButton"
-              tabIndex="-1"
-              role="dialog"
-              aria-labelledby="exampleModalCenterTitle"
-              aria-hidden="true"
-            >
-              <div
-                className="modal-dialog modal-dialog-centered"
-                role="document"
-              >
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title">Deseja realmente sair?</h5>
-                    <button
-                      type="button"
-                      className="close"
-                      data-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-
-                  <div className="modal-body">
-                    <form>
-                      <div className="form-group">
-                        <label htmlFor="recipient" className="col-form-label">
-                          {" "}
-                          SAD IMAGE{" "}
-                        </label>
-                      </div>
-                    </form>
-                  </div>
-
-                  <div className="modal-footer">
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      data-dismiss="modal"
-                    >
-                      {" "}
-                      Cancelar{" "}
-                    </button>
-                    <button type="button" className="btn btn-danger">
-                      {" "}
-                      Sair{" "}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
           </>
         ) : (
           <nav className="navbar navbar-light bg-yellow justify-content-between">
@@ -254,23 +200,12 @@ export default class Navbar extends Component {
               </Link>
             </div>
             <div>
-              {/* <!-- Modal Triggers --> */}
-              <button
-                type="button"
-                className="btn btn-outline-dark mr-3"
-                data-toggle="modal"
-                data-target="#loginbutton"
-              >
+              <Link className="btn btn-outline-dark mr-3" to="/login">
                 Entre
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-dark"
-                data-toggle="modal"
-                data-target="#signupbutton"
-              >
+              </Link>
+              <Link className="btn btn-outline-dark" to="/signup">
                 Cadastre-se
-              </button>
+              </Link>
             </div>
           </nav>
         )}

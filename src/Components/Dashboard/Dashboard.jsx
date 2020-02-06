@@ -16,7 +16,6 @@ class Dashboard extends Component {
   render() {
     return (
       <>
-        <Navbar />
         <h1>OLHA ESSE H1</h1>
         <article>Estes são os seus grupos:</article>
         <br />
