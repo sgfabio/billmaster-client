@@ -380,7 +380,7 @@ class App extends Component {
               render={(props) => {
                 return <Reports data={this.state} {...props} />;
               }}
-<<<<<<< HEAD
+
               />
               <PrivateRoute
                 exact
@@ -390,7 +390,7 @@ class App extends Component {
                 data={this.state}
               />
             </Switch>
-=======
+
             />
             <PrivateRoute
               exact
@@ -400,7 +400,7 @@ class App extends Component {
               data={this.state}
             />
           </Switch>
->>>>>>> 1d52c839c202b5126f335abb4c60855026d4d271
+
         )}
       </div>
     );
