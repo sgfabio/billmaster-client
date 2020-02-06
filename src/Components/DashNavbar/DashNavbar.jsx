@@ -3,43 +3,56 @@ import { Link, NavLink } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
-const DashNavbar = props => {
-  return (
-    <>
-      <Navbar />
-      <div className="dashContent row py-0 my-2">
-        <div
-          className="btn-group btn-group-toggle mx-auto my-0"
-          data-toggle="buttons"
-        >
-          <NavLink
-            to="/dashboard/pessoas"
-            className="btn btn-outline-dark btn-yellow-dashboard"
-          >
-            <input type="radio" name="options" id="dashPessoas" />
-            Pessoas
-          </NavLink>
+class DashNavbar extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      ID: this.props.ID,
+      groupName: this.props.groupName,
+      description: this.props.description
+    }
+  }
+  render(){
+    return(
 
-          <NavLink
-            to="/dashboard/despesas"
-            className="btn btn-outline-dark btn-yellow-dashboard"
+      <>
+        <Navbar />
+    <h2>Grupo: {this.props.groupName}</h2>    {console.log(this.props.groupName)}
+      
+        <div className="dashContent row py-0 my-2">
+          <div
+            className="btn-group btn-group-toggle mx-auto my-0"
+            data-toggle="buttons"
           >
-            <input type="radio" name="options" id="dashDespesas" />
-            Despesas
-          </NavLink>
-
-          <NavLink
-            to="/dashboard/acertos"
-            className="btn btn-outline-dark btn-yellow-dashboard"
-          >
-            <input type="radio" name="options" id="dashAcertos" />
-            Acertos
-          </NavLink>
+            <NavLink
+              to="/dashboard/pessoas"
+              className="btn btn-outline-dark btn-yellow-dashboard"
+            >
+              <input type="radio" name="options" id="dashPessoas" />
+              Pessoas
+            </NavLink>
+  
+            <NavLink
+              to="/dashboard/despesas"
+              className="btn btn-outline-dark btn-yellow-dashboard"
+            >
+              <input type="radio" name="options" id="dashDespesas" />
+              Despesas
+            </NavLink>
+  
+            <NavLink
+              to="/dashboard/acertos"
+              className="btn btn-outline-dark btn-yellow-dashboard"
+            >
+              <input type="radio" name="options" id="dashAcertos" />
+              Acertos
+            </NavLink>
+          </div>
         </div>
-      </div>
-      <hr className="my-2" />
-    </>
-  );
-};
+        <hr className="my-2" />
+      </>
+    );
+  };
+}
 
 export default DashNavbar;
