@@ -1,130 +1,76 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
+import {groups} from '../../util/api'       // Groups component from API service 
+
+class ReportsBills extends Component {
+    constructor(props){
+        super(props);
+        this.state = {message:'', groupAllExpenses: []};
+
+    }
+
+    componentDidMount() {
+        groups.getBills(this.props.groupId) //props do Id do grupo; 
+        .then(qryObj => {
+            console.log('componentDidMount',qryObj);
+            this.setState({msg: qryObj.data.msg, groupAllExpenses:qryObj.data.queryResult}, () => console.log(this.state) )
+
+        })
+        .catch(error => console.log('erro ReportBills', error))
+
+    }
 
 
+    render(){
+                
+        if (this.state.groupAllExpenses) {//Conditional return 
+            return(
+            <div>
+         
+                <p>
+                    Todos os gastos do grupo:
+                </p>
+                
+                <div className="resultTable">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Integrante</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            
+                            {/* Map que recebe os registros da API e cria uma row de tabela - vide exemplo abaixo */}
+                            {this.state.groupAllExpenses.map((qry, idx) => {
+                                return (
+                                    <tr key={idx} >    
+                                        <td>{qry.split.paidBy}</td>
+                                        <td>{qry.description}</td>
+                                        <td>{qry.value}</td>
+                                    </tr>
+                                )
+                            })}
+    
+                        </tbody>
+                    </table>
+                </div>
+                <br/>
+                <hr/>
+                <br/>
+            
+                
+            </div>
+            )
+        } else { //Conditional return FALSE
+            return(
+                <div>
+                    <h1>Carregando...</h1>
+                </div>
+            )
+        }
+    }
+}
 
-const ReportsBills = props => {
-  return (
-<div>
-    {/* Navbar */}
-    <nav className="navbar navbar-light bg-yellow justify-content-between">
-        <div>
-            <Link
-            className="navbar-brand" to="/"><strong>BANANA</strong><em>SPLIT</em></Link>
-        </div>
-        <div>
-            <Link to="/">
-                <button type="button" className="btn btn-outline-secondary mr-3" data-toggle="modal" data-target="#loginbutton">
-                    Início
-                </button>
-            </Link>
-        </div>
-    </nav>
-
-{/* Navegação */}
-    <div className="dashContent row py-0 my-2">
-        <div
-        className="btn-group btn-group-toggle mx-auto my-0"
-        data-toggle="buttons"
-        >
-        <NavLink
-            to="/reports/bills"
-            className="btn btn-outline-secondary btn-yellow-dashboard"
-        >
-            <input type="radio" name="options" id="reportsBills" />
-            Contas
-        </NavLink>
-
-        <NavLink
-            to="/reports/summary"
-            className="btn btn-outline-secondary btn-yellow-dashboard"
-        >
-            <input type="radio" name="options" id="reportsSummary" />
-            Resumo
-        </NavLink>
-
-        <NavLink
-            to="/reports/settle"
-            className="btn btn-outline-secondary btn-yellow-dashboard"
-        >
-            <input type="radio" name="options" id="reportsSettle" />
-            Acertos
-        </NavLink>
-        </div>
-    </div>
-    <hr className="my-2" />
-
-
-    <p>
-        Resumo dos gastos do grupo
-    </p>
-        
-
-    <div class="resultTable">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Integrante</th>
-                    <th scope="col">Título</th>
-                    <th scope="col">Valor</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Alison</td>
-                    <td>Pipoca</td>
-                    <td>R$20,00</td>
-                </tr>
-                <tr>
-                    <td>Leonardo</td>
-                    <td>Starbucks</td>
-                    <td>R$35,00</td>
-                </tr>
-                <tr>
-                    <td>Fábio</td>
-                    <td>Vinho</td>
-                    <td>R$90,00</td>
-                </tr>
-                <tr>
-                    <td>Leonardo</td>
-                    <td>Carne p/ churrasco</td>
-                    <td>R$240,00</td>
-                </tr>
-                <tr>
-                    <td>Alison</td>
-                    <td>Pipoca</td>
-                    <td>R$20,00</td>
-                </tr>
-                <tr>
-                    <td>Leonardo</td>
-                    <td>Starbucks</td>
-                    <td>R$35,00</td>
-                </tr>
-                <tr>
-                    <td>Fábio</td>
-                    <td>Vinho</td>
-                    <td>R$90,00</td>
-                </tr>
-                <tr>
-                    <td>Leonardo</td>
-                    <td>Carne p/ churrasco</td>
-                    <td>R$240,00</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <br/>
-    <hr/>
-    <br/>
-
-    <p>
-        <Link class="" data-toggle="collapse" to="/" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Crie seu próprio grupo!
-        </Link>
-    </p>
-</div>
-);
-};
-
-
-export default ReportsBills;
+export default ReportsBills

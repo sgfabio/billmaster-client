@@ -7,8 +7,6 @@ class ReportsSummary extends Component {
         super(props);
         this.state = {msg:'', balances: []};
 
-        //BINDS
-
     }
 
     componentDidMount() {
@@ -30,19 +28,18 @@ class ReportsSummary extends Component {
             <div>
          
                 <p>
-                    Resumo dos gastos por participante
+                    Resumo de contas por participante:
                 </p>
                 
-            
                 <div className="resultTable">
                     <table className="table">
                         <thead>
                             <tr>
                                 <th scope="col">Integrante</th>
                                 <th scope="col">Gastou</th>
+                                <th scope="col">Consumiu</th>
                                 <th scope="col">Pagou</th>
                                 <th scope="col">Recebeu</th>
-                                <th scope="col">Rateio</th>
                                 <th scope="col">Saldo</th>
                             </tr>
                         </thead>
@@ -54,9 +51,9 @@ class ReportsSummary extends Component {
                                     <tr key={idx} >    
                                         <td>{qry.member}</td>
                                         <td>{qry.expensePaid}</td>
+                                        <td>{qry.share}</td>
                                         <td>{qry.settlePaid}</td>
                                         <td>{qry.settleReceived}</td>
-                                        <td>{qry.share}</td>
                                         <td>{qry.balance}</td>
                                     </tr>
                                 )
@@ -69,11 +66,7 @@ class ReportsSummary extends Component {
                 <hr/>
                 <br/>
             
-                <p>
-                    <a className="" data-toggle="collapse" href="/" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        Crie seu próprio grupo!
-                    </a>
-                </p>
+             
             </div>
             )
         } else { //Conditional return FALSE
@@ -83,7 +76,7 @@ class ReportsSummary extends Component {
                 </div>
             )
         }
-    }//render()
-}//ReportsSummary
+    }
+}
 
 export default ReportsSummary
