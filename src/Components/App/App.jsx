@@ -253,17 +253,20 @@ class App extends Component {
     this.fetchUser();
     return (
       <div className="App">
-        <Navbar userInSession={this.state.user} getUser={this.getUser} />
+        <Navbar
+          userInSession={this.state.user}
+          getUser={this.getUser}
+          authed={this.state.isAuth}
+        />
         {this.state.isAuth ? (
           <Switch>
-            {/* teste */}
-            <PrivateRoute
+            {/* <PrivateRoute
               exact
               path="/oi"
               authed={this.state.isAuth}
               fetchGroups={this.fetchGroups}
               component={Dashboard}
-            />
+            /> */}
             <Route
               exact
               path="/login"
@@ -287,11 +290,14 @@ class App extends Component {
               exact
               path="/dashboard"
               render={(props) => {
-                return <Dashboard data={this.state} {...props} 
-                renderModalDelete={this.renderModalDelete}
-                renderModalEdit={this.renderModalEdit}
-
-                />;
+                return (
+                  <Dashboard
+                    data={this.state}
+                    {...props}
+                    renderModalDelete={this.renderModalDelete}
+                    renderModalEdit={this.renderModalEdit}
+                  />
+                );
               }}
             />
             <Route
@@ -341,6 +347,12 @@ class App extends Component {
           <Switch>
             <Route
               exact
+              path="/login"
+              user={this.state.user}
+              render={(props) => <Login getUser={this.getUser} {...props} />}
+            />
+            <Route
+              exact
               path="/signup"
               user={this.state.user}
               render={(props) => <Signup getUser={this.getUser} {...props} />}
@@ -349,9 +361,8 @@ class App extends Component {
               exact
               path="/"
               user={this.state.user}
-              render={(props) => <Login getUser={this.getUser} {...props} />}
+              render={(props) => <Index getUser={this.getUser} {...props} />}
             />
-            {/* ROTAS P/ RELATÓRIOS */}
             <Route
               exact
               path="/reports"
