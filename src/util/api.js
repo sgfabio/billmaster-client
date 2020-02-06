@@ -52,42 +52,6 @@ export const auth = {
 export const groups = {
   endpoint: process.env.REACT_APP_API, // 'http://localhost:5000/api', //Dev
 
-  //GROUPS
-  /* Example:
-
-      {
-          "members": [
-              "Batman",
-              "Superman",
-              "Aquaman"
-          ],
-          "expenses": [
-              {
-                  "split": {
-                      "dividedBy": [
-                          "WonderWoman",
-                          "Batman",
-                          "The Flash",
-                          "Superman"
-                      ],
-                      "paidBy": "WonderWoman"
-                  },
-                  "_id": "5e39b2d2d92dfc45cc87130c",
-                  "owner": "5e39a5dcd92dfc45cc871308",
-                  "description": "picanha ouro",
-                  "value": 20,
-                  "__v": 0
-              }
-          ],
-          "settles": [],
-          "_id": "5e39a5dcd92dfc45cc871308",
-          "owner": "5e31ed37505e1f56b4ef102b",
-          "groupName": "grupo A",
-          "description": "lala",
-          "date": "2020-02-01T00:00:00.000Z",
-          "__v": 0
-      }
-    */
   create(groupName, description, date) {
     // User must be logged in
     return axios.post(
@@ -101,12 +65,20 @@ export const groups = {
     );
   },
 
-  getAll() {
-    return axios.get(
-      // User must be logged in
-      `${this.endpoint}/grupos`,
-      { withCredentials: true }
-    );
+  // não testado
+  async getAll() {
+    try {
+      const response = await axios.get(
+        // User must be logged in
+        `${this.endpoint}/grupos`,
+        { withCredentials: true }
+      );
+      const { data, status } = response;
+      return { data, status };
+    } catch (error) {
+      const { data, status } = error.response;
+      return { data, status };
+    }
   },
 
   getOne(groupId) {
