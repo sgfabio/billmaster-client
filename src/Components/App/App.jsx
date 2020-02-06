@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Switch, Route, Link, Redirect } from "react-router-dom";
 
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import { auth } from "../../util/api";
-
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { auth } from '../../util/api';
+import { groups } from '../../util/api';
 // Components
 import Index from "../Index/Index";
 
@@ -88,7 +88,8 @@ class App extends Component {
     this.addExpense = this.addExpense.bind(this);
     this.addSettle = this.addSettle.bind(this);
     this.renderModalDelete = this.renderModalDelete.bind(this);
-    this.getUser = this.getUser.bind(this); // BIND do Método que guarda o usuário logado no estado *
+    this.getUser = this.getUser.bind(this);
+    this.fetchGroups = this.fetchGroups.bind(this);
   }
 
   async fetchUser() {
@@ -107,6 +108,24 @@ class App extends Component {
       }
     }
   }
+  // não testado
+  async fetchGroups() {
+    try {
+      const response = await groups.getAll();
+      const { status, data } = response;
+      console.log('data para os grupos:', data);
+      if (status !== 200) {
+        console.log('Erro api', data);
+      } else {
+        this.setState({
+          groups: data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   getUser(userObj) {
     this.setState({
       user: userObj,
@@ -211,17 +230,15 @@ class App extends Component {
 
   render() {
     // TODO: essa primeira private route é um exemplo. Dashboard recebe element!
-    const element = {
-      _id: 123456
-    };
     return (
       <div className="App">
         <Switch>
+        {/* teste */}
           <PrivateRoute
             exact
             path="/oi"
             authed={this.state.isAuth}
-            element={element}
+            fetchGroups={this.fetchGroups}
             component={Dashboard}
           />
           <Route
