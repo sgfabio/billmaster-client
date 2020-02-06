@@ -166,6 +166,13 @@ class App extends Component {
           console.log('ESSA SAO AS INFORMAÇÕES DO GRUPO PARA EDITAR', newInfo);
         })
       }
+      editExpense={
+        this.editExpense = (idOfExpenseToRemove, newInfo) => {
+          console.log('ESSE É O ID DA DESPESA PARA EDITAR', idOfExpenseToRemove);
+          console.log('ESSA SAO AS INFORMAÇÕES DA DESPESA PARA EDITAR', newInfo);
+        }
+
+      }
     />
   );
   renderModalDelete = (midleText, element, thisPage) => (
@@ -319,6 +326,7 @@ class App extends Component {
                     {...props}
                     oneGroup={this.state.selectedGroup}
                     renderModalDelete={this.renderModalDelete}
+                    renderModalEdit={this.renderModalEdit}
                     addMember={this.addMember}
                   />
                 );
@@ -333,6 +341,7 @@ class App extends Component {
                     {...props}
                     oneGroup={this.state.selectedGroup}
                     renderModalDelete={this.renderModalDelete}
+                    renderModalEdit={this.renderModalEdit}
                     addExpense={this.addExpense}
                   />
                 );
