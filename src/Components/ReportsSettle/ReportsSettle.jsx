@@ -31,8 +31,8 @@ class ReportsSettle extends Component {
                     Pagamentos a serem realizados:
                 </p>
                 
-                <div className="resultTable">
-                    <table className="table">
+                <div className="resultTable table-responsive-md">
+                    <table className="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Integrante</th>
