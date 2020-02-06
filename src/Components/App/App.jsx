@@ -211,7 +211,7 @@ class App extends Component {
   );
 
   addGroup = (newGroup) => {
-    console.log("ESSAS SÃO AS INFORMAÇÕES DO NOVO GRUPO", newGroup)
+    console.log('ESSAS SÃO AS INFORMAÇÕES DO NOVO GRUPO', newGroup);
     // const groupCopy = { ...this.state.selectedGroup };
     // groupCopy.Groups.push(newGroup);
 
@@ -254,12 +254,12 @@ class App extends Component {
     this.fetchUser();
     return (
       <div className="App">
-        <Navbar 
-        userInSession={this.state.user} 
-        getUser={this.getUser} 
-        authed={this.state.isAuth}
-        groups={this.state.groups} 
-        addGroup={this.addGroup}
+        <Navbar
+          userInSession={this.state.user}
+          getUser={this.getUser}
+          authed={this.state.isAuth}
+          groups={this.state.groups}
+          addGroup={this.addGroup}
         />
         {this.state.isAuth ? (
           <Switch>
@@ -379,6 +379,13 @@ class App extends Component {
               render={(props) => {
                 return <Reports data={this.state} {...props} />;
               }}
+            />
+            <PrivateRoute
+              exact
+              path="/dashboard"
+              authed={this.state.isAuth}
+              component={Dashboard}
+              data={this.state}
             />
           </Switch>
         )}
