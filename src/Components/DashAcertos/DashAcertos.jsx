@@ -71,9 +71,9 @@ class DashAcertos extends Component {
               >
                 <option value="">Selecione um nome</option>
                 {[...this.state.members]
-                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .sort((a, b) => a.localeCompare(b))
                   .map(member => {
-                    return <option value={member.name}>{member.name}</option>;
+                    return <option value={member}>{member}</option>;
                   })}
               </select>
             </div>
@@ -87,9 +87,9 @@ class DashAcertos extends Component {
               >
                 <option value="">Selecione um nome</option>
                 {[...this.state.members]
-                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .sort((a, b) => a.localeCompare(b))
                   .map(member => {
-                    return <option value={member.name}>{member.name}</option>;
+                    return <option value={member}>{member}</option>;
                   })}
               </select>
             </div>

@@ -7,14 +7,17 @@ class DeleteModal extends Component {
       midleText: this.props.midleText,
       element: this.props.element,
       member: this.props.element,
+      removeGroup:this.props.removeGroup,
       removeMember:this.props.removeMember,
       removeExpense:this.props.removeExpense,
       iAmInThisPage:this.props.iAmInThisPage,
     }
   }
   whatIsMyPage = (iAmInThisPage) => {
-    console.log("DELETEEEE")
     switch (iAmInThisPage) {
+      case "dashboard":
+        this.state.removeGroup(this.state.element)
+        break;
       case "member":
         this.state.removeMember(this.state.element)
         break;
@@ -24,7 +27,6 @@ class DeleteModal extends Component {
       case "settle":
         console.log("Error");
         break;
-        
       default:
           console.log("Delete mode is not defined");
         break;
