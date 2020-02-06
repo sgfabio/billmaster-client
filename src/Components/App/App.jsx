@@ -103,10 +103,10 @@ class App extends Component {
         });
       } catch (error) {
         console.log(error);
-        this.setState({
-          user: null,
-          isAuth: false,
-        });
+        // this.setState({
+        //   user: null,
+        //   isAuth: false,
+        // });
       }
     }
   }
@@ -190,7 +190,6 @@ class App extends Component {
   };
   // <Route path="*" render={() => <Redirect to="/login" />} />
 
-  // TODO: por que a navbar receber getUser?
   render() {
     this.fetchUser();
     return (
