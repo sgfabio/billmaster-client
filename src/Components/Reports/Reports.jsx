@@ -8,21 +8,6 @@ import ReportsBills from '../ReportsBills/ReportsBills';
 const Reports = props => {
     return(
         <div>
-        {/* Navbar */}
-            <nav className="navbar navbar-light bg-yellow justify-content-between">
-                <div>
-                    <Link
-                    className="navbar-brand" to="/"><strong>BANANA</strong><em>SPLIT</em></Link>
-                </div>
-                <div>
-                    <Link to="/">
-                        <button type="button" className="btn btn-outline-secondary mr-3" data-toggle="modal" data-target="#loginbutton">
-                            Início
-                        </button>
-                    </Link>
-                </div>
-            </nav>
-
             <div>
                 <h1> Relatório individual </h1>
                 <div>

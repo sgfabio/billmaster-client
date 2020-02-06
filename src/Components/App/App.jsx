@@ -263,6 +263,13 @@ class App extends Component {
         />
         {this.state.isAuth ? (
           <Switch>
+            <Route
+              exact
+              path="/reports"
+              render={(props) => {
+                return <Reports data={this.state} {...props} />;
+              }}
+            />
             {/* <PrivateRoute
               exact
               path="/oi"
