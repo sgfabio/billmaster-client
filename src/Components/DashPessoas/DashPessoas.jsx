@@ -94,7 +94,7 @@ class DashPessoas extends Component {
                         {" "}
                         X{" "}
                       </button>
-                      {this.props.renderModalDelete(e, e)}
+                      {this.props.renderModalDelete(e, e,"member")}
                     </div>
                   </>
                 );

@@ -30,7 +30,7 @@ const fakeExpense01 = {
   }
 };
 const fakeExpense02 = {
-  ID: 21,
+  ID: 25,
   group: "000",
   description: "ABC EXPENSE 0002",
   value: 1000,
@@ -140,7 +140,16 @@ class App extends Component {
           });
         })
       }
-      // removeExpense={this.removeExpense(idToRemove)}//TODO THIS FUNCTIONSSS
+      removeExpense={this.removeExpense = (idToRemove) => {
+        const groupCopy = { ...this.state.selectedGroup };
+        let idx;
+        let test = 0;
+        groupCopy.expense.map(e=>{(e.ID === idToRemove) ? idx = test : test += 1 }); //TODO Verificar a forma que o ID é passada
+        groupCopy.expense.splice(idx, 1);
+        this.setState({
+          selectedGroup: groupCopy
+        });
+      }}
       // removeSettle={this.removeSettle(idToRemove)}
     />
   );

@@ -5,15 +5,37 @@ class DeleteModal extends Component {
     super(props);
     this.state = {
       midleText: this.props.midleText,
+      element: this.props.element,
       member: this.props.element,
       removeMember:this.props.removeMember,
+      removeExpense:this.props.removeExpense,
+      iAmInThisPage:this.props.iAmInThisPage,
     }
+  }
+  whatIsMyPage = (iAmInThisPage) => {
+    console.log("DELETEEEE")
+    switch (iAmInThisPage) {
+      case "member":
+        this.state.removeMember(this.state.element)
+        break;
+      case "expense":
+        this.state.removeExpense(this.state.element.ID)
+        break;
+      case "settle":
+        console.log("Error");
+        break;
+        
+      default:
+          console.log("Delete mode is not defined");
+        break;
+    }
+
   }
   render(){
     return (
       <>
       {/* // CONFIRM EXCLUSION MODAL */}
-      <div className="modal fade" id={`deleteButton${this.props.element}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div className="modal fade" id={`deleteButton${this.state.element}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -37,7 +59,7 @@ class DeleteModal extends Component {
               <button type="button" className="btn btn-secondary" data-dismiss="modal">
                 {" "}Cancelar{" "}
               </button>
-              <button onClick={() => this.state.removeMember(this.props.element)} data-dismiss="modal" type="button" className="btn btn-danger">
+              <button onClick={() => this.whatIsMyPage(this.state.iAmInThisPage)} data-dismiss="modal" type="button" className="btn btn-danger">
                 {""}Excluir{" "}
               </button>
             </div>

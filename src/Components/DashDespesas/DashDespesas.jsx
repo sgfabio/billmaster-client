@@ -75,7 +75,7 @@ class DashDespesas extends Component {
       }
       newExpense.split.isDivideByAll = document.getElementById("isDivideByAll").checked;
     });    
-    this.setState({ members: members , selectedMembers: selectedMembers , newExpense: newExpense }, () => console.log("SELECTED",this.state.newExpense.split.isDivideByAll));
+    this.setState({ members: members , selectedMembers: selectedMembers , newExpense: newExpense });
   };
   handleChange = (event) => {
     const newExpense = {...this.state.newExpense};
@@ -106,7 +106,7 @@ class DashDespesas extends Component {
 
 
     this.props.addExpense(newExpense);
-    this.setState({ newExpense: newExpense }, ()=>{console.log("ALL",this.state.newExpense,"SPLIT",this.state.newExpense.split)});
+    this.setState({ newExpense: newExpense });
   }
 
   render() {
@@ -224,12 +224,12 @@ class DashDespesas extends Component {
                     className="btn btn-danger buttonOptions"
                     type="button"
                     data-toggle="modal"
-                    data-target={`#deleteButton${e.id}`}
+                    data-target={`#deleteButton${e.ID}`}
                     >
                     Excluir
                   </button>
                 </div>
-                {this.props.renderModalDelete(e.description, e,"expense")}
+                {this.props.renderModalDelete(e.description, e.ID,"expense")}
               </div>
                 )
               })
