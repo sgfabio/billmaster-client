@@ -389,9 +389,8 @@ class App extends Component {
                 component={Dashboard}
                 data={this.state}
               />
-            </Switch>
-
-            />
+            
+            
             <PrivateRoute
               exact
               path="/groups"
