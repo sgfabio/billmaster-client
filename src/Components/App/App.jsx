@@ -10,6 +10,7 @@ import { auth } from '../../util/api';
 import Index from '../Index/Index';
 
 import Login from '../Login/Login';
+import Signup from '../Signup/Signup';
 
 import Dashboard from '../Dashboard/Dashboard';
 import Pessoas from '../DashPessoas/DashPessoas';
@@ -133,7 +134,7 @@ class App extends Component {
   );
 
   addMember = (newMember) => {
-    const groupCopy = {...this.state.selectedGroup}
+    const groupCopy = { ...this.state.selectedGroup };
     groupCopy.members.push(newMember);
 
     this.setState({
@@ -142,7 +143,7 @@ class App extends Component {
   };
 
   addExpense = (newExpense) => {
-    const groupCopy = {...this.state.selectedGroup}
+    const groupCopy = { ...this.state.selectedGroup };
     groupCopy.expense.push(newExpense);
 
     this.setState({
@@ -151,7 +152,7 @@ class App extends Component {
   };
 
   addSettle = (newSettle) => {
-    const groupCopy = {...this.state.selectedGroup}
+    const groupCopy = { ...this.state.selectedGroup };
     groupCopy.settles.push(newSettle);
 
     this.setState({
@@ -180,6 +181,13 @@ class App extends Component {
             path="/login"
             render={(props) => {
               return <Login getUser={this.getUser} {...props} />;
+            }}
+          />
+          <Route
+            exact
+            path="/signup"
+            render={(props) => {
+              return <Signup getUser={this.getUser} {...props} />;
             }}
           />
           <Route
@@ -243,5 +251,3 @@ class App extends Component {
 }
 
 export default App;
-
-

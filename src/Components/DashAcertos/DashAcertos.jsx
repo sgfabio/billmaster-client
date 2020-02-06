@@ -56,7 +56,7 @@ class DashAcertos extends Component {
     return (
       <>
         <DashNavbar />
-
+        
         <div className="dashMainContent">
           {/* <!-- Add Settle --> */}
           <h2>Adicionar novo acerto:</h2>

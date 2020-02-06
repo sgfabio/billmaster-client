@@ -23,29 +23,33 @@ export default class Login extends Component {
     event.preventDefault();
     const { username, password } = this.state;
     try {
-      const {data: user} = await auth.login(username, password);
-      if(typeof user === 'undefined') {
+      const { data, status } = await auth.login(username, password);
+      console.log(
+        'data: ', data,
+        'status: ', status, 
+      )
+      if (status !== 200) {
         this.setState({
-          error: 'login falhou',
+          error: data.message,
           username: '',
           password: '',
-        })
-        return
+        });
+        return;
       }
-      this.props.getUser(user);
+      this.props.getUser(data);
       this.setState({
         redirectToReferrer: true,
         error: false,
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
   render() {
     // no sucesso, redireciona de onde ele veio ou leva ele de volta para login
     // TODO: conferir redirect
     const { from } = this.props.location.state || {
-      from: { pathname: '/' },
+      from: { pathname: '/dashboard' },
     };
     const { redirectToReferrer } = this.state;
 
@@ -54,106 +58,64 @@ export default class Login extends Component {
     }
 
     return (
-      <form onSubmit={this.handleFormSubmit}>
-        <div className="form-group">
-          <label htmlFor="recipient-user" className="col-form-label">
-            Usuário:
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="recipient-user"
-            name="username"
-            value={this.state.username}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="recipient-password" className="col-form-label">
-            Senha:
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="recipient-password"
-            name="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-        </div>
-
-        <button
-          type="button"
-          className="btn btn-secondary"
-          data-dismiss="modal"
+      <div>
+        <div
+        // className="modal fade"
+        // id="loginbutton"
+        // tabIndex="-1"
+        // role="dialog"
+        // aria-labelledby="exampleModalCenterTitle"
+        // aria-hidden="true"
         >
-          Cancelar
-        </button>
-        <input type="submit" value="Entrar" className="btn btn-primary" />
-        <br/>
-        {this.state.error && this.state.error }
-      </form>
-    );
-  }
-}
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              {/* Esse header talvez precise loadar contextualmente */}
+              <div className="modal-header">
+                <h5 className="modal-title">Login</h5>
+                {/* botão de fechar deixa de fazer sentido */}
+                {/* <button
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button> */}
+              </div>
+              <div className="modal-body">
+                <br />
+                {this.state.error && this.state.error}
+                <form onSubmit={this.handleFormSubmit}>
+                  <div className="form-group">
+                    <label htmlFor="recipient-user" className="col-form-label">
+                      Usuário:
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="recipient-user"
+                      name="username"
+                      value={this.state.username}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="recipient-password"
+                      className="col-form-label"
+                    >
+                      Senha:
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="recipient-password"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.handleChange}
+                    />
+                  </div>
 
-// modal
-/*
- <div
-        className="modal fade"
-        id="loginbutton"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Dados de acesso</h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-
-            <div className="modal-body">
-              <form onSubmit={this.handleLoginFormSubmit}>
-                <div className="form-group">
-                  <label htmlFor="recipient-user" className="col-form-label">
-                    Usuário:
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="recipient-user"
-                    name="username"
-                    value={this.state.username}
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <label
-                    htmlFor="recipient-password"
-                    className="col-form-label"
-                  >
-                    Senha:
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="recipient-password"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.handleChange}
-                  />
-                </div>
-
-                <div className="modal-footer">
                   <button
                     type="button"
                     className="btn btn-secondary"
@@ -166,10 +128,12 @@ export default class Login extends Component {
                     value="Entrar"
                     className="btn btn-primary"
                   />
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
-*/
+    );
+  }
+}
