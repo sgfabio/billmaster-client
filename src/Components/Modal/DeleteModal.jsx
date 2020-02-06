@@ -6,10 +6,10 @@ class DeleteModal extends Component {
     this.state = {
       midleText: this.props.midleText,
       member: this.props.element,
+      removeMember:this.props.removeMember,
     }
   }
   render(){
-    console.log(this.state.member)
     return (
       <>
       {/* // CONFIRM EXCLUSION MODAL */}
@@ -37,7 +37,7 @@ class DeleteModal extends Component {
               <button type="button" className="btn btn-secondary" data-dismiss="modal">
                 {" "}Cancelar{" "}
               </button>
-              <button onClick={() => console.log("BOTAO DELETE MODAL")} type="button" className="btn btn-danger">
+              <button onClick={() => this.state.removeMember(this.props.element)} data-dismiss="modal" type="button" className="btn btn-danger">
                 {""}Excluir{" "}
               </button>
             </div>

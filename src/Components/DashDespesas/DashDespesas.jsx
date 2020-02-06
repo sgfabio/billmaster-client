@@ -4,14 +4,20 @@ import DashNavbar from "../DashNavbar/DashNavbar";
 import CheckBox from "./Checkbox";
 import "./DashDespesas.css"
 
+const membersToArr = (arr) =>{
+  return arr.map(e=>{
+    let memberObj = {name: e};
+    return memberObj
+  });
+}
+
 class DashDespesas extends Component {
   constructor(props) {
     super(props);
     this.state = {
       group: this.props.oneGroup,
-      members: this.props.oneGroup.members,
+      members: membersToArr(this.props.oneGroup.members),
       expense: this.props.oneGroup.expense,
-      renderModalDelete: this.props.renderModalDelete,
       selectedMembers: [],
       newExpense:{
         ID: "Aleatorio",
@@ -27,69 +33,80 @@ class DashDespesas extends Component {
     };
   }
   handleAllChecked = event => {
-    let selectedMembers = [];
-    let isDivideByAll = false;
+    const newExpense = {...this.state.newExpense};
+    let isDivideByAll = "Error";
+    (event.target.checked) ? isDivideByAll = true : isDivideByAll = false;
+    newExpense.split.isDivideByAll = isDivideByAll;
+    
+    newExpense.split.divideBy = [];
 
     let members = [...this.state.members];
-    if(event.target.checked){
-      isDivideByAll = true;
-    }
-    members.map(e => (event.target.checked) ? selectedMembers.push(e.name) : selectedMembers)
+    members.map(e => (event.target.checked) ? newExpense.split.divideBy.push(e.name) : newExpense.split.divideBy)
     members.forEach(member => (member.isChecked = event.target.checked));
-    this.setState({ members: members , selectedMembers: selectedMembers }, () => console.log("SELECTED",this.state.selectedMembers));
+    this.setState({ newExpense: newExpense }, () => console.log("TESTE",this.state.newExpense.split.divideBy));
 
   };
   doSomething = (e) => {
     console.log("something is happening",e);
   };
   handleCheckChieldElement = event => {
+    const { newExpense } = this.state;
     let members = [...this.state.members];
+    
     let selectedMembers = [...this.state.selectedMembers];
+
+    
     members.map(member => {
       if (member.name === event.target.value) {
         member.isChecked = event.target.checked;
+        
         if (!event.target.checked) {
+          document.getElementById("isDivideByAll").checked = false;
+          newExpense.split.isDivideByAll = false;
           let idx = selectedMembers.indexOf(member.name);
           selectedMembers.splice(idx,1);
-          if (document.getElementById("isDivideByAll").checked){
-            this.state.newExpense.split.isDivideByAll = false;
-          }
+          
         } else if (event.target.checked) {
+          document.getElementById("isDivideByAll").checked = true;
+          let it = 0
+          members.map(e=>{(!e.isChecked) ? document.getElementById("isDivideByAll").checked = false: it = 1})
           selectedMembers.push(member.name)
         }
       }
-      return selectedMembers;
-    });
-    
-    console.log(this.state.selectedMembers);
-
-    this.setState({ members: members , selectedMembers: selectedMembers }, () => console.log("SELECTED00000",this.state.selectedMembers));
+      newExpense.split.isDivideByAll = document.getElementById("isDivideByAll").checked;
+    });    
+    this.setState({ members: members , selectedMembers: selectedMembers , newExpense: newExpense }, () => console.log("SELECTED",this.state.newExpense.split.isDivideByAll));
   };
   handleChange = (event) => {
-    const { name , value} = event.target;
-
-    const newExpenseCopy = {...this.state.newExpense};
-    if (name === "paidBy" || name === "divideBy" || name === "isDivideByAll"){
-      newExpenseCopy.split[name] = value;
-      
-
-    } else {
-      newExpenseCopy[name] = value;
+    const newExpense = {...this.state.newExpense};
+    const { name, value } = event.target;
+    
+    switch (name) {
+      case "paidBy":
+        newExpense.split.paidBy = value;
+        break;
+      case "divideBy":
+        newExpense.split.divideBy = value;
+        break;
+      case "value":
+        newExpense.value = value;
+        break;
+      case "description":
+        newExpense.description = value;
+        break;
+      default:
+        break;
     }
-
-    // this.setState({newExpense: newExpenseCopy});
+    this.setState({newExpense: newExpense});
   };
   handleSubmit = (event) => {
-    // event.preventDefault();
-    // this.props.addMember(this.state.newExpense);
-    // const copyNewExpense = {...this.state.newExpense};
-    // const { newExpense } = this.state;
-    // copyNewExpense.id=(getRandomInt(1000000000).toString());
-    // copyNewExpense.name="";
-    // copyNewExpense.contact="";
-    // this.setState({
-    //   newExpense: copyNewExpense,
-    // })
+    event.preventDefault();
+    const {newExpense} = this.state;
+    newExpense.split.divideBy = this.state.selectedMembers;
+
+
+    this.props.addExpense(newExpense);
+    this.setState({ newExpense: newExpense }, ()=>{console.log("ALL",this.state.newExpense,"SPLIT",this.state.newExpense.split)});
   }
 
   render() {
@@ -100,18 +117,22 @@ class DashDespesas extends Component {
         <div className="dashMainContent mx-2 p-0">
           {/* <!-- Add bills --> */}
           <h2>Adicionar nova despesa:</h2>
-          <form onSubmit="" className="dashAddBills d-flex justify-content-between align-items-end flex-wrap">
+          <form onSubmit={this.handleSubmit} className="dashAddBills d-flex justify-content-between align-items-end flex-wrap">
             <div className="form-group text-left col-xl-3 m-1 mb-0 p-0">
               Descrição:
               <input
                 type="text"
                 className="form-control"
                 maxLength="25"
+                name="description"
+                onChange={this.handleChange}
+                value={this.state.newExpense.description}
               />
             </div>
             <div className="form-group text-left col-xl-2 m-1 mb-0 p-0">
               Pagou:
-              <select className="form-control">
+              <select className="form-control" name="paidBy" onChange={this.handleChange}>
+                <option>Selecione um membro</option>
                 {[...this.state.members].sort((a,b)=>a.name.localeCompare(b.name)).map(member => {
                   return (
                   <option>{member.name}</option>
@@ -124,12 +145,13 @@ class DashDespesas extends Component {
               <input
                 type="number"
                 className="form-control"
-                name="value"
                 min="0.00"
                 max="10000.00"
                 step="0.01"
                 id="value"
                 placeholder="R$ 10,00"
+                onChange={this.handleChange}
+                name="value"
               />
             </div>
 
@@ -142,6 +164,7 @@ class DashDespesas extends Component {
                     <input
                       className="dropdown-item mx-0 my-auto bg-transparent"
                       type="checkbox"
+                      onChange={this.handleChange}
                       onClick={this.handleAllChecked}
                       id="isDivideByAll"
                       name="isDivideByAll"
@@ -185,7 +208,7 @@ class DashDespesas extends Component {
               <div className="col-lg p-0 ml-0 dashComponents">
                 <div className="col-9 p-0">
                   <button className="btn btn-outline-dark boxComponent">
-                    {e.split.paidBy} pagou {e.description} dividindo o {e.value} com {(e.split.isDivideByAll)?"todos os membros":`${e.split.divideBy.legth} dos membros`} 
+                    {e.description} 
                   </button>
                 </div>
                 <div className="col-2 p-0">
@@ -206,7 +229,7 @@ class DashDespesas extends Component {
                     Excluir
                   </button>
                 </div>
-                {this.props.renderModalDelete(e.description, e)}
+                {this.props.renderModalDelete(e.description, e,"expense")}
               </div>
                 )
               })

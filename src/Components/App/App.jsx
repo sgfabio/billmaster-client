@@ -1,78 +1,78 @@
-import React, { Component } from 'react';
-import { Switch, Route, Link, Redirect } from 'react-router-dom';
+import React, { Component } from "react";
+import { Switch, Route, Link, Redirect } from "react-router-dom";
 
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { auth } from '../../util/api';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import { auth } from "../../util/api";
 
 // Components
-import Index from '../Index/Index';
+import Index from "../Index/Index";
 
-import Login from '../Login/Login';
+import Login from "../Login/Login";
 
-import Dashboard from '../Dashboard/Dashboard';
-import Pessoas from '../DashPessoas/DashPessoas';
-import Despesas from '../DashDespesas/DashDespesas';
-import Acertos from '../DashAcertos/DashAcertos';
-import DeleteModal from '../Modal/DeleteModal';
-import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import Dashboard from "../Dashboard/Dashboard";
+import Pessoas from "../DashPessoas/DashPessoas";
+import Despesas from "../DashDespesas/DashDespesas";
+import Acertos from "../DashAcertos/DashAcertos";
+import DeleteModal from "../Modal/DeleteModal";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 // fake data
 const fakeExpense01 = {
   ID: 21,
-  group: '000',
-  description: 'ABC EXPENSE',
+  group: "000",
+  description: "ABC EXPENSE",
   value: 1000,
   split: {
-    paidBy: 'FULANO',
-    divideBy: ['CICLANO-01', 'CICLANO-02'],
-  },
+    paidBy: "FULANO",
+    divideBy: ["CICLANO-01", "CICLANO-02"]
+  }
 };
 const fakeExpense02 = {
   ID: 21,
-  group: '000',
-  description: 'ABC EXPENSE 0002',
+  group: "000",
+  description: "ABC EXPENSE 0002",
   value: 1000,
   split: {
-    paidBy: 'FULANO 02',
-    divideBy: ['CICLANO-01', 'CICLANO-02'],
-  },
+    paidBy: "FULANO 02",
+    divideBy: ["CICLANO-01", "CICLANO-02"]
+  }
 };
 const fakeSettle01 = {
   ID: 31,
-  group: 'GROUP ID',
+  group: "GROUP ID",
   value: 200,
-  paidBy: 'PAGOOUUU',
-  paidTo: 'QUEEMMMM RECEBEU',
+  paidBy: "PAGOU",
+  paidTo: "QUEM RECEBEU 02"
 };
 const fakeSettle02 = {
   ID: 32,
-  group: 'GROUP ID',
+  group: "GROUP ID",
   value: 300,
-  paidBy: 'PAGOOUUU',
-  paidTo: 'QUEEMMMM RECEBEU',
+  paidBy: "PAGOU",
+  paidTo: "QUEM RECEBEU 03"
 };
-const fakeMembers = ['Fulano', 'Ciclano', 'Barbosa'];
+const fakeMembers = ["Fulano", "Ciclano", "Barbosa"];
 const fakeGroups = [
   {
     ID: 11,
-    groupName: 'GRUPO 001',
-    description: 'bla bla bla grupo',
+    groupName: "GRUPO 001",
+    description: "bla bla bla grupo",
     owner: 200,
     members: fakeMembers,
     expense: [fakeExpense01, fakeExpense02],
-    settles: [fakeSettle01, fakeSettle02],
+    settles: [fakeSettle01, fakeSettle02]
   },
   {
     ID: 12,
-    groupName: 'GRUPO 002',
-    description: 'lalala',
+    groupName: "GRUPO 002",
+    description: "lalala",
     owner: 200,
     members: fakeMembers, //STRING
     expense: [fakeExpense02, fakeExpense01],
-    settles: [fakeSettle02, fakeSettle01],
-  },
+    settles: [fakeSettle02, fakeSettle01]
+  }
 ];
 
 class App extends Component {
@@ -82,11 +82,12 @@ class App extends Component {
       user: null,
       isAuth: false,
       groups: fakeGroups,
-      selectedGroup: fakeGroups[0],
+      selectedGroup: fakeGroups[0]
     };
     this.addMember = this.addMember.bind(this);
     this.addExpense = this.addExpense.bind(this);
     this.addSettle = this.addSettle.bind(this);
+    this.renderModalDelete = this.renderModalDelete.bind(this);
     this.getUser = this.getUser.bind(this); // BIND do Método que guarda o usuário logado no estado *
   }
 
@@ -96,12 +97,12 @@ class App extends Component {
         const loggedInUser = await auth.isAuth();
         this.setState({
           user: loggedInUser,
-          isAuth: true,
+          isAuth: true
         });
       } catch (error) {
         console.log(error);
         this.setState({
-          isAuth: false,
+          isAuth: false
         });
       }
     }
@@ -109,7 +110,7 @@ class App extends Component {
   getUser(userObj) {
     this.setState({
       user: userObj,
-      isAuth: true,
+      isAuth: true
     });
   }
 
@@ -117,45 +118,84 @@ class App extends Component {
     this.state.groups.push(newGroup);
   }
 
-  deleteOneElement = (elementID) => {
+  deleteOneElement = elementID => {
     //TODO deletar por ID ou ... name se for o caso do members
     // const index = this.state.selectedGroup.members.indexOf(memberID);
     // if (index > -1) {
     //   this.state.selectedGroup.members.splice(index, 1);
     // } return message = "Can not find ID Member";
   };
-  renderModalDelete = (midleText, element) => (
+  renderModalDelete = (midleText, element, thisPage) => (
     <DeleteModal
-      // deleteOneElement={this.deleteOneElement}
       midleText={midleText}
       element={element}
+      iAmInThisPage={thisPage}
+      removeMember={
+        (this.removeMember = memberToRemove => {
+          const groupCopy = { ...this.state.selectedGroup };
+          let idx = groupCopy.members.indexOf(memberToRemove);
+          groupCopy.members.splice(idx, 1);
+          this.setState({
+            selectedGroup: groupCopy
+          });
+        })
+      }
+      // removeExpense={this.removeExpense(idToRemove)}//TODO THIS FUNCTIONSSS
+      // removeSettle={this.removeSettle(idToRemove)}
     />
   );
 
-  addMember = (newMember) => {
-    const groupCopy = {...this.state.selectedGroup}
+  addMember = newMember => {
+    const groupCopy = { ...this.state.selectedGroup };
     groupCopy.members.push(newMember);
 
     this.setState({
-      selectedGroup: groupCopy,
+      selectedGroup: groupCopy
     });
   };
 
-  addExpense = (newExpense) => {
-    const groupCopy = {...this.state.selectedGroup}
+  removeMember = memberToRemove => {
+    const groupCopy = { ...this.state.selectedGroup };
+    let idx = groupCopy.members.indexOf(memberToRemove);
+    groupCopy.members.splice(idx, 1);
+    this.setState({
+      selectedGroup: groupCopy
+    });
+  };
+
+  addExpense = newExpense => {
+    const groupCopy = { ...this.state.selectedGroup };
     groupCopy.expense.push(newExpense);
 
     this.setState({
-      selectedGroup: groupCopy,
+      selectedGroup: groupCopy
     });
   };
 
-  addSettle = (newSettle) => {
-    const groupCopy = {...this.state.selectedGroup}
+  removeExpense = expenseToRemove => {
+    const groupCopy = { ...this.state.selectedGroup };
+    groupCopy.expense.push(expenseToRemove);
+
+    this.setState({
+      selectedGroup: groupCopy
+    });
+  };
+
+  addSettle = newSettle => {
+    const groupCopy = { ...this.state.selectedGroup };
     groupCopy.settles.push(newSettle);
 
     this.setState({
-      selectedGroup: groupCopy,
+      selectedGroup: groupCopy
+    });
+  };
+
+  removeSettle = settleToRemove => {
+    const groupCopy = { ...this.state.selectedGroup };
+    groupCopy.settles.push(settleToRemove);
+
+    this.setState({
+      selectedGroup: groupCopy
     });
   };
   // <Route path="*" render={() => <Redirect to="/login" />} />
@@ -163,7 +203,7 @@ class App extends Component {
   render() {
     // TODO: essa primeira private route é um exemplo. Dashboard recebe element!
     const element = {
-      _id: 123456,
+      _id: 123456
     };
     return (
       <div className="App">
@@ -178,7 +218,7 @@ class App extends Component {
           <Route
             exact
             path="/login"
-            render={(props) => {
+            render={props => {
               return <Login getUser={this.getUser} {...props} />;
             }}
           />
@@ -190,20 +230,21 @@ class App extends Component {
           <Route
             exact
             path="/dashboard"
-            render={(props) => {
+            render={props => {
               return <Dashboard data={this.state} {...props} />;
             }}
           />
           <Route
             exact
             path="/dashboard/pessoas"
-            render={(props) => {
+            render={props => {
               return (
                 <Pessoas
                   {...props}
                   oneGroup={this.state.selectedGroup}
                   renderModalDelete={this.renderModalDelete}
                   addMember={this.addMember}
+                  removeMember={this.removeMember}
                 />
               );
             }}
@@ -211,13 +252,14 @@ class App extends Component {
           <Route
             exact
             path="/dashboard/despesas"
-            render={(props) => {
+            render={props => {
               return (
                 <Despesas
                   {...props}
                   oneGroup={this.state.selectedGroup}
                   renderModalDelete={this.renderModalDelete}
                   addExpense={this.addExpense}
+                  removeExpense={this.removeExpense}
                 />
               );
             }}
@@ -225,13 +267,14 @@ class App extends Component {
           <Route
             exact
             path="/dashboard/acertos"
-            render={(props) => {
+            render={props => {
               return (
                 <Acertos
                   {...props}
                   oneGroup={this.state.selectedGroup}
                   renderModalDelete={this.renderModalDelete}
                   addSettle={this.addSettle}
+                  removeSettle={this.removeSettle}
                 />
               );
             }}
@@ -243,5 +286,3 @@ class App extends Component {
 }
 
 export default App;
-
-
