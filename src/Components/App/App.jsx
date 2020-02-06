@@ -17,6 +17,8 @@ import Despesas from "../DashDespesas/DashDespesas";
 import Acertos from "../DashAcertos/DashAcertos";
 import DeleteModal from "../Modal/DeleteModal";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Reports from "../Reports/Reports";
+
 
 // fake data
 const fakeExpense01 = {
@@ -305,6 +307,16 @@ class App extends Component {
               );
             }}
           />
+
+{/* ROTAS P/ RELATÓRIOS */}
+          <Route
+            exact
+            path="/reports"
+            render={props => {
+              return <Reports data={this.state} {...props} />;
+            }}
+          />  
+            
         </Switch>
       </div>
     );

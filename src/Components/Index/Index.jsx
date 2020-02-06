@@ -83,7 +83,7 @@ export class Index extends Component {
               <h1> ReportsSummary  </h1>
               <div>
                   {/* Para testar o componente ReportsSummary, passar algum 'groupId' na prop abaixo  */}
-                  {/* <ReportsSummary groupId={'5e39a5dcd92dfc45cc871308'}/> */}
+                  {/* <ReportsSummary groupId={'5e3c1dc6a4cbab45acf1bc82'}/> */}
               </div>
           </div>
           

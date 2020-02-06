@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {groups} from '../../util/api'       // Groups component from API service 
 
 class ReportsSummary extends Component {
@@ -28,20 +28,7 @@ class ReportsSummary extends Component {
         if (this.state.balances) {//Conditional return 
             return(
             <div>
-                <nav className="navbar navbar-light bg-yellow justify-content-between">
-                    <div>
-                        <a className="navbar-brand"><strong>BANANA</strong><em>SPLIT</em></a>
-                    </div>
-                    <div>
-                        Grupo: {}
-                    </div>
-                </nav>
-            
-            <div className="mt-2">
-                <h2>BARRA DE NAV AQUI: Resumo, Gastos, Acertos</h2>
-                <hr/>
-            </div>
-            
+         
                 <p>
                     Resumo dos gastos por participante
                 </p>
