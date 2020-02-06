@@ -287,7 +287,11 @@ class App extends Component {
               exact
               path="/dashboard"
               render={(props) => {
-                return <Dashboard data={this.state} {...props} />;
+                return <Dashboard data={this.state} {...props} 
+                renderModalDelete={this.renderModalDelete}
+                renderModalEdit={this.renderModalEdit}
+
+                />;
               }}
             />
             <Route

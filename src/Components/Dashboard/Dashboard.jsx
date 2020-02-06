@@ -10,7 +10,7 @@ class Dashboard extends Component {
     this.state = {
       userGroups: this.props.data.groups,
       renderModalDelete: this.props.renderModalDelete,
-      renderModalEdit: this.props.renderModalEdit
+      renderModalEdit: this.props.renderModalEdit,
     };
   }
   render() {
