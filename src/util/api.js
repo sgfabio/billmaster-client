@@ -203,4 +203,14 @@ export const groups = {
       { withCredentials: true }
     );
   },
+
+  getBills(groupId) {
+    console.log('getBills of a group', groupId);
+    return axios.get(
+      //
+      `${this.endpoint}/groups/${groupId}/historyExpenses`,
+      { withCredentials: true }
+    );
+  },
+
 };
