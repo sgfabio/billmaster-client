@@ -4,18 +4,19 @@ import CheckBox from "./Checkbox";
 import "./DashDespesas.css";
 import { groups } from "../../util/api";
 
-// const membersToArr = (arr) => {
-//   arr.map((e) => {
-//     let memberObj = { name: e };
-//     memberObj;
-//   });
-// };
+const membersToArr = (arr) => {
+  arr.map((e) => {
+    let memberObj = { name: e };
+    return memberObj;
+  });
+};
+
 class DashDespesas extends Component {
   constructor(props) {
     super(props);
     this.state = {
       group: {},
-      members: this.props.oneGroup.members,
+      members: membersToArr(this.props.oneGroup.members),
       expenses: this.props.oneGroup.expenses,
       selectedMembers: [],
       newExpense: {
@@ -87,16 +88,9 @@ class DashDespesas extends Component {
   handleCheckChieldElement = event => {
     const { newExpense } = this.state;
     const { members } = this.state;
-
-    
-    // const member = []
-    // member.name = [event.target.value];
-    // member.isChecked = event.target.checked;
-    // members.push(member);
-    
     
     let selectedMembers = this.state.selectedMembers;
-
+    
     members.map(member => {
       if (member.name === event.target.value) {
         member.isChecked = event.target.checked;
@@ -124,7 +118,6 @@ class DashDespesas extends Component {
       ).checked;
     });
 
-    console.log(members,"SAAAAAAAAAAAAAAAAAAAAALLLLLLLLLLLLLLLLVVVVVVVVVAAAAAAAAAAAAAA",selectedMembers);
     this.setState({
       members: members,
       selectedMembers: selectedMembers,
