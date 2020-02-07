@@ -96,6 +96,7 @@ class App extends Component {
     this.getUser = this.getUser.bind(this);
     this.fetchGroups = this.fetchGroups.bind(this);
     this.getSelectedGroup = this.getSelectedGroup.bind(this);
+    this.getGroups = this.getGroups.bind(this);
   }
 
   componentDidUpdate() {
@@ -162,6 +163,18 @@ class App extends Component {
       } catch (error) {
         console.log(error);
       }
+  }
+
+  getGroups(groups) {
+    if (groups === null) {
+      this.setState({
+        groups: [],
+      });
+    } else {
+      this.setState({
+        groups,
+      });
+    }
   }
 
   createGroup(newGroup) {
@@ -315,7 +328,13 @@ class App extends Component {
               exact
               path="/login"
               render={(props) => {
-                return <Login getUser={this.getUser} {...props} />;
+                return (
+                  <Login
+                    getUser={this.getUser}
+                    getGroups={this.getGroups}
+                    {...props}
+                  />
+                );
               }}
             />
             <Route
@@ -396,7 +415,13 @@ class App extends Component {
               exact
               path="/login"
               user={this.state.user}
-              render={(props) => <Login getUser={this.getUser} {...props} />}
+              render={(props) => (
+                <Login
+                  getUser={this.getUser}
+                  getGroups={this.getGroups}
+                  {...props}
+                />
+              )}
             />
             <Route
               exact

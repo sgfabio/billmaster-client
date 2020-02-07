@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { auth } from '../../util/api';
+
+import { groups } from '../../util/api';
+
 import { Redirect } from 'react-router-dom';
 
 export default class Login extends Component {
@@ -32,11 +35,13 @@ export default class Login extends Component {
         });
         return;
       }
-      this.props.getUser(data);
       this.setState({
         redirectToReferrer: true,
         error: false,
       });
+      const response = await groups.getAll();
+      this.props.getGroups(response.data);
+      this.props.getUser(data);
     } catch (error) {
       console.log(error);
     }
@@ -55,8 +60,7 @@ export default class Login extends Component {
 
     return (
       <div>
-        <div
-        >
+        <div>
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
               {/* Esse header talvez precise loadar contextualmente */}
