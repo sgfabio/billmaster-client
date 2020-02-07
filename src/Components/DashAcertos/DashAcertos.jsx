@@ -185,7 +185,7 @@ class DashAcertos extends Component {
                     </button>
                     {this.props.renderModalDelete(
                       `O pagamento de ${e.paidBy} para ${e.paidTo}`,
-                      e._id,
+                      e,
                       'settle'
                     )}
                   </div>

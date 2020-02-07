@@ -226,8 +226,9 @@ class App extends Component {
         })
       }
       removeSettle={
-        (this.removeSettle = (idToRemove) => {
-          console.log('ESSE É O ID DO ACERTO PARA REMOVER', idToRemove);
+        (this.removeSettle = (settleToRemove) => {
+          const {_id, group, value, paidBy, paidTo} = settleToRemove;
+          groups.deleteSettle(group, _id)
         })
       }
     />
@@ -270,25 +271,12 @@ class App extends Component {
   };
   editSettle = (idOfSettleToEdit, newInfo) => {
     const { group, value, paidBy, paidTo } = newInfo;
-    console.log('ESSE É O ID DO ACERTO PARA EDITAR', idOfSettleToEdit);
-    console.log('ESSA SAO AS INFORMAÇÕES DO ACERTO PARA EDITAR', {
-      group,
-      value,
-      paidBy,
-      paidTo,
-    });
+    groups.putSettle(group, idOfSettleToEdit, {value,paidBy,paidTo});
   };
 
   addSettle = (newSettle) => {
-    console.log('ESSA SAO AS INFORMAÇÕES DO NOVO ACERTO', newSettle);
-
-    // const groupCopy = { ...this.state.selectedGroup };
-    // groupCopy.settles.push(newSettle);
-    // console.log(newSettle);
-
-    // this.setState({
-    //   selectedGroup: groupCopy,
-    // });
+    const { group, value, paidBy, paidTo} = newSettle;
+    groups.createSettle(group, {value, paidBy, paidTo});
   };
 
   render() {
