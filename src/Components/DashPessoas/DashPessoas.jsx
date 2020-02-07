@@ -22,7 +22,6 @@ class DashPessoas extends Component {
     event.preventDefault();
     let str = this.state.newMember;
     str = str.replace(/\s{2,}/g, ' ');
-    console.log(str.length);
     if (str === ' ') {
       return;
     }
@@ -36,12 +35,8 @@ class DashPessoas extends Component {
       newMember: ' ',
     });
   }
-  // componentDidMount() {
-  //   this.getSingleGroup();
-  // }
 
   render() {
-    console.log('o que pessoas está recebendo nas suas props:', this.props);
     const { id: paramId } = this.props.match.params;
     let membersArray = [];
     if (Array.isArray(this.props.selectedGroup.members)) {

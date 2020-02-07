@@ -20,7 +20,6 @@ class Dashboard extends Component {
     const group = response.data;
     this.props.getSelectedGroup(group);
 
-    // console.log('group:', group)
     this.setState({
       selectedGroup: group.data,
     });

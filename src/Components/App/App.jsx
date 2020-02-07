@@ -65,7 +65,6 @@ class App extends Component {
   }
 
   getUser(userObj) {
-    console.log('o que esta chegando aqui?', userObj);
     if (userObj === null) {
       this.setState({
         user: null,
@@ -80,7 +79,6 @@ class App extends Component {
   }
 
   getSelectedGroup(groupObj) {
-    console.log('estou recebendo um id?', groupObj);
     if (groupObj === null) {
       this.setState({
         selectedGroup: null,
@@ -195,7 +193,9 @@ class App extends Component {
   };
 
   addMember = (newMember) => {
+    console.log('membro recebido:', newMember)
     groups.addMember(newMember);
+    // this.fetchGroups();
   };
 
   addExpense = (newExpense) => {
@@ -249,7 +249,6 @@ class App extends Component {
               exact
               path="/login"
               render={(props) => {
-                console.log('oi, /login!');
                 return (
                   <Login
                     getUser={this.getUser}
@@ -290,7 +289,6 @@ class App extends Component {
               exact
               path="/groups/:id/pessoas"
               render={(props) => {
-                console.log('oi, rota parametrizada!');
                 return (
                   <Pessoas
                     {...props}
