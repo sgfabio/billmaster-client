@@ -61,6 +61,7 @@ export default class Navbar extends Component {
   }
 
   render() {
+    console.log('props da navbar: ', this.props)
     return (
       <div>
         {this.state.isAuth ? (

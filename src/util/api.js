@@ -69,7 +69,7 @@ export const groups = {
     try {
       const response = await axios.get(
         // User must be logged in
-        `${this.endpoint}/grupos`,
+        `${this.endpoint}/groups`,
         { withCredentials: true }
       );
       const { data, status } = response;
