@@ -22,11 +22,14 @@ export default class Login extends Component {
     this.setState({ [name]: value });
   }
 
+  // TODO: depois do login, os dados do grupo ainda não estão carregados!
+  // TODO: O app está resolvendo a rota como se o usuário não estivesse logado (batendo na private route e redirecionando
   async handleFormSubmit(event) {
     event.preventDefault();
     const { username, password } = this.state;
     try {
       const { data, status } = await auth.login(username, password);
+      console.log(status);
       if (status !== 200) {
         this.setState({
           error: data.message,
@@ -39,22 +42,25 @@ export default class Login extends Component {
         redirectToReferrer: true,
         error: false,
       });
-      const response = await groups.getAll();
-      this.props.getGroups(response.data);
       this.props.getUser(data);
+      // const { location } = this.props;
+      // if (!location.state) {
+      //   this.props.history.push('/groups');
+      // }
     } catch (error) {
       console.log(error);
     }
   }
+
   render() {
     // no sucesso, redireciona de onde ele veio ou leva ele de volta para login
-    // TODO: conferir redirect
     const { from } = this.props.location.state || {
       from: { pathname: '/groups' },
     };
     const { redirectToReferrer } = this.state;
 
     if (redirectToReferrer) {
+      console.log('redirect do login:', from);
       return <Redirect to={from} />;
     }
 
@@ -63,18 +69,8 @@ export default class Login extends Component {
         <div>
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
-              {/* Esse header talvez precise loadar contextualmente */}
               <div className="modal-header">
                 <h5 className="modal-title">Login</h5>
-                {/* botão de fechar deixa de fazer sentido */}
-                {/* <button
-              type="button"
-              className="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button> */}
               </div>
               <div className="modal-body">
                 <br />

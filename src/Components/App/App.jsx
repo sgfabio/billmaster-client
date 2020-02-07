@@ -148,11 +148,10 @@ class App extends Component {
   }
 
   async fetchGroups() {
-    if (this.state.groups.length === 0)
+    if (this.state.groups.length === 0) {
       try {
         const response = await groups.getAll();
         const { status, data } = response;
-        console.log('data para os grupos:', data);
         if (status !== 200) {
           console.log('Erro api', data);
         } else {
@@ -163,6 +162,7 @@ class App extends Component {
       } catch (error) {
         console.log(error);
       }
+    }
   }
 
   getGroups(groups) {
@@ -225,14 +225,14 @@ class App extends Component {
       }
       removeExpense={
         (this.removeExpense = (expenseInfo) => {
-          const {_id, group, description, value, split } = expenseInfo;
+          const { _id, group, description, value, split } = expenseInfo;
           groups.deleteExpense(group, _id);
         })
       }
       removeSettle={
         (this.removeSettle = (settleToRemove) => {
-          const {_id, group, value, paidBy, paidTo} = settleToRemove;
-          groups.deleteSettle(group, _id)
+          const { _id, group, value, paidBy, paidTo } = settleToRemove;
+          groups.deleteSettle(group, _id);
         })
       }
     />
@@ -253,27 +253,28 @@ class App extends Component {
   };
 
   addExpense = (newExpense) => {
-    const {group, description, value, split } = newExpense;
-    groups.createExpense(group, {description, value, split})
+    const { group, description, value, split } = newExpense;
+    groups.createExpense(group, { description, value, split });
   };
 
   editExpense = (idOfExpenseToEdit, newInfo) => {
-    const {group, description, value, split } = newInfo;
-    groups.putExpense(group, idOfExpenseToEdit, {description, value, split})
+    const { group, description, value, split } = newInfo;
+    groups.putExpense(group, idOfExpenseToEdit, { description, value, split });
   };
 
   editSettle = (idOfSettleToEdit, newInfo) => {
     const { group, value, paidBy, paidTo } = newInfo;
-    groups.putSettle(group, idOfSettleToEdit, {value,paidBy,paidTo});
+    groups.putSettle(group, idOfSettleToEdit, { value, paidBy, paidTo });
   };
 
   addSettle = (newSettle) => {
-    const { group, value, paidBy, paidTo} = newSettle;
-    groups.createSettle(group, {value, paidBy, paidTo});
+    const { group, value, paidBy, paidTo } = newSettle;
+    groups.createSettle(group, { value, paidBy, paidTo });
   };
 
   render() {
     this.fetchUser();
+    // this.fetchGroups();
     return (
       <div className="App">
         <Navbar
