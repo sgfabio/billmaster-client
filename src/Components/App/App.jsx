@@ -23,7 +23,6 @@ import EditModal from '../Modal/EditModal';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Reports from '../Reports/Reports';
 
-
 // fake data
 const fakeExpense01 = {
   _id: 21,
@@ -62,7 +61,7 @@ const fakeSettle02 = {
 };
 const fakeGroups = [
   {
-    _id: "5e3ca62f1572e558f09a9fd8",
+    _id: '5e3ca62f1572e558f09a9fd8',
     groupName: 'GRUPO 001',
     description: 'bla bla bla grupo',
     owner: 200,
@@ -98,6 +97,14 @@ class App extends Component {
     this.fetchGroups = this.fetchGroups.bind(this);
   }
 
+  componentDidUpdate() {
+    this.fetchGroups();
+  }
+
+  componentDidMount() {
+    this.fetchGroups();
+  }
+
   async fetchUser() {
     if (this.state.isAuth === false) {
       try {
@@ -108,10 +115,6 @@ class App extends Component {
         });
       } catch (error) {
         console.log(error);
-        // this.setState({
-        //   user: null,
-        //   isAuth: false,
-        // });
       }
     }
   }
@@ -130,7 +133,6 @@ class App extends Component {
     }
   }
 
-  // não testado
   async fetchGroups() {
     if (this.state.groups.length === 0)
       try {
@@ -166,7 +168,7 @@ class App extends Component {
       iAmInThisPage={thisPage}
       editGroup={
         (this.editGroup = (idOfGroupToEdit, newInfo) => {
-          groups.put(idOfGroupToEdit,newInfo)
+          groups.put(idOfGroupToEdit, newInfo);
           console.log('ESSE É O ID DO GRUPO PARA EDITAR', idOfGroupToEdit);
           console.log('ESSA SAO AS INFORMAÇÕES DO GRUPO PARA EDITAR', newInfo);
         })
@@ -278,7 +280,6 @@ class App extends Component {
 
   render() {
     this.fetchUser();
-    this.fetchGroups();
     return (
       <div className="App">
         <Navbar
