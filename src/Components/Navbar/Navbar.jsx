@@ -9,8 +9,8 @@ export default class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
-      isAuth: false,
+      // user: null,
+      // isAuth: false,
       addGroup: this.props.addGroup, // provavelmente pode deletar
       newInfoGroup: {
         groupName: '',
@@ -60,11 +60,12 @@ export default class Navbar extends Component {
   }
 
   render() {
+    console.log('pros da navbar:', this.props)
     // TODO: barbosa, acrescentei um botão, mas parece que quebrei o styling.
     console.log('grupos nas props? ', this.props.groups);
     return (
       <div>
-        {this.state.isAuth ? (
+        {this.props.authed ? (
           <>
             <nav className="navbar navbar-light bg-yellow justify-content-between">
               <div>
@@ -90,7 +91,7 @@ export default class Navbar extends Component {
                     Criar Grupo
                   </button>
                   <hr className="py-0 my-1" />
-                  {this.state.user &&
+                  {this.props.authed &&
                     this.props.groups.map((e) => {
                       return (
                         <Link
@@ -109,7 +110,7 @@ export default class Navbar extends Component {
                 <button className="dropbtn">Relatórios</button>
                 <div className="dropdown-content">
                   <hr className="py-0 my-1" />
-                  {this.state.user &&
+                  {this.props.authed &&
                     this.props.groups.map((e) => {
                       return (
                         <Link
