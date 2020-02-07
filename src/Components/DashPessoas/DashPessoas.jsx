@@ -52,8 +52,6 @@ class DashPessoas extends Component {
 
   render() {
     const { id: paramId } = this.props.match.params;
-    console.log(this.props.match.params.id);
-    console.log(paramId);
     return (
       <>
         <DashNavbar
