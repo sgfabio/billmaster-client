@@ -89,9 +89,9 @@ class App extends Component {
       groups: [],
       selectedGroup: fakeGroups[0],
     };
-    // this.addMember = this.addMember.bind(this); ===> PRECISA???
-    // this.addExpense = this.addExpense.bind(this);
-    // this.addSettle = this.addSettle.bind(this);
+    this.addMember = this.addMember.bind(this);
+    this.addExpense = this.addExpense.bind(this);
+    this.addSettle = this.addSettle.bind(this);
     this.renderModalDelete = this.renderModalDelete.bind(this); //TODOS OS DELETES ESTAO AQUI
     this.getUser = this.getUser.bind(this);
     this.fetchGroups = this.fetchGroups.bind(this);
