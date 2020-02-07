@@ -54,7 +54,7 @@ class ReportsSettle extends Component {
             <table className="table table3 table-striped">
               <thead>
                 <tr>
-                  <th scope="col">Integrante</th>
+                  <th scope="col">Valor</th>
                   <th scope="col">Pago por</th>
                   <th scope="col">Pagou para</th>
                 </tr>
@@ -64,7 +64,7 @@ class ReportsSettle extends Component {
                 {this.state.groupAllSettles.map((qry, idx) => {
                   return (
                     <tr key={idx}>
-                      <td>{qry.member}</td>
+                      <td>{qry.value}</td>
                       <td>{qry.paidBy}</td>
                       <td>{qry.paidTo}</td>
                     </tr>
