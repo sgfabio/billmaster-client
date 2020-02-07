@@ -13,7 +13,7 @@ class ReportsSummary extends Component {
   componentDidMount() {
     // this.getBalances();
     groups
-      .getBalance(this.props.groupId) //props do Id dlocalhost:500o grupo;
+      .getBalances(this.props.groupId) //props do Id dlocalhost:500o grupo;
       .then((qryObj) => {
         // console.log('componentDidMount', qryObj);
         this.setState(

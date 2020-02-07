@@ -7,18 +7,33 @@ class ReportsBills extends Component {
     this.state = { message: '', groupAllExpenses: [] };
   }
 
-  // componentDidUpdate() {
-  //   groups
-  //     .getBills(this.props.groupId) //props do Id do grupo;
-  //     .then((qryObj) => {
-  //       // console.log('componentDidMount', qryObj);
-  //       this.setState(
-  //         { msg: qryObj.data.msg, groupAllExpenses: qryObj.data.queryResult },
-  //         // () => console.log(this.state)
-  //       );
-  //     })
-  //     .catch((error) => console.log('erro ReportBills', error));
-  // }
+  componentDidUpdate(prevProps) {
+    if (this.props.groupId !== prevProps.groupId) {
+    groups
+      .getBills(this.props.groupId) //props do Id do grupo;
+      .then((qryObj) => {
+        // console.log('componentDidMount', qryObj);
+        this.setState(
+          { message: qryObj.data.message, groupAllExpenses: qryObj.data.groupAllExpenses },
+          // () => console.log('ReportBills - this.state:', this.state)
+        );
+      })
+      .catch((error) => console.log('erro ReportBills', error));
+    }
+  }
+
+  componentDidMount() {
+    groups
+      .getBills(this.props.groupId) //props do Id do grupo;
+      .then((qryObj) => {
+        console.log('componentDidMount', qryObj);
+        this.setState(
+          { message: qryObj.data.message, groupAllExpenses: qryObj.data.groupAllExpenses },
+          // () => console.log('ReportBills - this.state:', this.state)
+        );
+      })
+      .catch((error) => console.log('erro ReportBills', error));
+  }
 
   render() {
     if (this.state.groupAllExpenses) {
