@@ -208,7 +208,8 @@ class App extends Component {
       iAmInThisPage={thisPage}
       removeGroup={
         (this.removeGroup = (idOfGroupToRemove) => {
-          console.log('ESSE É O ID DO GRUPO PARA REMOVER', idOfGroupToRemove);
+          // console.log('ESSE É O ID DO GRUPO PARA REMOVER', idOfGroupToRemove);
+          groups.delete(idOfGroupToRemove);
         })
       }
       removeMember={
