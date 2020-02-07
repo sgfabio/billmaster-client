@@ -30,7 +30,10 @@ class DashDespesas extends Component {
         },
       },
     };
+    this.handleAllChecked = this.handleAllChecked.bind(this);
     this.editExpense = this.editExpense.bind(this);
+    this.handleCheckChieldElement = this.handleCheckChieldElement.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -74,6 +77,7 @@ class DashDespesas extends Component {
     this.setState({ newExpense: newExpense });
   };
   handleCheckChieldElement = (event) => {
+    console.log("TESTE IF OR NOT",event.target.checked)
     const { newExpense } = this.state;
     let members = [...this.state.members];
 
@@ -92,11 +96,11 @@ class DashDespesas extends Component {
           document.getElementById('isDivideByAll').checked = true;
           let it = 0;
           members.map((e) => {
-            !e.isChecked
+            (!e.isChecked)
               ? (document.getElementById('isDivideByAll').checked = false)
               : (it = 1);
-          });
-          selectedMembers.push(member.name);
+            });
+            selectedMembers.push(member.name);
         }
       }
       newExpense.split.isDivideByAll = document.getElementById(
@@ -129,7 +133,7 @@ class DashDespesas extends Component {
       default:
         break;
     }
-    this.setState({ newExpense: newExpense });
+    this.setState({ newExpense: newExpense }, () => console.log(newExpense.split.divideBy,"ÄQUEEIEIEIEIEIEIEIEI"));
   };
   handleSubmit = (event) => {
     event.preventDefault();
@@ -137,7 +141,7 @@ class DashDespesas extends Component {
     newExpense.split.divideBy = this.state.selectedMembers;
 
     // If has an id got to edit function and else add new one expense
-    newExpense._id
+    (newExpense._id)
       ? this.props.editExpense(newExpense._id, newExpense)
       : this.props.addExpense(newExpense);
 
@@ -178,6 +182,7 @@ class DashDespesas extends Component {
                 className="form-control"
                 name="paidBy"
                 onChange={this.handleChange}
+                value={this.state.newExpense.split.paidBy}
               >
                 <option>Selecione um membro</option>
                 {[...this.state.members]
@@ -198,6 +203,7 @@ class DashDespesas extends Component {
                 id="value"
                 placeholder="R$ 10,00"
                 onChange={this.handleChange}
+                value={this.state.newExpense.value}
                 name="value"
               />
             </div>
@@ -231,7 +237,7 @@ class DashDespesas extends Component {
                             this.handleCheckChieldElement
                           }
                           handleChange={this.handleChange}
-                          doSomething={this.doSomething}
+                          // doSomething={this.doSomething}
                           {...member}
                         />
                       );

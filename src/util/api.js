@@ -51,6 +51,17 @@ export const auth = {
 export const groups = {
   endpoint: process.env.REACT_APP_API, // 'http://localhost:5000/api', //Dev
 
+
+
+//! ---------- Não achei ... pode isso? ---------- 
+  addMember(nameString) {
+    return axios.post(
+      `${this.endpoint}/groups/${this.groupId}/pessoas`, nameString ,
+    { withCredentials: true }
+    );
+  },
+  
+  
   create(groupName, description, date) {
     // User must be logged in
     return axios.post(
@@ -110,8 +121,6 @@ export const groups = {
 
   put(groupID, groupDataObj) {
     // groupData é o objeto contendo as modificações nos atributos do grupo
-    console.log('aaaaaaaaaaaaaaaaa', groupID);
-    console.log('BBBBBBBBBBBBBBBBB', groupDataObj);
     return axios.put(
       // User must be logged in
       `${this.endpoint}/groups/${groupID}`,

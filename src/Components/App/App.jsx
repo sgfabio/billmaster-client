@@ -258,18 +258,12 @@ class App extends Component {
   };
 
   addMember = (newMember) => {
-    console.log('ESSA SAO AS INFORMAÇÕES DO NOVO MEMBRO', newMember);
-
-    // const groupCopy = { ...this.state.selectedGroup };
-    // groupCopy.members.push(newMember);
-
-    // this.setState({
-    //   selectedGroup: groupCopy,
-    // });
+    groups.addMember(newMember);
   };
 
   addExpense = (newExpense) => {
     console.log('ESSA SAO AS INFORMAÇÕES DA NOVA DESPESA', newExpense);
+    // createExpense(groupID, expenseDataObj)
 
     // const groupCopy = { ...this.state.selectedGroup }; -------------- APAGAR -------------
     // groupCopy.expense.push(newExpense);
