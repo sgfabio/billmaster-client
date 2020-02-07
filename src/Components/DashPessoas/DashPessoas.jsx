@@ -22,7 +22,6 @@ class DashPessoas extends Component {
     event.preventDefault();
     let str = this.state.newMember;
     str = str.replace(/\s{2,}/g, ' ');
-    console.log(str.length);
     if (str === ' ') {
       return;
     }
@@ -36,29 +35,16 @@ class DashPessoas extends Component {
       newMember: ' ',
     });
   }
-  // componentDidMount() {
-  //   this.getSingleGroup();
-  // }
-
-  async handleGetSelectedGroup() {
-    const { params } = this.props.match;
-    const group = await groups.getOne(params.id);
-
-    // console.log('group:', group)
-    this.setState({
-      selectedGroup: group.data,
-    });
-  }
 
   render() {
     const { id: paramId } = this.props.match.params;
+    let membersArray = [];
+    if (Array.isArray(this.props.selectedGroup.members)) {
+      membersArray = this.props.selectedGroup.members;
+    }
     return (
       <>
-        <DashNavbar
-          paramId={paramId}
-          // description={this.state.selectedGroup.description}
-          // groupName={this.state.selectedGroup.groupName}
-        />
+        <DashNavbar paramId={paramId} />
         <div className="dashMainContent mx-4">
           <h2>Adicionar pessoa:</h2>
           <form
@@ -101,12 +87,12 @@ class DashPessoas extends Component {
 
           <div className="dashBillsList">
             <div className="row">
-              {/* {this.state.selectedGroup.members
+              {membersArray
                 .sort((a, b) => a.localeCompare(b))
-                .map((e) => {
+                .map((e, i) => {
                   return (
                     <>
-                      <div className="col-lg-6 p-0 my-1">
+                      <div key={i} className="col-lg-6 p-0 my-1">
                         <button className="btn btn-outline-secondary col-10">
                           {e}
                         </button>{' '}
@@ -125,7 +111,7 @@ class DashPessoas extends Component {
                       </div>
                     </>
                   );
-                })} */}
+                })}
             </div>
           </div>
         </div>

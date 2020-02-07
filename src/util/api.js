@@ -51,17 +51,33 @@ export const auth = {
 export const groups = {
   endpoint: process.env.REACT_APP_API, // 'http://localhost:5000/api', //Dev
 
+  /*
 
+    try {
+      const response = await axios.post(
+        `${this.endpoint}/signup`,
+        {
+          username,
+          password,
+        },
+        { withCredentials: true }
+      );
+      const { data, status } = response;
+      return { data, status };
+    } catch (error) {
+      const { data, status } = error.response;
+      return { data, status };
+    }
 
-//! ---------- Não achei ... pode isso? ---------- 
-  addMember(nameString) {
-    return axios.post(
-      `${this.endpoint}/groups/${this.groupId}/pessoas`, nameString ,
-    { withCredentials: true }
+*/
+  async addMember(nameString, ) {
+    const response = await axios.post(
+      `${this.endpoint}/groups/${this.groupId}`,
+      nameString,
+      { withCredentials: true }
     );
   },
-  
-  
+
   create(groupName, description, date) {
     // User must be logged in
     return axios.post(

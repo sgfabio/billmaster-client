@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
 import './Dashboard.css';
+
+import { groups } from '../../util/api';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -11,7 +12,19 @@ class Dashboard extends Component {
       renderModalDelete: this.props.renderModalDelete,
       renderModalEdit: this.props.renderModalEdit,
     };
+    this.handleClick = this.handleClick.bind(this);
   }
+
+  async handleClick(id) {
+    const response = await groups.getOne(id);
+    const group = response.data;
+    this.props.getSelectedGroup(group);
+
+    this.setState({
+      selectedGroup: group.data,
+    });
+  }
+
   render() {
     const { match } = this.props;
     return (
@@ -24,6 +37,7 @@ class Dashboard extends Component {
               <div className="row m-1 d-flex justify-content-center">
                 <div className="col-md-7 d-flex flex-column mt-1">
                   <Link
+                    onClick={() => this.handleClick(e._id)}
                     to={`${match.url}/${e._id}/pessoas`}
                     className="btn btn-outline-secondary "
                   >
@@ -53,15 +67,15 @@ class Dashboard extends Component {
             </>
           );
         })}
-        <Route 
+        <Route
           path={`${match.path}/:id`}
-          render={({match}) => {
+          render={({ match }) => {
             return (
               <div>
-              {" "}
-              <h1>{match.params.id}</h1>
+                {' '}
+                <h1>{match.params.id}</h1>
               </div>
-            )
+            );
           }}
         />
       </>
