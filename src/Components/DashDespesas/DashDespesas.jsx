@@ -77,7 +77,6 @@ class DashDespesas extends Component {
     this.setState({ newExpense: newExpense });
   };
   handleCheckChieldElement = (event) => {
-    console.log("TESTE IF OR NOT",event.target.checked)
     const { newExpense } = this.state;
     let members = [...this.state.members];
 
@@ -86,26 +85,26 @@ class DashDespesas extends Component {
     members.map((member) => {
       if (member.name === event.target.value) {
         member.isChecked = event.target.checked;
-
+        
         if (!event.target.checked) {
           document.getElementById('isDivideByAll').checked = false;
           newExpense.split.isDivideByAll = false;
           let idx = selectedMembers.indexOf(member.name);
           selectedMembers.splice(idx, 1);
-        } else if (event.target.checked) {
+        }
+        else if (event.target.checked) {
           document.getElementById('isDivideByAll').checked = true;
           let it = 0;
           members.map((e) => {
             (!e.isChecked)
-              ? (document.getElementById('isDivideByAll').checked = false)
-              : (it = 1);
-            });
-            selectedMembers.push(member.name);
+            ? (document.getElementById('isDivideByAll').checked = false)
+            : (it = 1);
+          });
+          selectedMembers.push(member.name);
         }
       }
-      newExpense.split.isDivideByAll = document.getElementById(
-        'isDivideByAll'
-      ).checked;
+      newExpense.split.isDivideByAll = document.getElementById('isDivideByAll').checked;
+      newExpense.split.divideBy = selectedMembers;
     });
     this.setState({
       members: members,
@@ -133,7 +132,7 @@ class DashDespesas extends Component {
       default:
         break;
     }
-    this.setState({ newExpense: newExpense }, () => console.log(newExpense.split.divideBy,"ÄQUEEIEIEIEIEIEIEIEI"));
+    this.setState({ newExpense: newExpense });
   };
   handleSubmit = (event) => {
     event.preventDefault();
