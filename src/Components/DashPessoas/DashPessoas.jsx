@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
 import DashNavbar from '../DashNavbar/DashNavbar';
 import { groups } from '../../util/api';
 
@@ -53,8 +52,8 @@ class DashPessoas extends Component {
 
   render() {
     const { id: paramId } = this.props.match.params;
-    console.log(this.props.match.params.id)
-    console.log(paramId)
+    console.log(this.props.match.params.id);
+    console.log(paramId);
     return (
       <>
         <DashNavbar

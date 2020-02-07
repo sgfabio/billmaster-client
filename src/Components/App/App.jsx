@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -230,7 +230,7 @@ class App extends Component {
           let idx;
           let test = 0;
           groupCopy.expense.map((e) => {
-            e.ID === idToRemove ? (idx = test) : (test += 1);
+            return e.ID === idToRemove ? (idx = test) : (test += 1);
           }); //TODO Verificar a forma que o ID é passada
           groupCopy.expense.splice(idx, 1);
           this.setState({

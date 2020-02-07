@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import DashNavbar from '../DashNavbar/DashNavbar';
 import CheckBox from './Checkbox';
 import './DashDespesas.css';

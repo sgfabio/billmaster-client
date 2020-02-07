@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Switch, Route } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
+import { NavLink } from 'react-router-dom';
 
 class DashNavbar extends Component {
   constructor(props) {
