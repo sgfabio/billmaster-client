@@ -1,4 +1,4 @@
-.dashComponents{
+/* .dashComponents{
     height: 80px;
     display: flex;
 	flex-direction: row;
@@ -7,7 +7,7 @@
 	align-items: stretch;
     align-content: stretch;
     margin: 2px;
-}
+} */
 
 .boxComponent{
     height: 80px;

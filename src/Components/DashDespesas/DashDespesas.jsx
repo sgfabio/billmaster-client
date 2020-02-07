@@ -12,12 +12,12 @@ import { groups } from "../../util/api";
 // };
 class DashDespesas extends Component {
   constructor(props) {
-    // console.log(groups.getOne(props.location.pathname.replace("/groups/","").replace("undefined","").replace("/despesas","")));
+    console.log(props.oneGroup.members);
     super(props);
     this.state = {
       group: {},
-      members: [],
-      expenses: this.props.oneGroup.expense,
+      members: this.props.oneGroup.members,
+      expenses: this.props.oneGroup.expenses,
       selectedMembers: [],
       newExpense: {
         group: this.props.oneGroup._id,
@@ -58,16 +58,19 @@ class DashDespesas extends Component {
     this.getSingleGroup();
     this.singleSelection();
   }
-
+  
   handleAllChecked = event => {
     const { newExpense } = this.state;
     let isDivideByAll = "Error";
     event.target.checked ? (isDivideByAll = true) : (isDivideByAll = false);
     newExpense.split.isDivideByAll = isDivideByAll;
-
+    
     newExpense.split.divideBy = [];
-
-    const members = [...this.state.members];
+    const members = [...this.props.oneGroup.members].map((e) => {
+          let memberObj = { name: e };
+          return memberObj;
+        });
+    
     members.map(e =>
       event.target.checked
         ? newExpense.split.divideBy.push(e.name)
@@ -84,7 +87,7 @@ class DashDespesas extends Component {
   };
   handleCheckChieldElement = event => {
     const { newExpense } = this.state;
-    let members = [...this.state.members].map(e => {
+    const members = [...this.props.oneGroup.members].map(e => {
       let memberObj = { name: e };
       return memberObj;
     });
@@ -101,7 +104,7 @@ class DashDespesas extends Component {
           let idx = selectedMembers.indexOf(member.name);
           selectedMembers.splice(idx, 1);
           newExpense.split.divideBy = selectedMembers;
-        } else if (event.target.checked) {
+        } if (event.target.checked) {
           document.getElementById("isDivideByAll").checked = true;
           let it = 0;
           members.map(e => {
@@ -117,6 +120,8 @@ class DashDespesas extends Component {
         "isDivideByAll"
       ).checked;
     });
+
+    console.log(members,"SAAAAAAAAAAAAAAAAAAAAALLLLLLLLLLLLLLLLVVVVVVVVVAAAAAAAAAAAAAA");
     this.setState({
       members: members,
       selectedMembers: selectedMembers,
@@ -194,7 +199,7 @@ class DashDespesas extends Component {
                 value={this.state.newExpense.split.paidBy}
               >
                 <option>Selecione um membro</option>
-                {[...this.state.members]
+                {this.props.oneGroup.members
                   .map(e => {
                     let memberObj = { name: e };
                     return memberObj;
@@ -243,7 +248,7 @@ class DashDespesas extends Component {
                     </label>
                   </div>
                   <ul>
-                    {[...this.state.members]
+                    {[...this.props.oneGroup.members]
                       .map(e => {
                         let memberObj = { name: e };
                         return memberObj;
@@ -274,7 +279,7 @@ class DashDespesas extends Component {
           {/* <!-- Bills list --> */}
           <div className="dashBillsList m-1">
             <div className="row m-0">
-              {[...this.state.expenses].map(e => {
+              {this.state.expenses.map(e => {
                 return (
                   <div className="col-lg-5 p-0 m-1 mx-auto dashComponents">
                     <div className="col-9 p-0">
