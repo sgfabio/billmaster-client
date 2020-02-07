@@ -5,29 +5,27 @@ import ReportsBills from '../ReportsBills/ReportsBills';
 import ReportsSettle from '../ReportsSettle/ReportsSettle';
 
 const Reports = (props) => {
+  const { id: paramId } = props.match.params;
   return (
     <div>
       <div>
         <h1> Resumo dos acertos </h1>
         <div>
-          {/* Para testar o componente ReportsSummary, passar algum 'groupId' na prop abaixo  */}
-          <ReportsSettle groupId={'5e3c1dc6a4cbab45acf1bc82'} />
+          <ReportsSettle groupId={paramId} />
         </div>
 
         <hr />
 
         <h1> Relatório individual </h1>
         <div>
-          {/* Para testar o componente ReportsSummary, passar algum 'groupId' na prop abaixo  */}
-          <ReportsSummary groupId={'5e3c1dc6a4cbab45acf1bc82'} />
+          <ReportsSummary groupId={paramId} />
         </div>
 
         <hr />
 
         <h1> Todas as contas </h1>
         <div>
-          {/* Para testar o componente ReportsSummary, passar algum 'groupId' na prop abaixo  */}
-          <ReportsBills groupId={'5e3c1dc6a4cbab45acf1bc82'} />
+          <ReportsBills groupId={paramId} />
         </div>
       </div>
       <p>
