@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
 
-import { auth } from '../../util/api';
+import { auth, groups } from "../../util/api";
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -30,10 +30,11 @@ export default class Navbar extends Component {
 
     this.setState({ newInfoGroup: newInfoGroup });
   };
-  handleSubmitNewGroup = (event) => {
+  handleSubmitNewGroup = event => {
     event.preventDefault();
-    const {newInfoGroup} = this.state;
-    
+    const { newInfoGroup } = this.state;
+    groups.createNewGroup(newInfoGroup);
+
     this.props.addGroup(newInfoGroup);
   };
 
@@ -41,7 +42,7 @@ export default class Navbar extends Component {
     if (this.props.userInSession !== prevProps.userInSession) {
       this.setState({
         user: this.props.userInSession,
-        isAuth: this.props.authed,
+        isAuth: this.props.authed
       });
     }
   }
@@ -70,7 +71,9 @@ export default class Navbar extends Component {
               <div>
                 <Link className="navbar-brand" to="/groups">
                   <strong>BANANA</strong>
-                  <em><i>SPLIT</i></em>
+                  <em>
+                    <i>SPLIT</i>
+                  </em>
                 </Link>
               </div>
 
@@ -186,7 +189,12 @@ export default class Navbar extends Component {
                     >
                       Cancelar
                     </button>
-                    <button onClick={this.handleSubmitNewGroup} type="submit" className="btn btn-primary" data-dismiss="modal">
+                    <button
+                      onClick={this.handleSubmitNewGroup}
+                      type="submit"
+                      className="btn btn-primary"
+                      data-dismiss="modal"
+                    >
                       CRIAR
                     </button>
                   </div>

@@ -63,6 +63,14 @@ export const groups = {
       { withCredentials: true }
     );
   },
+  createNewGroup(infoNewGroup) {
+    // User must be logged in
+    return axios.post(
+      `${this.endpoint}/groups`,
+      infoNewGroup,
+      { withCredentials: true }
+    );
+  },
 
   // não testado
   async getAll() {
@@ -80,6 +88,12 @@ export const groups = {
     }
   },
 
+  getOne(groupId) {
+    return axios.get(
+      // User must be logged in
+      `${this.endpoint}/groups/${groupId}`,
+      { withCredentials: true }
+    );}
   async getOne(groupId) {
     try {
       const response = await axios.get(
@@ -97,9 +111,11 @@ export const groups = {
 
   put(groupID, groupDataObj) {
     // groupData é o objeto contendo as modificações nos atributos do grupo
+    console.log("aaaaaaaaaaaaaaaaa",groupID);
+    console.log("BBBBBBBBBBBBBBBBB",groupDataObj);
     return axios.put(
       // User must be logged in
-      `${this.endpoint}/grupos/${groupID}`,
+      `${this.endpoint}/groups/${groupID}`,
       groupDataObj, // Verificar modo de passar dados do grupo que serão modificados
       { withCredentials: true }
     );
@@ -108,7 +124,7 @@ export const groups = {
   delete(groupId) {
     return axios.delete(
       // User must be logged in
-      `${this.endpoint}/grupos/${groupId}`,
+      `${this.endpoint}/groups/${groupId}`,
       { withCredentials: true }
     );
   },

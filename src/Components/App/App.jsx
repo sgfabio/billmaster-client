@@ -23,6 +23,7 @@ import EditModal from '../Modal/EditModal';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Reports from '../Reports/Reports';
 
+
 // fake data
 const fakeExpense01 = {
   _id: 21,
@@ -61,7 +62,7 @@ const fakeSettle02 = {
 };
 const fakeGroups = [
   {
-    _id: '11',
+    _id: "5e3ca62f1572e558f09a9fd8",
     groupName: 'GRUPO 001',
     description: 'bla bla bla grupo',
     owner: 200,
@@ -164,8 +165,9 @@ class App extends Component {
       element={element}
       iAmInThisPage={thisPage}
       editGroup={
-        (this.editGroup = (idOfGroupToRemove, newInfo) => {
-          console.log('ESSE É O ID DO GRUPO PARA EDITAR', idOfGroupToRemove);
+        (this.editGroup = (idOfGroupToEdit, newInfo) => {
+          groups.put(idOfGroupToEdit,newInfo)
+          console.log('ESSE É O ID DO GRUPO PARA EDITAR', idOfGroupToEdit);
           console.log('ESSA SAO AS INFORMAÇÕES DO GRUPO PARA EDITAR', newInfo);
         })
       }
