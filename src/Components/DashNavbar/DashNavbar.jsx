@@ -12,7 +12,6 @@ class DashNavbar extends Component {
   }
   render() {
     const { paramId } = this.props;
-    console.log('props da dashNavbar:', this.props);
     return (
       <>
         <h1>

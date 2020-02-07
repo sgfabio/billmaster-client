@@ -70,14 +70,6 @@ export const groups = {
     }
 
 */
-  async addMember(nameString, ) {
-    const response = await axios.post(
-      `${this.endpoint}/groups/${this.groupId}`,
-      nameString,
-      { withCredentials: true }
-    );
-  },
-
   create(groupName, description, date) {
     // User must be logged in
     return axios.post(
@@ -127,14 +119,20 @@ export const groups = {
     }
   },
 
-  put(groupID, groupDataObj) {
-    // groupData é o objeto contendo as modificações nos atributos do grupo
-    return axios.put(
-      // User must be logged in
-      `${this.endpoint}/groups/${groupID}`,
-      groupDataObj, // Verificar modo de passar dados do grupo que serão modificados
-      { withCredentials: true }
-    );
+  async put(groupId, groupDataObj) {
+    try {
+      const response = await axios.put(
+        // User must be logged in
+        `${this.endpoint}/groups/${groupId}`,
+        groupDataObj, // Verificar modo de passar dados do grupo que serão modificados
+        { withCredentials: true }
+      );
+      const { data, status } = response;
+      return { data, status };
+    } catch (error) {
+      const { data, status } = error.response;
+      return { data, status };
+    }
   },
 
   delete(groupId) {
