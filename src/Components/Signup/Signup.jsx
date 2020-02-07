@@ -35,7 +35,7 @@ export default class Signup extends Component {
         return;
       } else {
         this.props.getUser(data);
-        this.props.history.push("/dashboard");
+        this.props.history.push("/groups");
         this.setState({
           error: false,
         });

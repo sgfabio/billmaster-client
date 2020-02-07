@@ -12,7 +12,9 @@ import Navbar from '../Navbar/Navbar';
 
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
+
 import Dashboard from '../Dashboard/Dashboard';
+
 import Pessoas from '../DashPessoas/DashPessoas';
 import Despesas from '../DashDespesas/DashDespesas';
 import Acertos from '../DashAcertos/DashAcertos';
@@ -321,10 +323,9 @@ class App extends Component {
                 );
               }}
             />
-            {/* tudo depois daqui é nested.. */}
             <Route
               exact
-              path="/groups/pessoas"
+              path="/groups/:id/pessoas"
               render={(props) => {
                 return (
                   <Pessoas
@@ -339,7 +340,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/groups/despesas"
+              path="/groups/:id/despesas"
               render={(props) => {
                 return (
                   <Despesas
@@ -354,7 +355,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/groups/acertos"
+              path="/groups/:id/acertos"
               render={(props) => {
                 return (
                   <Acertos

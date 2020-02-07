@@ -3,7 +3,6 @@ import axios from 'axios';
 export const auth = {
   endpoint: process.env.REACT_APP_API, // 'http://localhost:5000/api', //Dev
 
-  // TODO: não consegui buscar o erro do servidor. Se consologar a resposta do retorno sem resolver a promessa, eu vejo o erro... mas se tratar a promessa, não vejo mais o erro! tornei async e coloquei error handling pra conseguir detectar que o login falhou no componente login
   async login(username, password) {
     try {
       const response = await axios.post(
@@ -94,7 +93,20 @@ export const groups = {
       // User must be logged in
       `${this.endpoint}/groups/${groupId}`,
       { withCredentials: true }
-    );
+    );}
+  async getOne(groupId) {
+    try {
+      const response = await axios.get(
+        // User must be logged in
+        `${this.endpoint}/groups/${groupId}`,
+        { withCredentials: true }
+      );
+      const { data, status } = response;
+      return { data, status };
+    } catch (error) {
+      const { data, status } = error.response;
+      return { data, status };
+    }
   },
 
   put(groupID, groupDataObj) {
@@ -231,5 +243,4 @@ export const groups = {
       { withCredentials: true }
     );
   },
-
 };

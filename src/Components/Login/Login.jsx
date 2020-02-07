@@ -24,10 +24,6 @@ export default class Login extends Component {
     const { username, password } = this.state;
     try {
       const { data, status } = await auth.login(username, password);
-      console.log(
-        'data: ', data,
-        'status: ', status, 
-      )
       if (status !== 200) {
         this.setState({
           error: data.message,
