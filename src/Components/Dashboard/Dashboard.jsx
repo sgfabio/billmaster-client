@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
 import './Dashboard.css';
 
 import { groups } from '../../util/api';

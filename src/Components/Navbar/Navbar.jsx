@@ -21,6 +21,7 @@ export default class Navbar extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmitNewGroup = this.handleSubmitNewGroup.bind(this);
     this.logout = this.logout.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   handleChange = (event) => {
     const newInfoGroup = { ...this.state.newInfoGroup };
@@ -59,8 +60,19 @@ export default class Navbar extends Component {
     }
   }
 
+  async handleClick(id) {
+    const response = await groups.getOne(id);
+    const group = response.data;
+    this.props.getSelectedGroup(group);
+
+    // console.log('group:', group)
+    this.setState({
+      selectedGroup: group.data,
+    });
+  }
+
   render() {
-    console.log('pros da navbar:', this.props)
+    console.log('pros da navbar:', this.props);
     // TODO: barbosa, acrescentei um botão, mas parece que quebrei o styling.
     console.log('grupos nas props? ', this.props.groups);
     return (
@@ -92,9 +104,11 @@ export default class Navbar extends Component {
                   </button>
                   <hr className="py-0 my-1" />
                   {this.props.authed &&
-                    this.props.groups.map((e) => {
+                    this.props.groups.map((e, i) => {
                       return (
                         <Link
+                          key={i}
+                          onClick={() => this.handleClick(e._id)}
                           to={`/groups/${e._id}/pessoas`}
                           className="dropdown-item px-1"
                           type="button"
