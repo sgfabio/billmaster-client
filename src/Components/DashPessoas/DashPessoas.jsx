@@ -59,6 +59,15 @@ class DashPessoas extends Component {
     }
   }
 
+  async componentDidUpdate(prevProps, prevState) {
+    if (Object.keys(this.props.selectedGroup).length === 0) {
+      const response = await groups.getOne(this.props.match.params.id);
+      const group = response.data;
+      this.props.getSelectedGroup(group);
+    }
+    console.log('props no dashpessoas:', this.props);
+  }
+
   render() {
     const { id: paramId } = this.props.match.params;
     let membersArray = [];

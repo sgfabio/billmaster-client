@@ -41,10 +41,6 @@ class App extends Component {
     this.getGroups = this.getGroups.bind(this);
   }
 
-  componentDidUpdate() {
-    this.fetchGroups();
-  }
-
   componentDidMount() {
     this.fetchGroups();
   }
@@ -284,7 +280,7 @@ class App extends Component {
                 return (
                   <Pessoas
                     {...props}
-                    // getSelectedGroup={this.getSelectedGroup}
+                    getSelectedGroup={this.getSelectedGroup}
                     selectedGroup={this.state.selectedGroup}
                     renderModalDelete={this.renderModalDelete}
                     renderModalEdit={this.renderModalEdit}
