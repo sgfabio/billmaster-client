@@ -54,7 +54,7 @@ class DashDespesas extends Component {
   handleAllChecked = (event) => {
     const newExpense = { ...this.state.newExpense };
     let isDivideByAll = 'Error';
-    event.target.checked ? (isDivideByAll = true) : (isDivideByAll = false);
+    (event.target.checked) ? (isDivideByAll = true) : (isDivideByAll = false);
     newExpense.split.isDivideByAll = isDivideByAll;
 
     newExpense.split.divideBy = [];
