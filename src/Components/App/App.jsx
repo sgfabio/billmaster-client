@@ -95,6 +95,7 @@ class App extends Component {
     this.renderModalDelete = this.renderModalDelete.bind(this); //TODOS OS DELETES ESTAO AQUI
     this.getUser = this.getUser.bind(this);
     this.fetchGroups = this.fetchGroups.bind(this);
+    this.getSelectedGroup = this.getSelectedGroup.bind(this);
   }
 
   componentDidUpdate() {
@@ -129,6 +130,18 @@ class App extends Component {
       this.setState({
         user: userObj,
         isAuth: true,
+      });
+    }
+  }
+
+  getSelectedGroup(groupObj) {
+    if (groupObj === null) {
+      this.setState({
+        selectedGroup: null,
+      });
+    } else {
+      this.setState({
+        selectedGroup: groupObj,
       });
     }
   }

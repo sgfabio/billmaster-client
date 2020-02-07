@@ -41,7 +41,7 @@ class DashPessoas extends Component {
   //   this.getSingleGroup();
   // }
 
-  async getSingleGroup() {
+  async handleGetSelectedGroup() {
     const { params } = this.props.match;
     const group = await groups.getOne(params.id);
 
