@@ -224,18 +224,9 @@ class App extends Component {
         })
       }
       removeExpense={
-        (this.removeExpense = (idToRemove) => {
-          console.log('ESSE É O ID DA DESPESA PARA REMOVER', idToRemove);
-          const groupCopy = { ...this.state.selectedGroup };
-          let idx;
-          let test = 0;
-          groupCopy.expense.map((e) => {
-            e.ID === idToRemove ? (idx = test) : (test += 1);
-          }); //TODO Verificar a forma que o ID é passada
-          groupCopy.expense.splice(idx, 1);
-          this.setState({
-            selectedGroup: groupCopy,
-          });
+        (this.removeExpense = (expenseInfo) => {
+          const {_id, group, description, value, split } = expenseInfo;
+          groups.deleteExpense(group, _id);
         })
       }
       removeSettle={
@@ -262,20 +253,15 @@ class App extends Component {
   };
 
   addExpense = (newExpense) => {
-    console.log('ESSA SAO AS INFORMAÇÕES DA NOVA DESPESA', newExpense);
-    // createExpense(groupID, expenseDataObj)
-
-    // const groupCopy = { ...this.state.selectedGroup }; -------------- APAGAR -------------
-    // groupCopy.expense.push(newExpense);
-
-    // this.setState({
-    //   selectedGroup: groupCopy,
-    // });
+    const {group, description, value, split } = newExpense;
+    groups.createExpense(group, {description, value, split})
   };
+
   editExpense = (idOfExpenseToEdit, newInfo) => {
-    console.log('ESSE É O ID DA DESPESA PARA EDITAR', idOfExpenseToEdit);
-    console.log('ESSA SAO AS INFORMAÇÕES DA DESPESA PARA EDITAR', newInfo);
+    const {group, description, value, split } = newInfo;
+    groups.putExpense(group, idOfExpenseToEdit, {description, value, split})
   };
+
   editSettle = (idOfSettleToEdit, newInfo) => {
     const { group, value, paidBy, paidTo } = newInfo;
     groups.putSettle(group, idOfSettleToEdit, {value,paidBy,paidTo});

@@ -52,23 +52,17 @@ class DashDespesas extends Component {
   // }
 
   handleAllChecked = (event) => {
-    const newExpense = { ...this.state.newExpense };
+    const {newExpense} = this.state;
     let isDivideByAll = 'Error';
     (event.target.checked) ? (isDivideByAll = true) : (isDivideByAll = false);
     newExpense.split.isDivideByAll = isDivideByAll;
 
     newExpense.split.divideBy = [];
 
-    let members = [...this.state.members];
-    members.map((e) =>
-      event.target.checked
-        ? newExpense.split.divideBy.push(e.name)
-        : newExpense.split.divideBy
-    );
+    const members = [...this.state.members];
+    members.map((e) => event.target.checked ? newExpense.split.divideBy.push(e.name) : newExpense.split.divideBy );
     members.forEach((member) => (member.isChecked = event.target.checked));
-    this.setState({ newExpense: newExpense }, () =>
-      console.log('TESTE', this.state.newExpense.split.divideBy)
-    );
+    this.setState({ newExpense: newExpense });
   };
   editExpense = (e) => {
     let { newExpense } = this.state;
@@ -91,6 +85,8 @@ class DashDespesas extends Component {
           newExpense.split.isDivideByAll = false;
           let idx = selectedMembers.indexOf(member.name);
           selectedMembers.splice(idx, 1);
+          newExpense.split.divideBy = selectedMembers;
+
         }
         else if (event.target.checked) {
           document.getElementById('isDivideByAll').checked = true;
@@ -101,10 +97,10 @@ class DashDespesas extends Component {
             : (it = 1);
           });
           selectedMembers.push(member.name);
+          newExpense.split.divideBy = selectedMembers;
         }
       }
       newExpense.split.isDivideByAll = document.getElementById('isDivideByAll').checked;
-      newExpense.split.divideBy = selectedMembers;
     });
     this.setState({
       members: members,
@@ -137,13 +133,12 @@ class DashDespesas extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { newExpense } = this.state;
-    newExpense.split.divideBy = this.state.selectedMembers;
-
+    
     // If has an id got to edit function and else add new one expense
     (newExpense._id)
-      ? this.props.editExpense(newExpense._id, newExpense)
-      : this.props.addExpense(newExpense);
-
+    ? this.props.editExpense(newExpense._id, newExpense)
+    : this.props.addExpense(newExpense);
+    
     this.setState({ newExpense: newExpense });
   };
 
@@ -282,7 +277,7 @@ class DashDespesas extends Component {
                     </div>
                     {this.props.renderModalDelete(
                       e.description,
-                      e._id,
+                      e,
                       'expense'
                     )}
                   </div>
