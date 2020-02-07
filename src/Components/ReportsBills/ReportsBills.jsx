@@ -7,18 +7,18 @@ class ReportsBills extends Component {
     this.state = { message: '', groupAllExpenses: [] };
   }
 
-  componentDidMount() {
-    groups
-      .getBills(this.props.groupId) //props do Id do grupo;
-      .then((qryObj) => {
-        console.log('componentDidMount', qryObj);
-        this.setState(
-          { msg: qryObj.data.msg, groupAllExpenses: qryObj.data.queryResult },
-          () => console.log(this.state)
-        );
-      })
-      .catch((error) => console.log('erro ReportBills', error));
-  }
+  // componentDidUpdate() {
+  //   groups
+  //     .getBills(this.props.groupId) //props do Id do grupo;
+  //     .then((qryObj) => {
+  //       // console.log('componentDidMount', qryObj);
+  //       this.setState(
+  //         { msg: qryObj.data.msg, groupAllExpenses: qryObj.data.queryResult },
+  //         // () => console.log(this.state)
+  //       );
+  //     })
+  //     .catch((error) => console.log('erro ReportBills', error));
+  // }
 
   render() {
     if (this.state.groupAllExpenses) {
