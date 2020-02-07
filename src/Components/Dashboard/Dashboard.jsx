@@ -22,27 +22,27 @@ class Dashboard extends Component {
             <>
               <hr />
               <div className="row m-1 d-flex justify-content-center">
-                <div class="col-md-7 d-flex flex-column mt-1">
+                <div className="col-md-7 d-flex flex-column mt-1">
                   <Link
                     to={`${match.url}/${e._id}/pessoas`}
-                    class="btn btn-outline-secondary "
+                    className="btn btn-outline-secondary "
                   >
                     {e.groupName} - {e.description}
                   </Link>
                 </div>
-                <div class="col-md-4 p-0 ml-1 d-flex flex-row justify-content-center mt-1">
-                  <button class="btn btn-secondary mr-1">Relatório</button>
+                <div className="col-md-4 p-0 ml-1 d-flex flex-row justify-content-center mt-1">
+                  <button className="btn btn-secondary mr-1">Relatório</button>
                   <button
                     data-toggle="modal"
                     data-target={`#editButton${e._id}`}
-                    class="btn btn-warning mr-1"
+                    className="btn btn-warning mr-1"
                   >
                     Editar
                   </button>
                   <button
                     data-toggle="modal"
                     data-target={`#deleteButton${e._id}`}
-                    class="btn btn-danger"
+                    className="btn btn-danger"
                   >
                     Excluir
                   </button>
