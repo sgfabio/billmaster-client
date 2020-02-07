@@ -12,7 +12,6 @@ import { groups } from "../../util/api";
 // };
 class DashDespesas extends Component {
   constructor(props) {
-    console.log(props.oneGroup.members);
     super(props);
     this.state = {
       group: {},
@@ -30,11 +29,11 @@ class DashDespesas extends Component {
         }
       }
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAllChecked = this.handleAllChecked.bind(this);
     this.editExpense = this.editExpense.bind(this);
     this.handleCheckChieldElement = this.handleCheckChieldElement.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   async singleSelection() {
@@ -87,12 +86,16 @@ class DashDespesas extends Component {
   };
   handleCheckChieldElement = event => {
     const { newExpense } = this.state;
-    const members = [...this.props.oneGroup.members].map(e => {
-      let memberObj = { name: e };
-      return memberObj;
-    });
+    const { members } = this.state;
 
-    let selectedMembers = [...this.state.selectedMembers];
+    
+    // const member = []
+    // member.name = [event.target.value];
+    // member.isChecked = event.target.checked;
+    // members.push(member);
+    
+    
+    let selectedMembers = this.state.selectedMembers;
 
     members.map(member => {
       if (member.name === event.target.value) {
@@ -108,9 +111,9 @@ class DashDespesas extends Component {
           document.getElementById("isDivideByAll").checked = true;
           let it = 0;
           members.map(e => {
-            !e.isChecked
-              ? (document.getElementById("isDivideByAll").checked = false)
-              : (it = 1);
+           !e.isChecked
+            ? (document.getElementById("isDivideByAll").checked = false)
+            : (it = 1);
           });
           selectedMembers.push(member.name);
           newExpense.split.divideBy = selectedMembers;
@@ -121,7 +124,7 @@ class DashDespesas extends Component {
       ).checked;
     });
 
-    console.log(members,"SAAAAAAAAAAAAAAAAAAAAALLLLLLLLLLLLLLLLVVVVVVVVVAAAAAAAAAAAAAA");
+    console.log(members,"SAAAAAAAAAAAAAAAAAAAAALLLLLLLLLLLLLLLLVVVVVVVVVAAAAAAAAAAAAAA",selectedMembers);
     this.setState({
       members: members,
       selectedMembers: selectedMembers,
@@ -129,6 +132,7 @@ class DashDespesas extends Component {
     });
   };
   handleChange = event => {
+    console.log(event.target.name);
     const newExpense = { ...this.state.newExpense };
     const { name, value } = event.target;
 
@@ -153,24 +157,24 @@ class DashDespesas extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { newExpense } = this.state;
-
+    console.log("AQUI VEM AS INFORMACOES", newExpense);
+    
     // If has an id got to edit function and else add new one expense
     newExpense._id
-      ? this.props.editExpense(newExpense._id, newExpense)
-      : this.props.addExpense(newExpense);
-
+    ? this.props.editExpense(newExpense._id, newExpense)
+    : this.props.addExpense(newExpense);
+    
     this.setState({ newExpense: newExpense });
   };
 
   render() {
-    console.log('grupo selecionado:', this.props.selectedGroup)
     const { id: paramId } = this.props.match.params;
     return (
       <>
         <DashNavbar
           paramId={paramId}
-          description={this.state.group.description}
-          groupName={this.state.group.groupName}
+          description={this.props.oneGroup.description}
+          groupName={this.props.oneGroup.groupName}
         />
 
         <div className="dashMainContent mx-2 p-0">
@@ -261,7 +265,6 @@ class DashDespesas extends Component {
                               this.handleCheckChieldElement
                             }
                             handleChange={this.handleChange}
-                            // doSomething={this.doSomething}
                             {...member}
                           />
                         );
@@ -271,7 +274,7 @@ class DashDespesas extends Component {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-warning mb-1 col-xl-1">
+            <button onClick={()=>{this.handleSubmit()}} type="submit" className="btn btn-warning mb-1 col-xl-1">
               Submit
             </button>
           </form>

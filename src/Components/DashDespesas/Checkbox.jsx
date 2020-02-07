@@ -8,12 +8,12 @@ export const CheckBox = props => {
         className="mx=auto my-auto"
         // key="split"
         id={props.name}
-        onClick={props.handleCheckChieldElement}
+        // onClick={props.handleCheckChieldElement}
         type="checkbox"
         checked={props.isChecked}
         name="divideBy"
         value={props.name}
-        // onChange={props.handleCheckChieldElement}
+        onChange={props.handleCheckChieldElement}
         />
       <label
         className="dropdown-item mx-0 my-0 bg-transparent"
