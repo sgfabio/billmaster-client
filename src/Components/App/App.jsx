@@ -23,63 +23,6 @@ import EditModal from '../Modal/EditModal';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Reports from '../Reports/Reports';
 
-// fake data
-const fakeExpense01 = {
-  _id: 21,
-  group: '000',
-  description: 'ABC EXPENSE',
-  value: 1000,
-  split: {
-    paidBy: 'FULANO',
-    divideBy: ['CICLANO-01', 'CICLANO-02'],
-  },
-};
-const fakeExpense02 = {
-  _id: 25,
-  group: '000',
-  description: 'ABC EXPENSE 0002',
-  value: 1000,
-  split: {
-    paidBy: 'FULANO 02',
-    divideBy: ['CICLANO-01', 'CICLANO-02'],
-  },
-};
-const fakeMembers = ['Fulano', 'Ciclano', 'Barbosa'];
-const fakeSettle01 = {
-  _id: 31,
-  group: 'GROUP ID',
-  value: 200,
-  paidBy: fakeMembers[0],
-  paidTo: fakeMembers[1],
-};
-const fakeSettle02 = {
-  _id: 32,
-  group: 'GROUP ID',
-  value: 300,
-  paidBy: fakeMembers[1],
-  paidTo: fakeMembers[2],
-};
-const fakeGroups = [
-  {
-    _id: '5e3ca62f1572e558f09a9fd8',
-    groupName: 'GRUPO 001',
-    description: 'bla bla bla grupo',
-    owner: 200,
-    members: fakeMembers,
-    expense: [fakeExpense01, fakeExpense02],
-    settles: [fakeSettle01, fakeSettle02],
-  },
-  {
-    _id: '12',
-    groupName: 'GRUPO 002',
-    description: 'lalala',
-    owner: 200,
-    members: fakeMembers, //STRING
-    expense: [fakeExpense02, fakeExpense01],
-    settles: [fakeSettle02, fakeSettle01],
-  },
-];
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -87,7 +30,7 @@ class App extends Component {
       user: null,
       isAuth: false,
       groups: [],
-      selectedGroup: fakeGroups[0],
+      selectedGroup: {},
     };
     // this.addMember = this.addMember.bind(this); ===> PRECISA???
     // this.addExpense = this.addExpense.bind(this);
@@ -122,6 +65,7 @@ class App extends Component {
   }
 
   getUser(userObj) {
+    console.log('o que esta chegando aqui?', userObj);
     if (userObj === null) {
       this.setState({
         user: null,
@@ -136,6 +80,7 @@ class App extends Component {
   }
 
   getSelectedGroup(groupObj) {
+    console.log('estou recebendo um id?', groupObj);
     if (groupObj === null) {
       this.setState({
         selectedGroup: null,
@@ -278,6 +223,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar
+          getSelectedGroup={this.getSelectedGroup}
           userInSession={this.state.user}
           getUser={this.getUser}
           authed={this.state.isAuth}
@@ -290,9 +236,12 @@ class App extends Component {
               exact
               path="/groups/:id/reports"
               render={(props) => {
-                return <Reports
-                // data={this.state}
-                {...props} />;
+                return (
+                  <Reports
+                    // data={this.state}
+                    {...props}
+                  />
+                );
               }}
             />
             <Route
@@ -327,10 +276,11 @@ class App extends Component {
               render={(props) => {
                 return (
                   <Dashboard
+                    getSelectedGroup={this.getSelectedGroup}
                     data={this.state}
-                    {...props}
                     renderModalDelete={this.renderModalDelete}
                     renderModalEdit={this.renderModalEdit}
+                    {...props}
                   />
                 );
               }}
@@ -339,11 +289,12 @@ class App extends Component {
               exact
               path="/groups/:id/pessoas"
               render={(props) => {
-                console.log('oi, rota parametrizada!')
+                console.log('oi, rota parametrizada!');
                 return (
                   <Pessoas
                     {...props}
-                    oneGroup={this.state.selectedGroup}
+                    // getSelectedGroup={this.getSelectedGroup}
+                    selectedGroup={this.state.selectedGroup}
                     renderModalDelete={this.renderModalDelete}
                     renderModalEdit={this.renderModalEdit}
                     addMember={this.addMember}
@@ -412,9 +363,12 @@ class App extends Component {
               exact
               path="/groups/:id/reports"
               render={(props) => {
-                return <Reports
-                // data={this.state}
-                {...props} />;
+                return (
+                  <Reports
+                    // data={this.state}
+                    {...props}
+                  />
+                );
               }}
             />
             {/* <PrivateRoute
