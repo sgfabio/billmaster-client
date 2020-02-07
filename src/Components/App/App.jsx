@@ -288,15 +288,18 @@ class App extends Component {
           <Switch>
             <Route
               exact
-              path="/reports"
+              path="/groups/:id/reports"
               render={(props) => {
-                return <Reports data={this.state} {...props} />;
+                return <Reports
+                // data={this.state}
+                {...props} />;
               }}
             />
             <Route
               exact
               path="/login"
               render={(props) => {
+                console.log('oi, /login!');
                 return (
                   <Login
                     getUser={this.getUser}
@@ -336,6 +339,7 @@ class App extends Component {
               exact
               path="/groups/:id/pessoas"
               render={(props) => {
+                console.log('oi, rota parametrizada!')
                 return (
                   <Pessoas
                     {...props}
@@ -406,18 +410,20 @@ class App extends Component {
             />
             <Route
               exact
-              path="/reports"
+              path="/groups/:id/reports"
               render={(props) => {
-                return <Reports data={this.state} {...props} />;
+                return <Reports
+                // data={this.state}
+                {...props} />;
               }}
             />
-            <PrivateRoute
+            {/* <PrivateRoute
               exact
               path="/dashboard"
               authed={this.state.isAuth}
               component={Dashboard}
               data={this.state}
-            />
+            /> */}
 
             <PrivateRoute
               exact

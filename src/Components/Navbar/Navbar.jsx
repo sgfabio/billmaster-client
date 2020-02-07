@@ -60,7 +60,7 @@ export default class Navbar extends Component {
   }
 
   render() {
-    // TODO: barbosa, se liga. EStou recebendo os grupos por props, mas não no estado! Isso deve ser uma fonte de problemas nessa reta final. Bora nessa!
+    // TODO: barbosa, acrescentei um botão, mas parece que quebrei o styling.
     console.log('grupos nas props? ', this.props.groups);
     return (
       <div>
@@ -77,7 +77,9 @@ export default class Navbar extends Component {
               </div>
 
               <div className="dropdown ml-auto mr-3 btn btn-outline-dark dropdown-toggle">
-                <button className="dropbtn">Grupos</button>
+                <Link to="/groups" className="dropbtn">
+                  Grupos
+                </Link>
                 <div className="dropdown-content">
                   <button
                     className="btn btn-success dropdown-item bg-success text-white"
@@ -93,6 +95,25 @@ export default class Navbar extends Component {
                       return (
                         <Link
                           to={`/groups/${e._id}/pessoas`}
+                          className="dropdown-item px-1"
+                          type="button"
+                        >
+                          {e.groupName}
+                        </Link>
+                      );
+                    })}
+                </div>
+              </div>
+
+              <div className="dropdown ml-auto mr-3 btn btn-outline-dark dropdown-toggle">
+                <button className="dropbtn">Relatórios</button>
+                <div className="dropdown-content">
+                  <hr className="py-0 my-1" />
+                  {this.state.user &&
+                    this.props.groups.map((e) => {
+                      return (
+                        <Link
+                          to={`/groups/${e._id}/reports`}
                           className="dropdown-item px-1"
                           type="button"
                         >
