@@ -22,7 +22,7 @@ class DeleteModal extends Component {
         this.state.removeMember(this.state.element)
         break;
       case "expense":
-        this.state.removeExpense(this.state.element)
+        this.props.removeExpense(this.state.element)
         break;
       case "settle":
         this.props.removeSettle(this.state.element)
@@ -37,7 +37,7 @@ class DeleteModal extends Component {
     return (
       <>
       {/* // CONFIRM EXCLUSION MODAL */}
-      <div className="modal fade" id={`deleteButton${this.state.element}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div className="modal fade" id={`deleteButton${(this.state.iAmInThisPage === "settle" || this.state.iAmInThisPage === "expense") ? this.state.element._id : this.state.element}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-header">

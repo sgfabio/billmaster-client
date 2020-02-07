@@ -29,7 +29,10 @@ class DashDespesas extends Component {
         },
       },
     };
+    this.handleAllChecked = this.handleAllChecked.bind(this);
     this.editExpense = this.editExpense.bind(this);
+    this.handleCheckChieldElement = this.handleCheckChieldElement.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -48,23 +51,17 @@ class DashDespesas extends Component {
   // }
 
   handleAllChecked = (event) => {
-    const newExpense = { ...this.state.newExpense };
+    const {newExpense} = this.state;
     let isDivideByAll = 'Error';
-    event.target.checked ? (isDivideByAll = true) : (isDivideByAll = false);
+    (event.target.checked) ? (isDivideByAll = true) : (isDivideByAll = false);
     newExpense.split.isDivideByAll = isDivideByAll;
 
     newExpense.split.divideBy = [];
 
-    let members = [...this.state.members];
-    members.map((e) =>
-      event.target.checked
-        ? newExpense.split.divideBy.push(e.name)
-        : newExpense.split.divideBy
-    );
+    const members = [...this.state.members];
+    members.map((e) => event.target.checked ? newExpense.split.divideBy.push(e.name) : newExpense.split.divideBy );
     members.forEach((member) => (member.isChecked = event.target.checked));
-    this.setState({ newExpense: newExpense }, () =>
-      console.log('TESTE', this.state.newExpense.split.divideBy)
-    );
+    this.setState({ newExpense: newExpense });
   };
   editExpense = (e) => {
     let { newExpense } = this.state;
@@ -81,26 +78,28 @@ class DashDespesas extends Component {
     members.map((member) => {
       if (member.name === event.target.value) {
         member.isChecked = event.target.checked;
-
+        
         if (!event.target.checked) {
           document.getElementById('isDivideByAll').checked = false;
           newExpense.split.isDivideByAll = false;
           let idx = selectedMembers.indexOf(member.name);
           selectedMembers.splice(idx, 1);
-        } else if (event.target.checked) {
+          newExpense.split.divideBy = selectedMembers;
+
+        }
+        else if (event.target.checked) {
           document.getElementById('isDivideByAll').checked = true;
           let it = 0;
           members.map((e) => {
-            !e.isChecked
-              ? (document.getElementById('isDivideByAll').checked = false)
-              : (it = 1);
+            (!e.isChecked)
+            ? (document.getElementById('isDivideByAll').checked = false)
+            : (it = 1);
           });
           selectedMembers.push(member.name);
+          newExpense.split.divideBy = selectedMembers;
         }
       }
-      newExpense.split.isDivideByAll = document.getElementById(
-        'isDivideByAll'
-      ).checked;
+      newExpense.split.isDivideByAll = document.getElementById('isDivideByAll').checked;
     });
     this.setState({
       members: members,
@@ -133,13 +132,12 @@ class DashDespesas extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { newExpense } = this.state;
-    newExpense.split.divideBy = this.state.selectedMembers;
-
+    
     // If has an id got to edit function and else add new one expense
-    newExpense._id
-      ? this.props.editExpense(newExpense._id, newExpense)
-      : this.props.addExpense(newExpense);
-
+    (newExpense._id)
+    ? this.props.editExpense(newExpense._id, newExpense)
+    : this.props.addExpense(newExpense);
+    
     this.setState({ newExpense: newExpense });
   };
 
@@ -177,6 +175,7 @@ class DashDespesas extends Component {
                 className="form-control"
                 name="paidBy"
                 onChange={this.handleChange}
+                value={this.state.newExpense.split.paidBy}
               >
                 <option>Selecione um membro</option>
                 {[...this.state.members]
@@ -197,6 +196,7 @@ class DashDespesas extends Component {
                 id="value"
                 placeholder="R$ 10,00"
                 onChange={this.handleChange}
+                value={this.state.newExpense.value}
                 name="value"
               />
             </div>
@@ -230,7 +230,7 @@ class DashDespesas extends Component {
                             this.handleCheckChieldElement
                           }
                           handleChange={this.handleChange}
-                          doSomething={this.doSomething}
+                          // doSomething={this.doSomething}
                           {...member}
                         />
                       );
@@ -276,7 +276,7 @@ class DashDespesas extends Component {
                     </div>
                     {this.props.renderModalDelete(
                       e.description,
-                      e._id,
+                      e,
                       'expense'
                     )}
                   </div>

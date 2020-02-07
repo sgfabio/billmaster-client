@@ -90,7 +90,6 @@ export default class Navbar extends Component {
                   <hr className="py-0 my-1" />
                   {this.state.user &&
                     this.props.groups.map((e) => {
-                      console.log('e:', e);
                       return (
                         <Link
                           to={`/groups/${e._id}/pessoas`}

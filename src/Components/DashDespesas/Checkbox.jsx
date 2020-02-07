@@ -13,7 +13,7 @@ export const CheckBox = props => {
         checked={props.isChecked}
         name="divideBy"
         value={props.name}
-        onChange={props.handleChange}
+        // onChange={props.handleCheckChieldElement}
         />
       <label
         className="dropdown-item mx-0 my-0 bg-transparent"
