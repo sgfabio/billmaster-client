@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
 
-import { auth, groups } from "../../util/api";
+import { auth, groups } from '../../util/api';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -11,8 +11,7 @@ export default class Navbar extends Component {
     this.state = {
       user: null,
       isAuth: false,
-      groups: this.props.groups,
-      addGroup: this.props.addGroup,
+      addGroup: this.props.addGroup, // provavelmente pode deletar
       newInfoGroup: {
         groupName: '',
         description: '',
@@ -30,7 +29,7 @@ export default class Navbar extends Component {
 
     this.setState({ newInfoGroup: newInfoGroup });
   };
-  handleSubmitNewGroup = event => {
+  handleSubmitNewGroup = (event) => {
     event.preventDefault();
     const { newInfoGroup } = this.state;
     groups.createNewGroup(newInfoGroup);
@@ -42,7 +41,7 @@ export default class Navbar extends Component {
     if (this.props.userInSession !== prevProps.userInSession) {
       this.setState({
         user: this.props.userInSession,
-        isAuth: this.props.authed
+        isAuth: this.props.authed,
       });
     }
   }
@@ -50,7 +49,6 @@ export default class Navbar extends Component {
   async logout() {
     try {
       await auth.logout();
-      // Eu não poderia só atualizar o state do app?
       this.setState({
         user: null,
         isAuth: false,
@@ -62,7 +60,8 @@ export default class Navbar extends Component {
   }
 
   render() {
-    console.log('props da navbar: ', this.props)
+    // TODO: barbosa, se liga. EStou recebendo os grupos por props, mas não no estado! Isso deve ser uma fonte de problemas nessa reta final. Bora nessa!
+    console.log('grupos nas props? ', this.props.groups);
     return (
       <div>
         {this.state.isAuth ? (
@@ -89,17 +88,19 @@ export default class Navbar extends Component {
                     Criar Grupo
                   </button>
                   <hr className="py-0 my-1" />
-                  {this.state.groups.map((e) => {
-                    return (
-                      <Link
-                        to={`/groups/${e._id}/pessoas`}
-                        className="dropdown-item px-1"
-                        type="button"
-                      >
-                        {e.groupName}
-                      </Link>
-                    );
-                  })}
+                  {this.state.user &&
+                    this.props.groups.map((e) => {
+                      console.log('e:', e);
+                      return (
+                        <Link
+                          to={`/groups/${e._id}/pessoas`}
+                          className="dropdown-item px-1"
+                          type="button"
+                        >
+                          {e.groupName}
+                        </Link>
+                      );
+                    })}
                 </div>
               </div>
 

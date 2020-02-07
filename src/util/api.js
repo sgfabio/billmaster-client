@@ -70,7 +70,6 @@ export const groups = {
     });
   },
 
-  // não testado
   async getAll() {
     try {
       const response = await axios.get(
