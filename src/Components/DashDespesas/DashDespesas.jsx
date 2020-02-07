@@ -158,6 +158,7 @@ class DashDespesas extends Component {
   };
 
   render() {
+    console.log('grupo selecionado:', this.props.selectedGroup)
     const { id: paramId } = this.props.match.params;
     return (
       <>

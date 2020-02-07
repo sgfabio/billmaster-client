@@ -6,7 +6,7 @@ class DashPessoas extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedGroup: null,
+      selectedGroup: {},
       newMember: ' ',
     };
     this.handleChange = this.handleChange.bind(this);
@@ -20,20 +20,43 @@ class DashPessoas extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
+    console.log('oi, submit!');
     let str = this.state.newMember;
     str = str.replace(/\s{2,}/g, ' ');
     if (str === ' ') {
+      console.log('oi');
       return;
     }
+    let _id, members;
     if (str[0] === ' ') {
       str.slice(0, 1);
-      this.props.addMember(str);
+      console.log('meu grupo selecionado:', this.props.selectedGroup);
+      // pegar o grupo selecionado, atualizar o array de membros, devolver o objeto para o put da api
+      _id = this.props.selectedGroup._id;
+      members = this.props.selectedGroup.members;
+      if (_id && members) {
+        members.push(str);
+        const groupCopy = { ...this.props.selectedGroup };
+        console.log('meu groupCopy:', groupCopy);
+        groupCopy.members = members;
+        const response = groups.put(_id, groupCopy);
+        console.log('resposta do put:', response);
+      }
     } else {
-      this.props.addMember(str);
+      _id = this.props.selectedGroup._id;
+      members = this.props.selectedGroup.members;
+      if (_id && members) {
+        members.push(str);
+        const groupCopy = { ...this.props.selectedGroup };
+        console.log('meu groupCopy:', groupCopy);
+        groupCopy.members = members;
+        const response = groups.put(_id, groupCopy);
+        console.log('resposta do put:', response);
+      }
+      this.setState({
+        newMember: ' ',
+      });
     }
-    this.setState({
-      newMember: ' ',
-    });
   }
 
   render() {
@@ -58,7 +81,6 @@ class DashPessoas extends Component {
                 className="form-control"
                 id="newMemberName"
                 name="name"
-                // value={this.state.newMember}
                 onChange={this.handleChange}
                 required
               />

@@ -32,7 +32,6 @@ class App extends Component {
       groups: [],
       selectedGroup: {},
     };
-    this.addMember = this.addMember.bind(this);
     this.addExpense = this.addExpense.bind(this);
     this.addSettle = this.addSettle.bind(this);
     this.renderModalDelete = this.renderModalDelete.bind(this); //TODOS OS DELETES ESTAO AQUI
@@ -158,13 +157,12 @@ class App extends Component {
       removeMember={
         (this.removeMember = (memberToRemove) => {
           console.log('ESSE É O MEMBRO PARA REMOVER', memberToRemove);
-
-          //   const groupCopy = { ...this.state.selectedGroup }; -----------APAGAR
-          //   let idx = groupCopy.members.indexOf(memberToRemove);
-          //   groupCopy.members.splice(idx, 1);
-          //   this.setState({
-          //     selectedGroup: groupCopy,
-          //   });
+          const groupCopy = { ...this.state.selectedGroup };
+          console.log(groupCopy);
+          const membersArr = groupCopy.members;
+          membersArr.splice(membersArr.indexOf(memberToRemove), 1);
+          groupCopy.members = membersArr;
+          groups.put(this.state.selectedGroup._id, groupCopy);
         })
       }
       removeExpense={
@@ -190,12 +188,6 @@ class App extends Component {
     // this.setState({
     //   selectedGroup: groupCopy,
     // });
-  };
-
-  addMember = (newMember) => {
-    console.log('membro recebido:', newMember)
-    groups.addMember(newMember);
-    // this.fetchGroups();
   };
 
   addExpense = (newExpense) => {
@@ -296,7 +288,6 @@ class App extends Component {
                     selectedGroup={this.state.selectedGroup}
                     renderModalDelete={this.renderModalDelete}
                     renderModalEdit={this.renderModalEdit}
-                    addMember={this.addMember}
                   />
                 );
               }}
