@@ -150,7 +150,6 @@ class DashDespesas extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { newExpense } = this.state;
-    console.log("AQUI VEM AS INFORMACOES", newExpense);
     
     // If has an id got to edit function and else add new one expense
     newExpense._id
@@ -267,7 +266,7 @@ class DashDespesas extends Component {
               </div>
             </div>
 
-            <button onClick={()=>{this.handleSubmit()}} type="submit" className="btn btn-warning mb-1 col-xl-1">
+            <button onClick={(event)=>{this.handleSubmit(event)}} type="submit" className="btn btn-warning mb-1 col-xl-1">
               Submit
             </button>
           </form>
