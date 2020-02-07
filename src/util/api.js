@@ -218,7 +218,7 @@ export const groups = {
   //http://localhost:5000/api/groups/5e39a5dcd92dfc45cc871308/balance
 
   getBalances(groupId) {
-    console.log('getBalances of a group', groupId);
+    // console.log('getBalances of a group', groupId);
     return axios.get(
       //
       `${this.endpoint}/groups/${groupId}/balance`,
@@ -227,7 +227,7 @@ export const groups = {
   },
 
   getBills(groupId) {
-    console.log('getBills of a group', groupId);
+    // console.log('getBills of a group', groupId);
     return axios.get(
       //
       `${this.endpoint}/groups/${groupId}/historyExpenses`,
