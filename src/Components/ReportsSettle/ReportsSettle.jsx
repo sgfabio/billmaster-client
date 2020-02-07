@@ -4,46 +4,69 @@ import { groups } from '../../util/api'; // Groups component from API service
 class ReportsSettle extends Component {
   constructor(props) {
     super(props);
-    this.state = { msg: '', balances: [] };
+    this.state = { message: '', groupAllSettles: [] };
   }
 
-  // componentDidUpdate() {
-  //   groups
-  //     .getBalance(this.props.groupId) //props do Id do grupo;
-  //     .then((qryObj) => {
-  //       // console.log('componentDidMount', qryObj);
-  //       this.setState(
-  //         { msg: qryObj.data.msg, balances: qryObj.data.queryResult },
-  //       //   () => console.log(this.state)
-  //       );
-  //     })
-  //     .catch((error) => console.log('erro ReportSummary', error));
-  // }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.groupId !== prevProps.groupId) {
+    groups
+      .getSettles(this.props.groupId) //props do Id do grupo;
+      .then((qryObj) => {
+        // console.log('ReportsSettle - componentDidUpdate - qryObj', qryObj);
+        this.setState(
+          { message: qryObj.data.message, groupAllSettles: qryObj.data.groupAllSettles },
+          () => console.log('ReportsSettle - componentDidUpdate - this.state:', this.state)
+        );
+      })
+      .catch((error) => console.log('ERRO ReportBills - componentDidUpdate: ', error));
+    }
+  }
+
+  componentDidMount() {
+    groups
+      .getSettles(this.props.groupId) //props do Id do grupo;
+      .then((qryObj) => {
+        console.log('ReportBills - componentDidMount - this.state', qryObj);
+        this.setState(
+          { message: qryObj.data.message, groupAllSettles: qryObj.data.groupAllSettles },
+          () => console.log('ReportBills - componentDidMount - this.state:', this.state)
+        );
+      })
+      .catch((error) => console.log('ERRO ReportBills - componentDidMount - this.state', error));
+  }
 
   render() {
-    if (this.state.balances) {
+    if (this.state.groupAllSettles) {
       //Conditional return
       return (
         <div>
           <p>Pagamentos a serem realizados:</p>
+{/*             "_id": "5e3c401e67966a77c0fb599d",
+            "owner": "5e39a5dcd92dfc45cc871308",
+            "paidBy": "Batman",
+            "paidTo": "WonderWoman",
+            "value": 10,
+            "__v": 0 */}
+
 
           <div className="resultTable table-responsive-md">
             <table className="table table3 table-striped">
               <thead>
                 <tr>
                   <th scope="col">Integrante</th>
-                  <th scope="col">Deve</th>
-                  <th scope="col">Para</th>
+                  <th scope="col">Pago por</th>
+                  <th scope="col">Pagou para</th>
                 </tr>
               </thead>
               <tbody>
                 {/* Map que recebe os registros da API e cria uma row de tabela - vide exemplo abaixo */}
-                {this.state.balances.map((qry, idx) => {
+                {this.state.groupAllSettles.map((qry, idx) => {
                   return (
                     <tr key={idx}>
                       <td>{qry.member}</td>
-                      <td>{qry.expensePaid}</td>
-                      <td>{qry.share}</td>
+                      <td>{qry.paidBy}</td>
+                      <td>{qry.paidTo}</td>
                     </tr>
                   );
                 })}

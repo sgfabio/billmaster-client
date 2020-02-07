@@ -7,18 +7,35 @@ class ReportsSummary extends Component {
     this.state = { msg: '', balances: [] };
     // this.getBalances = this.getBalances.bind(this)
   }
+ 
+  componentDidUpdate(prevProps) {
+    if (this.props.groupId !== prevProps.groupId) {
+    groups
+      .getBalances(this.props.groupId) //props do Id do grupo;
+      .then((qryObj) => {
+        // console.log('ReportSummary - componentDidUpdate - qryObj', qryObj);
+        this.setState(
+          { msg: qryObj.data.msg, balances: qryObj.data.queryResult },
+          () => console.log('ReportSummary - componentDidUpdate - this.state:', this.state)
+        );
+      })
+      .catch((error) => console.log('erro ReportBills', error));
+    }
+  }
+ 
   /*
    TODO: No componentDidMount, quando troca o grupo na navbar, não atualiza a view. Com o componentDidUpdate, atualiza, mas bate na API a todo instante! E
   */
+ 
   componentDidMount() {
     // this.getBalances();
     groups
-      .getBalance(this.props.groupId) //props do Id dlocalhost:500o grupo;
+      .getBalances(this.props.groupId) //props do Id dlocalhost:500o grupo;
       .then((qryObj) => {
-        // console.log('componentDidMount', qryObj);
+        // console.log('ReportSummary - componentDidMount - qryObj', qryObj);
         this.setState(
-          { msg: qryObj.data.msg, balances: qryObj.data.queryResult }
-          //   () => console.log(this.state)
+          { msg: qryObj.data.msg, balances: qryObj.data.queryResult },
+            // () => console.log('ReportSummary - componentDidMount - this.state', this.state)
         );
       })
       .catch((error) => console.log('erro ReportSummary', error));
